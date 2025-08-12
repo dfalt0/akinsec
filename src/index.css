@@ -237,6 +237,73 @@ body {
   }
 }
 
+/* Rotating one-liner animations */
+.one-liner-viewport {
+  position: relative;
+  display: inline-block;
+  height: 1.4em;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.one-liner-slide-in {
+  animation-name: slide-fade-in-from-top;
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+.one-liner-slide-out {
+  animation-name: slide-fade-out-to-bottom;
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes slide-fade-in-from-top {
+  0% { opacity: 0; transform: translateY(-60%); }
+  100% { opacity: 1; transform: translateY(0%); }
+}
+
+@keyframes slide-fade-out-to-bottom {
+  0% { opacity: 1; transform: translateY(0%); }
+  100% { opacity: 0; transform: translateY(60%); }
+}
+
+/* Badge bubble fade animations */
+.one-liner-bubble-in {
+  animation-name: bubble-fade-in;
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+.one-liner-bubble-out {
+  animation-name: bubble-fade-out;
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes bubble-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes bubble-fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Respect reduced motion for one-liner animations */
+@media (prefers-reduced-motion: reduce) {
+  .one-liner-slide-in,
+  .one-liner-slide-out,
+  .one-liner-bubble-in,
+  .one-liner-bubble-out {
+    animation: none !important;
+  }
+}
 
 @layer base {
   :root {
@@ -318,5 +385,50 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Hero gradient overlay */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, hsl(var(--accent) / 0.34) 0%, transparent 60%),
+    radial-gradient(800px 400px at 10% 0%, hsl(var(--chart-5) / 0.26) 0%, transparent 60%),
+    radial-gradient(800px 400px at 90% 0%, hsl(var(--chart-2) / 0.22) 0%, transparent 60%),
+    linear-gradient(to bottom, hsl(var(--background) / 0) 0%, hsl(var(--background)) 90%);
+  --hero-sat: 1.15;
+  filter: saturate(var(--hero-sat)) hue-rotate(0deg);
+  animation: hero-hue-cycle 36s linear infinite;
+  will-change: filter;
+}
+
+.dark .hero-gradient {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, hsl(var(--accent) / 0.22) 0%, transparent 60%),
+    radial-gradient(800px 400px at 10% 0%, hsl(var(--chart-5) / 0.20) 0%, transparent 60%),
+    radial-gradient(800px 400px at 90% 0%, hsl(var(--chart-2) / 0.18) 0%, transparent 60%),
+    linear-gradient(to bottom, hsl(var(--background) / 0) 0%, hsl(var(--background)) 90%);
+  --hero-sat: 1.2;
+  filter: saturate(var(--hero-sat)) hue-rotate(0deg);
+  animation: hero-hue-cycle 42s linear infinite;
+}
+
+@keyframes hero-hue-cycle {
+  0% { filter: saturate(var(--hero-sat)) hue-rotate(0deg); }
+  50% { filter: saturate(var(--hero-sat)) hue-rotate(180deg); }
+  100% { filter: saturate(var(--hero-sat)) hue-rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-gradient {
+    animation: none;
+    filter: saturate(var(--hero-sat)) hue-rotate(0deg);
+  }
+  .dark .hero-gradient {
+    animation: none;
+    filter: saturate(var(--hero-sat)) hue-rotate(0deg);
   }
 }

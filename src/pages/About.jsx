@@ -71,44 +71,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">Our Team</h2>
-            <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Meet the passionate professionals behind AkinSec, dedicated to revolutionizing compliance management.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-xl font-bold">JD</span>
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-1">John Doe</h3>
-              <p className="text-accent mb-2">CEO & Founder</p>
-              <p className="text-sm text-muted-foreground">Former security consultant with 15+ years in compliance and risk management.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-xl font-bold">JS</span>
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-1">Jane Smith</h3>
-              <p className="text-accent mb-2">CTO</p>
-              <p className="text-sm text-muted-foreground">Expert in cloud security and AI, previously led engineering at major tech companies.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-xl font-bold">MJ</span>
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-1">Mike Johnson</h3>
-              <p className="text-accent mb-2">Head of Product</p>
-              <p className="text-sm text-muted-foreground">Product leader with deep expertise in compliance frameworks and user experience design.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">

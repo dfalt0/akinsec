@@ -229,6 +229,9 @@ export default function DocumentationPage() {
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
             Complete documentation to help you master compliance management with AkinSec. From getting started to advanced features.
           </p>
+          <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
+            This page is in development.
+          </p>
           
           {/* Search Bar */}
           <div className="max-w-md mx-auto">

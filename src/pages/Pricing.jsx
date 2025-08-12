@@ -8,6 +8,20 @@ import { Check, ArrowRight, Shield, Zap, Users } from 'lucide-react';
 const pricingPlans = {
   monthly: [
     {
+      name: '14-Day Free Trial',
+      price: '$0',
+      frequency: '',
+      description: 'Test out the platform for free.',
+      features: [
+        '1 User',
+        'Basic AI File Analysis',
+        'Standard Template Library',
+        'Task Management',
+      ],
+      cta: 'Free Trial',
+      popular: true,
+    },
+    {
       name: 'Starter',
       price: '$49',
       frequency: '/month',
@@ -35,25 +49,40 @@ const pricingPlans = {
         'Priority Email Support',
       ],
       cta: 'Choose Business',
-      popular: true,
-    },
-    {
-      name: 'Enterprise',
-      price: 'Custom',
-      frequency: '',
-      description: 'For large organizations with complex compliance needs.',
-      features: [
-        'Unlimited Users',
-        'Premium AI & Highest Token Limits',
-        'Single Sign-On (SSO)',
-        'Dedicated Account Manager',
-        'Custom SLAs',
-      ],
-      cta: 'Contact Sales',
       popular: false,
     },
+    // {
+    //   name: 'Enterprise',
+    //   price: 'Custom',
+    //   frequency: '',
+    //   description: 'For large organizations with complex compliance needs.',
+    //   features: [
+    //     'TBD'
+    //     // 'Unlimited Users',
+    //     // 'Premium AI & Highest Token Limits',
+    //     // 'Single Sign-On (SSO)',
+    //     // 'Dedicated Account Manager',
+    //     // 'Custom SLAs',
+    //   ],
+    //   cta: 'Contact Us',
+    //   popular: false,
+    // },
   ],
   annually: [
+    {
+      name: '14-Day Free Trial',
+      price: '$0',
+      frequency: '',
+      description: 'Test out the platform for free.',
+      features: [
+        '1 User',
+        'Basic AI File Analysis',
+        'Standard Template Library',
+        'Task Management',
+      ],
+      cta: 'Free Trial',
+      popular: true,
+    },
     {
       name: 'Starter',
       price: '$490',
@@ -82,23 +111,23 @@ const pricingPlans = {
         'Priority Email Support',
       ],
       cta: 'Choose Business',
-      popular: true,
-    },
-    {
-      name: 'Enterprise',
-      price: 'Custom',
-      frequency: '',
-      description: 'For large organizations with complex compliance needs.',
-      features: [
-        'Unlimited Users',
-        'Premium AI & Highest Token Limits',
-        'Single Sign-On (SSO)',
-        'Dedicated Account Manager',
-        'Custom SLAs',
-      ],
-      cta: 'Contact Sales',
       popular: false,
     },
+    // {
+    //   name: 'Enterprise',
+    //   price: 'Custom',
+    //   frequency: '',
+    //   description: 'For large organizations with complex compliance needs.',
+    //   features: [
+    //     // 'Unlimited Users',
+    //     // 'Premium AI & Highest Token Limits',
+    //     // 'Single Sign-On (SSO)',
+    //     // 'Dedicated Account Manager',
+    //     // 'Custom SLAs',
+    //   ],
+    //   cta: 'Contact Sales',
+    //   popular: false,
+    // },
   ],
 };
 

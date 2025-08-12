@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -29,17 +29,88 @@ const StepCard = ({ number, title, description }) => (
   </div>
 );
 
+function RotatingBadge({ items, intervalMs = 5000, transitionMs = 1200 }) {
+  const [index, setIndex] = useState(0);
+  const [phase, setPhase] = useState('in'); // 'in' | 'out'
+  const outTimerRef = useRef(null);
+
+  // Schedule fade-out near the end of the interval
+  useEffect(() => {
+    const visibleTimer = setTimeout(() => setPhase('out'), Math.max(0, intervalMs - transitionMs));
+    return () => clearTimeout(visibleTimer);
+  }, [index, intervalMs, transitionMs]);
+
+  // Fallback for when animations are disabled (prefers-reduced-motion)
+  useEffect(() => {
+    if (phase !== 'out') return;
+    outTimerRef.current = setTimeout(() => {
+      setIndex((prev) => (prev + 1) % items.length);
+      setPhase('in');
+    }, transitionMs);
+    return () => {
+      if (outTimerRef.current) clearTimeout(outTimerRef.current);
+    };
+  }, [phase, transitionMs, items.length]);
+
+  const animationStyle = { animationDuration: `${transitionMs}ms` };
+
+  return (
+    <Badge
+      variant="outline"
+      className={`mb-4 border-accent/50 text-accent font-semibold py-1 px-3 rounded-full ${
+        phase === 'in' ? 'one-liner-bubble-in' : 'one-liner-bubble-out'
+      }`}
+      style={animationStyle}
+      onAnimationEnd={(e) => {
+        if (phase === 'out' && e.currentTarget === e.target) {
+          if (outTimerRef.current) clearTimeout(outTimerRef.current);
+          setIndex((prev) => (prev + 1) % items.length);
+          setPhase('in');
+        }
+      }}
+    >
+      <span className="one-liner-viewport" aria-live="polite">
+        <span
+          className={phase === 'in' ? 'one-liner-slide-in' : 'one-liner-slide-out'}
+          style={animationStyle}
+        >
+          {items[index]}
+        </span>
+      </span>
+    </Badge>
+  );
+}
+
 export default function HomePage() {
+  const oneLiners = useMemo(
+    () => [
+      'AI-Powered Compliance Automation',
+      'IT Compliance + Simplicity + AI',
+      'Simplify Audits, Instantly',
+      'Continuous Monitoring Made Easy',
+      'Evidence Collection, Automated',
+      'Ship Faster, Stay Compliant',
+      'Compliance Made Simple',
+      'Automated Compliance Intelligence',
+      'This is Next-Gen Compliance',
+      'AI-Driven Organization',
+      'AI File Analysis',
+      'Automating Trust & Security'
+    ],
+    []
+  );
+
+  // old interval rotation replaced by animated component
+
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 text-center">
-        <div className="container mx-auto px-4">
-          <Badge variant="outline" className="mb-4 border-accent/50 text-accent font-semibold py-1 px-3 rounded-full">
-            AI-Powered Compliance Automation
-          </Badge>
+      <section className="relative py-20 md:py-32 text-center overflow-hidden">
+        <div className="hero-gradient" />
+        <div className="container mx-auto px-4 relative">
+          <RotatingBadge items={oneLiners} intervalMs={4200} transitionMs={1100} />
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Be Simply Compliant.
+            Simply Compliant.
           </h1>
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
             AkinSec is the all-in-one platform to automate compliance tasks, manage integrations, and stay ahead of regulations with AI-driven insights.
