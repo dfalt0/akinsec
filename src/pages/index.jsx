@@ -39,6 +39,7 @@ import Privacy from "./Privacy";
 import Terms from "./Terms";
 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { createPageUrl } from '@/utils/index.js';
 
 const PAGES = {
@@ -103,6 +104,11 @@ function _getCurrentPage(url) {
 function PagesContent() {
     const location = useLocation();
     const currentPage = _getCurrentPage(location.pathname);
+    
+    // Scroll to top on every route change
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, [location.pathname]);
     
     return (
         <Layout currentPageName={currentPage}>
