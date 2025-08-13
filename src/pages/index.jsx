@@ -6,7 +6,7 @@ import About from "./About";
 
 import Contact from "./Contact";
 
-import Blog from "./Blog";
+// import Blog from "./Blog";
 
 import FAQ from "./FAQ";
 
@@ -25,6 +25,10 @@ import TemplatesScreenshots from "./TemplatesScreenshots";
 import FileAnalysisScreenshots from "./FileAnalysisScreenshots";
 
 import IntegrationsScreenshots from "./IntegrationsScreenshots";
+
+import TasksScreenshots from "./TasksScreenshots";
+
+import ReportsScreenshots from "./ReportsScreenshots";
 
 import Careers from "./Careers";
 
@@ -45,7 +49,7 @@ const PAGES = {
     
     Contact: Contact,
     
-    Blog: Blog,
+    // Blog: Blog,
     
     FAQ: FAQ,
     
@@ -64,6 +68,10 @@ const PAGES = {
     FileAnalysisScreenshots: FileAnalysisScreenshots,
     
     IntegrationsScreenshots: IntegrationsScreenshots,
+
+    TasksScreenshots: TasksScreenshots,
+    
+    ReportsScreenshots: ReportsScreenshots,
     
     Careers: Careers,
     
@@ -109,7 +117,7 @@ function PagesContent() {
                 
                 <Route path="/Contact" element={<Contact />} />
                 
-                <Route path="/Blog" element={<Blog />} />
+                {/* <Route path="/Blog" element={<Blog />} /> */}
                 
                 <Route path="/FAQ" element={<FAQ />} />
                 
@@ -128,6 +136,10 @@ function PagesContent() {
                 <Route path="/FileAnalysisScreenshots" element={<FileAnalysisScreenshots />} />
                 
                 <Route path="/IntegrationsScreenshots" element={<IntegrationsScreenshots />} />
+
+                <Route path="/TasksScreenshots" element={<TasksScreenshots />} />
+
+                <Route path="/ReportsScreenshots" element={<ReportsScreenshots />} />
                 
                 <Route path="/Careers" element={<Careers />} />
                 

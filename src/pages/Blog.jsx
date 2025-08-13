@@ -73,55 +73,55 @@ export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const blogPosts = [
-    {
-      title: "The Complete Guide to SOC 2 Compliance in 2024",
-      excerpt: "Everything you need to know about achieving SOC 2 Type II certification, from initial preparation to ongoing monitoring and maintenance.",
-      category: "SOC 2",
-      readTime: "8 min read",
-      date: "Jan 15, 2024",
-      author: "Sarah Chen",
-      featured: true
-    },
-    {
-      title: "GDPR Compliance for SaaS Companies: A Practical Approach",
-      excerpt: "Navigate GDPR requirements with confidence. Learn about data mapping, consent management, and building privacy by design.",
-      category: "GDPR",
-      readTime: "6 min read",
-      date: "Jan 12, 2024",
-      author: "Dr. Emily Watson"
-    },
-    {
-      title: "AI in Compliance: How Machine Learning is Transforming Risk Management",
-      excerpt: "Discover how artificial intelligence is revolutionizing compliance monitoring, risk assessment, and regulatory reporting.",
-      category: "Technology",
-      readTime: "5 min read",
-      date: "Jan 10, 2024",
-      author: "James Wilson"
-    },
-    {
-      title: "Building a Security Culture: Tips for Small and Medium Businesses",
-      excerpt: "Create a strong security culture in your organization with practical steps that don't require a massive budget.",
-      category: "Security Culture",
-      readTime: "7 min read",
-      date: "Jan 8, 2024",
-      author: "Michael Rodriguez"
-    },
-    {
-      title: "ISO 27001 vs SOC 2: Which Framework is Right for Your Business?",
-      excerpt: "Compare these two popular security frameworks and learn how to choose the right certification path for your organization.",
-      category: "ISO 27001",
-      readTime: "9 min read",
-      date: "Jan 5, 2024",
-      author: "David Kim"
-    },
-    {
-      title: "The Cost of Non-Compliance: Real-World Case Studies",
-      excerpt: "Learn from real examples of companies that faced significant penalties and reputational damage due to compliance failures.",
-      category: "Case Studies",
-      readTime: "6 min read",
-      date: "Jan 3, 2024",
-      author: "Lisa Thompson"
-    }
+    // {
+    //   title: "The Complete Guide to SOC 2 Compliance in 2024",
+    //   excerpt: "Everything you need to know about achieving SOC 2 Type II certification, from initial preparation to ongoing monitoring and maintenance.",
+    //   category: "SOC 2",
+    //   readTime: "8 min read",
+    //   date: "Jan 15, 2024",
+    //   author: "Sarah Chen",
+    //   featured: true
+    // },
+    // {
+    //   // title: "GDPR Compliance for SaaS Companies: A Practical Approach",
+    //   // excerpt: "Navigate GDPR requirements with confidence. Learn about data mapping, consent management, and building privacy by design.",
+    //   // category: "GDPR",
+    //   // readTime: "6 min read",
+    //   // date: "Jan 12, 2024",
+    //   // author: "Dr. Emily Watson"
+    // },
+    // {
+    //   // title: "AI in Compliance: How Machine Learning is Transforming Risk Management",
+    //   // excerpt: "Discover how artificial intelligence is revolutionizing compliance monitoring, risk assessment, and regulatory reporting.",
+    //   // category: "Technology",
+    //   // readTime: "5 min read",
+    //   // date: "Jan 10, 2024",
+    //   // author: "James Wilson"
+    // },
+    // {
+    //   title: "Building a Security Culture: Tips for Small and Medium Businesses",
+    //   excerpt: "Create a strong security culture in your organization with practical steps that don't require a massive budget.",
+    //   category: "Security Culture",
+    //   readTime: "7 min read",
+    //   date: "Jan 8, 2024",
+    //   author: "Michael Rodriguez"
+    // },
+    // {
+    //   title: "ISO 27001 vs SOC 2: Which Framework is Right for Your Business?",
+    //   excerpt: "Compare these two popular security frameworks and learn how to choose the right certification path for your organization.",
+    //   category: "ISO 27001",
+    //   readTime: "9 min read",
+    //   date: "Jan 5, 2024",
+    //   author: "David Kim"
+    // },
+    // {
+    //   title: "The Cost of Non-Compliance: Real-World Case Studies",
+    //   excerpt: "Learn from real examples of companies that faced significant penalties and reputational damage due to compliance failures.",
+    //   category: "Case Studies",
+    //   readTime: "6 min read",
+    //   date: "Jan 3, 2024",
+    //   author: "Lisa Thompson"
+    // }
   ];
 
   const categories = [
@@ -140,7 +140,8 @@ export default function BlogPage() {
             Compliance Blog
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Stay Informed on Compliance
+            {/* Stay Informed on Compliance */}
+            This page is in development.
           </h1>
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
             Get the latest insights, best practices, and expert advice on compliance, security, and risk management from our team of specialists.

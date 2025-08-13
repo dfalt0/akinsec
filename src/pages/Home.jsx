@@ -2,10 +2,11 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Check, Shield, FileText, CheckSquare, Zap } from 'lucide-react';
+import { ArrowRight, Check, Shield, FileText, CheckSquare, Zap, BarChart3, CheckCircle, AlertTriangle, Network } from 'lucide-react';
 // import { User } from '@/api/entities'; // This import is no longer strictly needed for the buttons but might be used elsewhere or in future. Keeping for now.
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
+import dashboardPreview from '@/img/dashboard-preview-sc.png';
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
   <Card className="bg-card/60 backdrop-blur-md border-border/30 shadow-xl text-center p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 hover:bg-card/80">
@@ -110,7 +111,8 @@ export default function HomePage() {
         <div className="container mx-auto px-4 relative">
           <RotatingBadge items={oneLiners} intervalMs={4200} transitionMs={1100} />
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Simply Compliant.
+            Simply Compliant
+            <span className="typing-caret" aria-hidden="true" />
           </h1>
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
             AkinSec is the all-in-one platform to automate compliance tasks, manage integrations, and stay ahead of regulations with AI-driven insights.
@@ -130,6 +132,99 @@ export default function HomePage() {
         </div>
       </section>
 
+      
+      {/* Dashboard Preview Section (from DashboardScreenshots.jsx content only) */}
+      <section className="py-20">
+        <div className="container mx-auto">
+          {/* Inline Screenshot */}
+          <section className="py-16">
+            <div className="container mx-auto">
+              <div className="rounded-2xl overflow-hidden border border-border/40 shadow-2xl bg-card/70 backdrop-blur-sm">
+                <img
+                  src={dashboardPreview}
+                  alt="Compliance Dashboard preview"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </section>
+          
+
+          {/* Feature Highlights */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-4">
+            <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-4">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  Real-time Metrics
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Monitor your compliance score, task completion rates, and progress across all frameworks in real-time.
+                </p>
+                <div className="bg-muted rounded-lg p-4">
+                  <div className="text-sm text-muted-foreground mb-2">Features shown:</div>
+                  <ul className="text-sm text-foreground space-y-1">
+                    <li>• Compliance score calculation</li>
+                    <li>• Task completion tracking</li>
+                    <li>• Risk level indicators</li>
+                    <li>• Monthly progress trends</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-4">
+                  <AlertTriangle className="w-5 h-5 text-amber-600" />
+                  Risk Alerts
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Stay informed about overdue tasks, high-risk integrations, and compliance gaps that need attention.
+                </p>
+                <div className="bg-muted rounded-lg p-4">
+                  <div className="text-sm text-muted-foreground mb-2">Alert types:</div>
+                  <ul className="text-sm text-foreground space-y-1">
+                    <li>• Overdue compliance tasks</li>
+                    <li>• High-risk integrations</li>
+                    <li>• Framework gaps</li>
+                    <li>• Upcoming deadlines</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-4">
+                  <Network className="w-5 h-5 text-purple-600" />
+                  Quick Actions
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  Access commonly used features quickly with one-click actions for creating documents and auditing integrations.
+                </p>
+                <div className="bg-muted rounded-lg p-4">
+                  <div className="text-sm text-muted-foreground mb-2">Quick actions:</div>
+                  <ul className="text-sm text-foreground space-y-1">
+                    <li>• Create compliance documents</li>
+                    <li>• Audit integrations</li>
+                    <li>• Generate reports</li>
+                    <li>• Add new tasks</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -140,39 +235,52 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={Zap}
-              title="AI File Analysis"
-              description="Instantly analyze documents for compliance gaps and get actionable recommendations."
-            />
-            <FeatureCard
-              icon={CheckSquare}
-              title="Automated Task Management"
-              description="Create and track compliance tasks, assign owners, and monitor progress on a centralized board."
-            />
-            <FeatureCard
-              icon={FileText}
-              title="Comprehensive Templates"
-              description="Access a library of pre-built policies, procedures, and forms for various frameworks."
-            />
-            <FeatureCard
-              icon={Shield}
-              title="Integration Auditing"
-              description="Assess third-party vendor risk and maintain a compliant app ecosystem."
-            />
-            <FeatureCard
-              icon={Check}
-              title="Framework Alignment"
-              description="Align your controls and evidence with multiple compliance frameworks like SOC 2, ISO 27001, and more."
-            />
-            <FeatureCard
-              icon={ArrowRight}
-              title="Actionable Reporting"
-              description="Generate insightful reports on your compliance posture and share progress with stakeholders."
-            />
+            <Link to={createPageUrl('FileAnalysisScreenshots')} className="block">
+              <FeatureCard
+                icon={Zap}
+                title="AI File Analysis"
+                description="Instantly analyze documents for compliance gaps and get actionable recommendations."
+              />
+            </Link>
+            <Link to={createPageUrl('TasksScreenshots')} className="block">
+              <FeatureCard
+                icon={CheckSquare}
+                title="Automated Task Management"
+                description="Create and track compliance tasks, assign owners, and monitor progress on a centralized board."
+              />
+            </Link>
+            <Link to={createPageUrl('TemplatesScreenshots')} className="block">
+              <FeatureCard
+                icon={FileText}
+                title="Comprehensive Templates"
+                description="Access a library of pre-built policies, procedures, and forms for various frameworks."
+              />
+            </Link>
+            <Link to={createPageUrl('IntegrationsScreenshots')} className="block">
+              <FeatureCard
+                icon={Shield}
+                title="Integration Auditing"
+                description="Assess third-party vendor risk and maintain a compliant app ecosystem."
+              />
+            </Link>
+            <Link to={createPageUrl('frameworksscreenshots')} className="block">
+              <FeatureCard
+                icon={Check}
+                title="Framework Alignment"
+                description="Align your controls and evidence with multiple compliance frameworks like SOC 2, ISO 27001, and more."
+              />
+            </Link>
+            <Link to={createPageUrl('ReportsScreenshots')} className="block">
+              <FeatureCard
+                icon={ArrowRight}
+                title="Actionable Reporting"
+                description="Generate insightful reports on your compliance posture and share progress with stakeholders."
+              />
+            </Link>
           </div>
         </div>
       </section>
+
 
       {/* How It Works Section */}
       <section className="py-20">
@@ -203,6 +311,7 @@ export default function HomePage() {
         </div>
       </section>
 
+
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
@@ -212,7 +321,7 @@ export default function HomePage() {
           </p>
           <Link to={createPageUrl('Pricing')}>
             <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              Start Your Free Trial Today <ArrowRight className="w-4 h-4 ml-2" />
+              Start for Free Today <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
         </div>

@@ -61,10 +61,12 @@ const LandingFooter = () => (
           <h3 className="font-semibold mb-3">Product</h3>
           <ul className="space-y-2 text-sm">
             <li><Link to={createPageUrl('DashboardScreenshots')} className="text-muted-foreground hover:text-foreground">Dashboard</Link></li>
-            <li><Link to={createPageUrl('FrameworksScreenshots')} className="text-muted-foreground hover:text-foreground">Compliance</Link></li>
+            <li><Link to={createPageUrl('FrameworksScreenshots')} className="text-muted-foreground hover:text-foreground">Frameworks</Link></li>
             <li><Link to={createPageUrl('TemplatesScreenshots')} className="text-muted-foreground hover:text-foreground">Templates</Link></li>
             <li><Link to={createPageUrl('FileAnalysisScreenshots')} className="text-muted-foreground hover:text-foreground">AI Analysis</Link></li>
             <li><Link to={createPageUrl('IntegrationsScreenshots')} className="text-muted-foreground hover:text-foreground">Integrations</Link></li>
+            <li><Link to={createPageUrl('ReportsScreenshots')} className="text-muted-foreground hover:text-foreground">Reports</Link></li>
+            <li><Link to={createPageUrl('TasksScreenshots')} className="text-muted-foreground hover:text-foreground">Tasks</Link></li>
           </ul>
         </div>
         <div>
@@ -73,7 +75,7 @@ const LandingFooter = () => (
             {landingNavItems.filter(item => ['About', 'Blog', 'Contact'].includes(item.page)).map(item => (
               <li key={item.page}><Link to={createPageUrl(item.page)} className="text-muted-foreground hover:text-foreground">{item.title}</Link></li>
             ))}
-            <li><Link to={createPageUrl('Careers')} className="text-muted-foreground hover:text-foreground">Careers</Link></li>
+            {/* <li><Link to={createPageUrl('Careers')} className="text-muted-foreground hover:text-foreground">Careers</Link></li> */}
           </ul>
         </div>
         <div>
