@@ -8,7 +8,7 @@ import { Check, ArrowRight, Shield, Zap, Users } from 'lucide-react';
 const pricingPlans = {
   monthly: [
     {
-      name: '14-Day Free Trial',
+      name: 'Free',
       price: '$0',
       frequency: '',
       description: 'Test out the platform for free.',
@@ -18,7 +18,7 @@ const pricingPlans = {
         'Standard Template Library',
         'Task Management',
       ],
-      cta: 'Free Trial',
+      cta: 'Free',
       popular: true,
     },
     {
@@ -27,7 +27,7 @@ const pricingPlans = {
       frequency: '/month',
       description: 'For small teams getting started with compliance.',
       features: [
-        'Up to 5 Users',
+        'Up to 20 Users',
         'Basic AI File Analysis',
         'Standard Template Library',
         'Task Management',
@@ -42,7 +42,7 @@ const pricingPlans = {
       frequency: '/month',
       description: 'For growing businesses managing multiple frameworks.',
       features: [
-        'Up to 20 Users',
+        'Up to 50 Users',
         'Advanced AI Analysis (more tokens)',
         'Integration Auditing',
         'Customizable Reports',
@@ -70,7 +70,7 @@ const pricingPlans = {
   ],
   annually: [
     {
-      name: '14-Day Free Trial',
+      name: 'Free',
       price: '$0',
       frequency: '',
       description: 'Test out the platform for free.',
@@ -80,7 +80,7 @@ const pricingPlans = {
         'Standard Template Library',
         'Task Management',
       ],
-      cta: 'Free Trial',
+      cta: 'Free',
       popular: true,
     },
     {
@@ -89,7 +89,7 @@ const pricingPlans = {
       frequency: '/year',
       description: 'For small teams getting started with compliance.',
       features: [
-        'Up to 5 Users',
+        'Up to 20 Users',
         'Basic AI File Analysis',
         'Standard Template Library',
         'Task Management',
@@ -104,7 +104,7 @@ const pricingPlans = {
       frequency: '/year',
       description: 'For growing businesses managing multiple frameworks.',
       features: [
-        'Up to 20 Users',
+        'Up to 50 Users',
         'Advanced AI Analysis (more tokens)',
         'Integration Auditing',
         'Customizable Reports',
@@ -211,6 +211,7 @@ export default function PricingPage() {
                             <thead className="bg-slate-50">
                                 <tr>
                                     <th className="p-4 font-semibold">Feature</th>
+                                    <th className="p-4 font-semibold text-center">Free</th>
                                     <th className="p-4 font-semibold text-center">Starter</th>
                                     <th className="p-4 font-semibold text-center">Business</th>
                                     <th className="p-4 font-semibold text-center">Enterprise</th>
@@ -219,12 +220,14 @@ export default function PricingPage() {
                             <tbody>
                                 <tr className="border-b">
                                     <td className="p-4 font-medium flex items-center gap-2"><Users className="w-4 h-4 text-muted-foreground"/>Number of Users</td>
-                                    <td className="p-4 text-center">5</td>
+                                    <td className="p-4 text-center">1</td>
                                     <td className="p-4 text-center">20</td>
+                                    <td className="p-4 text-center">50</td>
                                     <td className="p-4 text-center">Unlimited</td>
                                 </tr>
                                 <tr className="border-b">
                                     <td className="p-4 font-medium flex items-center gap-2"><Zap className="w-4 h-4 text-muted-foreground"/>AI Tokens</td>
+                                    <td className="p-4 text-center">Basic</td>
                                     <td className="p-4 text-center">Basic</td>
                                     <td className="p-4 text-center">Advanced</td>
                                     <td className="p-4 text-center">Premium</td>
@@ -232,11 +235,13 @@ export default function PricingPage() {
                                 <tr className="border-b">
                                     <td className="p-4 font-medium flex items-center gap-2"><Shield className="w-4 h-4 text-muted-foreground"/>Integration Auditing</td>
                                     <td className="p-4 text-center"><Check className="w-5 h-5 text-slate-300 mx-auto"/></td>
+                                    <td className="p-4 text-center"><Check className="w-5 h-5 text-slate-300 mx-auto"/></td>
                                     <td className="p-4 text-center"><Check className="w-5 h-5 text-green-500 mx-auto"/></td>
                                     <td className="p-4 text-center"><Check className="w-5 h-5 text-green-500 mx-auto"/></td>
                                 </tr>
                                 <tr>
                                     <td className="p-4 font-medium flex items-center gap-2"><ArrowRight className="w-4 h-4 text-muted-foreground"/>Dedicated Support</td>
+                                    <td className="p-4 text-center"><Check className="w-5 h-5 text-slate-300 mx-auto"/></td>
                                     <td className="p-4 text-center"><Check className="w-5 h-5 text-slate-300 mx-auto"/></td>
                                     <td className="p-4 text-center"><Check className="w-5 h-5 text-slate-300 mx-auto"/></td>
                                     <td className="p-4 text-center"><Check className="w-5 h-5 text-green-500 mx-auto"/></td>
