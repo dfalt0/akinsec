@@ -86,7 +86,7 @@ export default function HomePage() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const phrases = ["Simple Compliance", "Simply Compliant", "Secure Your Business", "AI Compliance"];
+  const phrases = ["Simple Compliance", "Simply Compliant", "Secure Your Business", "AI Compliance", "What's a computer?", "D'you check that file, Jeff?", "My cOmPliAnCe isn't running...", "Boss said I needed this?", "What's 'compliance'?"];
   const typingSpeed = 150;
   const deletingSpeed = 75;
   const pauseDuration = 2000;
@@ -254,7 +254,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
+
       {/* Features Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
