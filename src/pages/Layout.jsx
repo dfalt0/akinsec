@@ -9,7 +9,7 @@ const landingNavItems = [
   { title: 'Live Demo', page: 'DemoLive' },
   { title: 'Compliance', page: 'Frameworks' },
   { title: 'About', page: 'About' },
-  { title: 'Blog', page: 'Blog' },
+  // { title: 'Blog', page: 'Blog' },
   { title: 'Pricing', page: 'Pricing' },
   { title: 'FAQ', page: 'FAQ' },
   { title: 'Contact', page: 'Contact' }

@@ -3,9 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Check, Shield, FileText, CheckSquare, Zap, BarChart3, CheckCircle, AlertTriangle, Network } from 'lucide-react';
+// import { User } from '@/api/entities'; // This import is no longer strictly needed for the buttons but might be used elsewhere or in future. Keeping for now.
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
 import dashboardPreview from '@/img/dashboard-preview-sc.png';
+
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
   <Card className="bg-card/60 backdrop-blur-md border-border/30 shadow-xl text-center p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 hover:bg-card/80">
@@ -82,16 +84,16 @@ function RotatingBadge({ items, intervalMs = 5000, transitionMs = 1200 }) {
 }
 
 export default function HomePage() {
-  const [text, setText] = useState('');
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  
-  const phrases = ["Simple Compliance", "Simply Compliant", "Secure Your Business", "AI Compliance"];
-  const typingSpeed = 150;
-  const deletingSpeed = 75;
-  const pauseDuration = 2000;
+    const [text, setText] = useState('');
+    const [phraseIndex, setPhraseIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    
+    const phrases = ["Simple Compliance", "Simply Compliant", "Secure Your Business", "AI Compliance"];
+    const typingSpeed = 150;
+    const deletingSpeed = 75;
+    const pauseDuration = 2000;
 
-  useEffect(() => {
+    useEffect(() => {
     const handleType = () => {
       const currentPhrase = phrases[phraseIndex % phrases.length];
       const currentText = isDeleting 
@@ -113,29 +115,31 @@ export default function HomePage() {
     const timeout = setTimeout(handleType, isDeleting ? deletingSpeed : typingSpeed);
     
     return () => clearTimeout(timeout);
-  }, [text, isDeleting, phraseIndex, phrases, pauseDuration, typingSpeed, deletingSpeed]);
+    }, [text, isDeleting, phraseIndex, phrases, pauseDuration, typingSpeed, deletingSpeed]); // Added dependencies to useEffect
 
-  const oneLiners = useMemo(
-    () => [
-      'AI-Powered Compliance Automation',
-      'IT Compliance + Simplicity + AI',
-      'Simplify Audits, Instantly',
-      'Continuous Monitoring Made Easy',
-      'Evidence Collection, Automated',
-      'Ship Faster, Stay Compliant',
-      'Compliance Made Simple',
-      'Automated Compliance Intelligence',
-      'This is Next-Gen Compliance',
-      'AI-Driven Organization',
-      'AI File Analysis',
-      'Automating Trust & Security'
-    ],
-    []
-  );
+    const oneLiners = useMemo(
+        () => [
+            'AI-Powered Compliance Automation',
+            'IT Compliance + Simplicity + AI',
+            'Simplify Audits, Instantly',
+            'Continuous Monitoring Made Easy',
+            'Evidence Collection, Automated',
+            'Ship Faster, Stay Compliant',
+            'Compliance Made Simple',
+            'Automated Compliance Intelligence',
+            'This is Next-Gen Compliance',
+            'AI-Driven Organization',
+            'AI File Analysis',
+            'Automating Trust & Security'
+        ],
+        []
+        );
+
+  // old interval rotation replaced by animated component
 
   return (
     <div className="w-full">
-      <style>{`
+        <style>{`
         @keyframes blink {
           50% { opacity: 0; }
         }
@@ -149,9 +153,10 @@ export default function HomePage() {
         <div className="hero-gradient" />
         <div className="container mx-auto px-4 relative">
           <RotatingBadge items={oneLiners} intervalMs={4200} transitionMs={1100} />
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight flex items-center justify-center min-h-[80px] md:min-h-[150px]">
-            {text}
-            <span className="blinking-cursor" aria-hidden="true">|</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+          {/* <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight flex items-center justify-center min-h-[80px] md:min-h-[150px]"> */}
+            <span>{text}</span>
+            <span className="typing-caret" aria-hidden="true" />
           </h1>
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
             AkinSec is the all-in-one platform to automate compliance tasks, manage integrations, and stay ahead of regulations with AI-driven insights.
@@ -163,28 +168,35 @@ export default function HomePage() {
               </Button>
             </Link>
             <Link to={createPageUrl('Dashboard')}>
-              <Button size="lg" variant="outline">
-                Go to App
-              </Button>
+                <Button size="lg" variant="outline">
+                    Go to App
+                </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Dashboard Preview Section */}
+      
+      {/* Dashboard Preview Section (from DashboardScreenshots.jsx content only) */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-full rounded-2xl overflow-hidden border border-border/40 shadow-2xl bg-card/70 backdrop-blur-sm">
-            <img
-              src={dashboardPreview}
-              alt="Compliance Dashboard preview"
-              className="w-full h-auto object-cover max-w-full"
-              loading="lazy"
-            />
-          </div>
+        <div className="container mx-auto">
+          {/* Inline Screenshot */}
+          <section className="py-16">
+            <div className="container mx-auto">
+              <div className="rounded-2xl overflow-hidden border border-border/40 shadow-2xl bg-card/70 backdrop-blur-sm">
+                <img
+                  src={dashboardPreview}
+                  alt="Compliance Dashboard preview"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </section>
           
+
           {/* Feature Highlights */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 max-w-full">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-4">
             <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-4">
@@ -207,6 +219,7 @@ export default function HomePage() {
                 </div>
               </CardContent>
             </Card>
+
             <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-4">
@@ -229,6 +242,7 @@ export default function HomePage() {
                 </div>
               </CardContent>
             </Card>
+
             <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-4">
@@ -254,7 +268,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
+
       {/* Features Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -311,6 +325,7 @@ export default function HomePage() {
         </div>
       </section>
 
+
       {/* How It Works Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
@@ -339,6 +354,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
 
       {/* CTA Section */}
       <section className="py-20">
