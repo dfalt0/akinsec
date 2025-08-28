@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils/index.js";
 import { Shield, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,7 +43,7 @@ const LandingHeader = () => (
 );
 
 const LandingFooter = () => (
-<footer className="border-t">
+<footer className="border-t bg-background/95 backdrop-blur-sm relative z-20">
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className="md:col-span-1">
@@ -60,13 +60,13 @@ const LandingFooter = () => (
         <div>
           <h3 className="font-semibold mb-3">Product</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to={createPageUrl('DashboardScreenshots')} className="text-muted-foreground hover:text-foreground">Dashboard</Link></li>
-            <li><Link to={createPageUrl('FrameworksScreenshots')} className="text-muted-foreground hover:text-foreground">Frameworks</Link></li>
-            <li><Link to={createPageUrl('TemplatesScreenshots')} className="text-muted-foreground hover:text-foreground">Templates</Link></li>
-            <li><Link to={createPageUrl('FileAnalysisScreenshots')} className="text-muted-foreground hover:text-foreground">AI Analysis</Link></li>
-            <li><Link to={createPageUrl('IntegrationsScreenshots')} className="text-muted-foreground hover:text-foreground">Integrations</Link></li>
-            <li><Link to={createPageUrl('ReportsScreenshots')} className="text-muted-foreground hover:text-foreground">Reports</Link></li>
-            <li><Link to={createPageUrl('TasksScreenshots')} className="text-muted-foreground hover:text-foreground">Tasks</Link></li>
+            <li><Link to={createPageUrl('DashboardExample')} className="text-muted-foreground hover:text-foreground">Dashboard</Link></li>
+            <li><Link to={createPageUrl('FrameworksExample')} className="text-muted-foreground hover:text-foreground">Frameworks</Link></li>
+            <li><Link to={createPageUrl('TemplatesExample')} className="text-muted-foreground hover:text-foreground">Templates</Link></li>
+            <li><Link to={createPageUrl('FileAnalysisExample')} className="text-muted-foreground hover:text-foreground">AI Analysis</Link></li>
+            <li><Link to={createPageUrl('IntegrationsExample')} className="text-muted-foreground hover:text-foreground">Integrations</Link></li>
+            <li><Link to={createPageUrl('ReportsExample')} className="text-muted-foreground hover:text-foreground">Reports</Link></li>
+            <li><Link to={createPageUrl('TasksExample')} className="text-muted-foreground hover:text-foreground">Tasks</Link></li>
           </ul>
         </div>
         <div>
@@ -96,6 +96,14 @@ const LandingFooter = () => (
     </div>
   </footer>
 );
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
+  return null;
+};
 
 
 export default function Layout({ children, currentPageName }) {
@@ -130,26 +138,12 @@ export default function Layout({ children, currentPageName }) {
           }
         `}</style>
         
-        {/* Vercel-style Grid Background */}
-        <div className="grid-background"></div>
-        <div className="grid-lines"></div>
-        <div className="architectural-grid"></div>
-        <div className="gradient-overlay"></div>
-        <div className="floating-particles">
-          <div className="particle"></div>
-          <div className="particle"></div>
-          <div className="particle"></div>
-          <div className="particle"></div>
-          <div className="particle"></div>
-          <div className="particle"></div>
-          <div className="particle"></div>
-          <div className="particle"></div>
-          <div className="particle"></div>
-        </div>
-        
+        <ScrollToTop />
         <LandingHeader />
         <main className="flex-1 relative z-10">{children}</main>
-        <LandingFooter />
+        <div className="relative z-50">
+          <LandingFooter />
+        </div>
       </div>
     );
 }

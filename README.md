@@ -1,4 +1,4 @@
-# AkinSec Website
+# AkinSec Website - Landing Page
 
 This is a modern, responsive website for AkinSec, a compliance management platform.
 

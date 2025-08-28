@@ -587,25 +587,75 @@ export default function DemoLiveDashboard() {
       </div>
       
       {/* Call to Action */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white mt-8">
-        <div className="max-w-7xl mx-auto p-8 text-center">
-            <h3 className="text-2xl font-bold mb-2">Ready to Get Started?</h3>
-            <p className="text-blue-100 mb-6">
-              This is just a preview. Get full access to enterprise features with a free trial.
-            </p>
-            <div className="flex justify-center gap-4">
-              <Link to={createPageUrl('Pricing')}>
-                <Button size="lg" variant="secondary">
-                  Start Free Trial
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-              <Link to={createPageUrl('Contact')}>
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-blue-600">
-                  Schedule Demo
-                </Button>
-              </Link>
+      <div className="content-section with-ship-animation">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white mt-8 relative overflow-hidden">
+          {/* Business icons animation container */}
+          <div className="ship-container">
+            <div className="ship">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" fill="#A5B4FC" stroke="#6366F1" strokeWidth="1"/>
+                <path d="M9 12L11 14L15 10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
+            <div className="ship">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#86EFAC" stroke="#4ADE80" strokeWidth="1"/>
+                <path d="M14 2V8H20" stroke="#4ADE80" strokeWidth="1"/>
+                <path d="M16 13H8" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M16 17H8" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M10 9H9H8" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <div className="ship">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" fill="#FCD34D" stroke="#F59E0B" strokeWidth="1"/>
+                <path d="M12 6V12L16 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <div className="ship">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#C4B5FD" stroke="#A78BFA" strokeWidth="1"/>
+                <path d="M2 17L12 22L22 17" fill="#C4B5FD" stroke="#A78BFA" strokeWidth="1"/>
+                <path d="M2 12L12 17L22 12" fill="#C4B5FD" stroke="#A78BFA" strokeWidth="1"/>
+                <path d="M12 2V22" stroke="#A78BFA" strokeWidth="1"/>
+              </svg>
+            </div>
+            <div className="ship">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12L11 14L15 10" stroke="#FCA5A5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#FCA5A5" strokeWidth="2"/>
+              </svg>
+            </div>
+            <div className="ship">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="#99F6E4" stroke="#5EEAD4" strokeWidth="1"/>
+                <path d="M12 4L10.5 8L6 9L10.5 10L12 14L13.5 10L18 9L13.5 8L12 4Z" fill="#F9A8D4" stroke="#F472B6" strokeWidth="1"/>
+              </svg>
+            </div>
+          </div>
+          
+          {/* Text overlay to mute icons when they pass over text */}
+          <div className="text-overlay"></div>
+          
+          <div className="max-w-7xl mx-auto p-8 text-center relative z-10">
+              <h3 className="text-2xl font-bold mb-2 cta-text-glow">Ready to Get Started?</h3>
+              <p className="text-blue-100 mb-6 cta-text-glow">
+                This is just a preview. Get full access to enterprise features with a free trial.
+              </p>
+              <div className="flex justify-center gap-4">
+                <Link to={createPageUrl('Pricing')}>
+                  <Button size="lg" variant="secondary">
+                    Start Free Trial
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+                <Link to={createPageUrl('Contact')}>
+                  <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-blue-600">
+                    Schedule Demo
+                  </Button>
+                </Link>
+              </div>
+          </div>
         </div>
       </div>
     </div>

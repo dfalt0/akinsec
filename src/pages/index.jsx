@@ -16,19 +16,19 @@ import Home from "./Home";
 
 import Frameworks from "./Frameworks";
 
-import DashboardScreenshots from "./DashboardScreenshots";
+import DashboardExample from "./DashboardExample.jsx";
 
-import FrameworksScreenshots from "./FrameworksScreenshots";
+import FrameworksExample from "./FrameworksExample.jsx";
 
-import TemplatesScreenshots from "./TemplatesScreenshots";
+import TemplatesExample from "./TemplatesExample.jsx";
 
-import FileAnalysisScreenshots from "./FileAnalysisScreenshots";
+import FileAnalysisExample from "./FileAnalysisExample.jsx";
 
-import IntegrationsScreenshots from "./IntegrationsScreenshots";
+import IntegrationsExample from "./IntegrationsExample.jsx";
 
-import TasksScreenshots from "./TasksScreenshots";
+import TasksExample from "./TasksExample.jsx";
 
-import ReportsScreenshots from "./ReportsScreenshots";
+import ReportsExample from "./ReportsExample.jsx";
 
 import Careers from "./Careers";
 
@@ -59,19 +59,19 @@ const PAGES = {
     
     Frameworks: Frameworks,
     
-    DashboardScreenshots: DashboardScreenshots,
+    DashboardExample: DashboardExample,
     
-    FrameworksScreenshots: FrameworksScreenshots,
+    FrameworksExample: FrameworksExample,
     
-    TemplatesScreenshots: TemplatesScreenshots,
+    TemplatesExample: TemplatesExample,
     
-    FileAnalysisScreenshots: FileAnalysisScreenshots,
+    FileAnalysisExample: FileAnalysisExample,
     
-    IntegrationsScreenshots: IntegrationsScreenshots,
+    IntegrationsExample: IntegrationsExample,
 
-    TasksScreenshots: TasksScreenshots,
+    TasksExample: TasksExample,
     
-    ReportsScreenshots: ReportsScreenshots,
+    ReportsExample: ReportsExample,
     
     Careers: Careers,
     
@@ -127,19 +127,19 @@ function PagesContent() {
                 
                 <Route path="/Frameworks" element={<Frameworks />} />
                 
-                <Route path="/DashboardScreenshots" element={<DashboardScreenshots />} />
+                <Route path="/DashboardExample" element={<DashboardExample />} />
                 
-                <Route path="/FrameworksScreenshots" element={<FrameworksScreenshots />} />
+                <Route path="/FrameworksExample" element={<FrameworksExample />} />
                 
-                <Route path="/TemplatesScreenshots" element={<TemplatesScreenshots />} />
+                <Route path="/TemplatesExample" element={<TemplatesExample />} />
                 
-                <Route path="/FileAnalysisScreenshots" element={<FileAnalysisScreenshots />} />
+                <Route path="/FileAnalysisExample" element={<FileAnalysisExample />} />
                 
-                <Route path="/IntegrationsScreenshots" element={<IntegrationsScreenshots />} />
+                <Route path="/IntegrationsExample" element={<IntegrationsExample />} />
 
-                <Route path="/TasksScreenshots" element={<TasksScreenshots />} />
+                <Route path="/TasksExample" element={<TasksExample />} />
 
-                <Route path="/ReportsScreenshots" element={<ReportsScreenshots />} />
+                <Route path="/ReportsExample" element={<ReportsExample />} />
                 
                 <Route path="/Careers" element={<Careers />} />
                 
