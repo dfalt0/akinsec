@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Switch } from '@/components/ui/switch';
 import { Check, ArrowRight, Shield, Zap, Users } from 'lucide-react';
 // import { User } from '@/api/entities';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils/index.js';
 
 const pricingPlans = {
   monthly: [
@@ -159,13 +161,14 @@ const PricingCard = ({ plan }) => (
           ))}
         </ul>
       </div>
-      <Button 
-        className={`w-full mt-8 ${plan.popular ? 'bg-accent hover:bg-accent/90' : ''}`}
-        variant={plan.popular ? 'default' : 'outline'}
-        onClick={() => alert('Contact us to get started!')}
-      >
-        {plan.cta}
-      </Button>
+      <Link to={createPageUrl('Setup')}>
+        <Button 
+          className={`w-full mt-8 ${plan.popular ? 'bg-accent hover:bg-accent/90' : ''}`}
+          variant={plan.popular ? 'default' : 'outline'}
+        >
+          {plan.cta}
+        </Button>
+      </Link>
     </CardContent>
   </Card>
 );

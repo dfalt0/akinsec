@@ -37,6 +37,7 @@ import Documentation from "./Documentation";
 import Privacy from "./Privacy";
 
 import Terms from "./Terms";
+import Setup from "./Setup.jsx";
 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
@@ -80,6 +81,7 @@ const PAGES = {
     Privacy: Privacy,
     
     Terms: Terms,
+    Setup: Setup,
     
 }
 
@@ -148,6 +150,7 @@ function PagesContent() {
                 <Route path="/Privacy" element={<Privacy />} />
                 
                 <Route path="/Terms" element={<Terms />} />
+                <Route path="/Setup" element={<Setup />} />
                 
                 {/* Catch-all route for unmatched paths */}
                 <Route path="*" element={<Home />} />

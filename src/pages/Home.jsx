@@ -15,6 +15,7 @@ const BackgroundWrapper = ({ children }) => (
     <div className="grid-background" />
     <div className="grid-lines" />
     <div className="edge-vignette" />
+    <canvas className="particle-lines" id="particle-lines-canvas" />
     <div className="floating-particles">
       {[...Array(9)].map((_, i) => (
         <div key={i} className="particle" />
@@ -213,7 +214,12 @@ function RotatingBadge({ items, intervalMs = 5000, transitionMs = 1200 }) {
   return (
     <Badge
       variant="outline"
-      className={`mb-4 border-accent/50 text-accent font-semibold py-1 px-3 rounded-full ${
+      className={`mb-5 font-semibold py-2 px-4 rounded-full text-base 
+        bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 
+        border border-blue-500/40 dark:border-blue-400/30 badge-vibrant
+        text-indigo-900 dark:text-fuchsia-200 shadow-md 
+        ring-1 ring-blue-500/25 dark:ring-blue-400/20 
+        hover:shadow-lg transition-shadow ${
         phase === 'in' ? 'one-liner-bubble-in' : 'one-liner-bubble-out'
       }`}
       style={animationStyle}
@@ -242,12 +248,114 @@ export default function HomePage() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(null);
+  const canvasRef = useRef(null);
+  const particlesRef = useRef([]);
+  const rafRef = useRef(0);
   
   const phrases = ["AkinSec", "Simple Compliance", "Simply Compliant", "Secure Your Business", "AI Compliance", "What's \"compliance\"?", "What's a computer?", "D'you check that file, Jeff?", "My cOmPliAnCe isn't running...", "Boss said I needed this?"];
   const typingSpeed = 150;
   const deletingSpeed = 75;
   const pauseDuration = 2000;
 
+  useEffect(() => {
+    // Particle line drawer: connects nearby floating particles with lines
+    const canvas = document.getElementById('particle-lines-canvas');
+    if (!canvas) return;
+    canvasRef.current = canvas;
+    const ctx = canvas.getContext('2d');
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Initialize pseudo-particles matching the DOM particles count with random positions/velocities
+    const count = 20; // separate from DOM bubbles for smoother lines
+    const particles = Array.from({ length: count }).map(() => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+    }));
+    particlesRef.current = particles;
+
+    const maxDist = 210; // connect within this distance
+    const repelDist = 40; // gently repel when too close to avoid clumping
+
+    const step = () => {
+      const { width, height } = canvas;
+      ctx.clearRect(0, 0, width, height);
+
+      // Update particle positions
+      for (const p of particlesRef.current) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+      }
+
+      // Draw connections
+      for (let i = 0; i < particlesRef.current.length; i++) {
+        for (let j = i + 1; j < particlesRef.current.length; j++) {
+          const a = particlesRef.current[i];
+          const b = particlesRef.current[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+
+          // Soft repel at close distances
+          if (d < repelDist && d > 0.0001) {
+            const f = (repelDist - d) / repelDist * 0.02;
+            const ux = dx / d;
+            const uy = dy / d;
+            a.vx += ux * f;
+            a.vy += uy * f;
+            b.vx -= ux * f;
+            b.vy -= uy * f;
+          }
+
+          if (d < maxDist) {
+            const alpha = 1 - d / maxDist;
+            // Glow pass (reduced)
+            ctx.save();
+            ctx.strokeStyle = `rgba(99, 102, 241, ${Math.min(0.45, 0.4 * alpha)})`;
+            ctx.lineWidth = 1.4;
+            ctx.shadowColor = 'rgba(99, 102, 241, 0.25)';
+            ctx.shadowBlur = 6;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+            ctx.restore();
+            // Crisp core pass (reduced)
+            ctx.strokeStyle = `rgba(99, 102, 241, ${Math.min(0.7, 0.5 * alpha)})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
   useEffect(() => {
     const handleType = () => {
       const currentPhrase = phrases[phraseIndex % phrases.length];
@@ -313,29 +421,138 @@ export default function HomePage() {
       <section className="relative py-20 md:py-32 text-center overflow-hidden">
         <div className="hero-gradient" />
         <div className="container mx-auto px-4 relative">
-          <RotatingBadge items={oneLiners} intervalMs={4200} transitionMs={1100} />
+          <RotatingBadge items={oneLiners} intervalMs={6200} transitionMs={1100} />
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight flex items-center justify-center min-h-[80px] md:min-h-[150px]">
             {text}
             <span className="blinking-cursor" aria-hidden="true">|</span>
           </h1>
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
-            AkinSec is the all-in-one platform to automate compliance tasks, manage integrations, and stay ahead of regulations with AI-driven insights.
+            <b>AkinSec</b> is the all-in-one platform to help you understand IT Compliance, and automate it with the <span className="text-rainbow-glow">power of AI</span>.
           </p>
           <div className="flex justify-center gap-4">
             <Link to={createPageUrl('Pricing')}>
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+              <Button size="lg" className="btn-gradient">
                 Get Started Free <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
             {/* <Link to={createPageUrl('Dashboard')}> */}
             <Link to="https://app.akinsec.com">
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="btn-rainbow">
                 Go to App
               </Button>
             </Link>
           </div>
         </div>
       </section>
+
+      {/* {activeFeature && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setActiveFeature(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[85vh] overflow-auto bg-card/95 border border-border/50 rounded-2xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            <button
+              className="absolute -top-3 -right-3 bg-white/90 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 rounded-full w-9 h-9 flex items-center justify-center shadow-md border border-neutral-200/60 dark:border-neutral-700/60"
+              onClick={() => setActiveFeature(null)}
+              aria-label="Close"
+            >
+              ✕
+            </button>
+            <div className="p-6">
+              {activeFeature === 'metrics' && (
+                <>
+                  <div className="mb-4 flex items-center gap-2">
+                    <span className="inline-flex items-center px-2 py-0.5 text-xs rounded-full border border-border/60 bg-card/60">Live</span>
+                    <h3 className="text-2xl font-bold">Real-time Metrics</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-6">A single, explainable score driven by control status, evidence freshness, overdue work, and integration signals—updated on every change.</p>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><BarChart3 className="w-4 h-4 text-indigo-600"/> Score model</div>
+                      <p className="text-sm text-muted-foreground">Weighted controls (pass/partial/fail), evidence age decay, and penalties for critical overdue tasks. Each score shows its top drivers.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><CheckCircle className="w-4 h-4 text-green-600"/> Task analytics</div>
+                      <p className="text-sm text-muted-foreground">Rolling 7/30-day throughput, on-time vs late, and SLA-breach forecasts based on owner load and historical velocity.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><Shield className="w-4 h-4 text-purple-600"/> Risk map</div>
+                      <p className="text-sm text-muted-foreground">Aggregate risk by framework, owner, and domain with drill downs to the specific failed control or missing artifact.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><FileText className="w-4 h-4 text-blue-600"/> Trends & export</div>
+                      <p className="text-sm text-muted-foreground">Compare week-over-week deltas and export CSV/PNG snapshots for auditors and leadership.</p>
+                    </div>
+                  </div>
+                </>
+              )}
+              {activeFeature === 'alerts' && (
+                <>
+                  <div className="mb-4 flex items-center gap-2">
+                    <span className="inline-flex items-center px-2 py-0.5 text-xs rounded-full border border-border/60 bg-card/60">Prioritized</span>
+                    <h3 className="text-2xl font-bold">Risk Alerts</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-6">Signals are scored by impact and proximity to deadlines. Every alert includes a one-click remediation path.</p>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><FileText className="w-4 h-4 text-pink-600"/> Evidence expiry</div>
+                      <p className="text-sm text-muted-foreground">Notify when artifacts near expiry (e.g., SOC 2 policy attestation less than 365 days) and auto-create renewal tasks.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><AlertTriangle className="w-4 h-4 text-amber-600"/> Integration drift</div>
+                      <p className="text-sm text-muted-foreground">Flag vendors with expiring DPAs, missing pen-test reports, or scope changes pulled from integrations.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><Check className="w-4 h-4 text-green-600"/> Coverage gaps</div>
+                      <p className="text-sm text-muted-foreground">Highlight controls without mapped evidence, grouped by framework (SOC 2, ISO 27001, etc.).</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><Calendar className="w-4 h-4 text-blue-600"/> Upcoming deadlines</div>
+                      <p className="text-sm text-muted-foreground">Audit dates, renewals, and quarterly control tests with owners and due dates in one list.</p>
+                    </div>
+                  </div>
+                </>
+              )}
+              {activeFeature === 'actions' && (
+                <>
+                  <div className="mb-4 flex items-center gap-2">
+                    <span className="inline-flex items-center px-2 py-0.5 text-xs rounded-full border border-border/60 bg-card/60">Guided</span>
+                    <h3 className="text-2xl font-bold">Quick Actions</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-6">Pre-wired flows that spin up the right tasks, owners, and artifacts—so work starts in seconds, not meetings.</p>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><CheckSquare className="w-4 h-4 text-indigo-600"/> New control</div>
+                      <p className="text-sm text-muted-foreground">Pick a framework control—we generate a policy draft, evidence checklist, and an owner-routed task with due dates.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><Shield className="w-4 h-4 text-purple-600"/> Vendor audit</div>
+                      <p className="text-sm text-muted-foreground">Collect SOC reports/DPAs, run the questionnaire, and produce a residual-risk summary with remediation tasks.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><FileText className="w-4 h-4 text-emerald-600"/> Report pack</div>
+                      <p className="text-sm text-muted-foreground">Board-ready PDF: score trend, top risks, overdue items, next-week plan. One click to export.</p>
+                    </div>
+                    <div className="rounded-xl border border-border/60 p-4 bg-card/70">
+                      <div className="flex items-center gap-2 font-semibold mb-2"><Zap className="w-4 h-4 text-amber-600"/> Evidence capture</div>
+                      <p className="text-sm text-muted-foreground">Upload or link artifacts—we auto-tag to controls, set review cadence, and assign approvers.</p>
+                    </div>
+                  </div>
+                </>
+              )}
+              <div className="flex justify-end gap-3 mt-6">
+                <Button variant="outline" onClick={() => setActiveFeature(null)}>Close</Button>
+                <Link to={createPageUrl('Pricing')}><Button className="btn-gradient">Get Started <ArrowRight className="w-4 h-4 ml-2"/></Button></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )} */}
 
       {/* Dashboard Preview Section */}
       <section className="py-20">
@@ -380,7 +597,7 @@ export default function HomePage() {
           {/* Feature Highlights */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 max-w-full">
             <TiltCard>
-              <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
+              <Card onClick={() => setActiveFeature('metrics')} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter' || e.key===' '){ setActiveFeature('metrics'); } }} className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg card-glow-blue cursor-pointer hover:bg-card/80">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-4">
                     <CheckCircle className="w-5 h-5 text-green-600" />
@@ -404,7 +621,7 @@ export default function HomePage() {
               </Card>
             </TiltCard>
             <TiltCard>
-              <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
+              <Card onClick={() => setActiveFeature('alerts')} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter' || e.key===' '){ setActiveFeature('alerts'); } }} className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg card-glow-amber cursor-pointer hover:bg-card/80">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-4">
                     <AlertTriangle className="w-5 h-5 text-amber-600" />
@@ -428,7 +645,7 @@ export default function HomePage() {
               </Card>
             </TiltCard>
             <TiltCard>
-              <Card className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg">
+              <Card onClick={() => setActiveFeature('actions')} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter' || e.key===' '){ setActiveFeature('actions'); } }} className="bg-card/70 backdrop-blur-sm border-border/40 shadow-lg card-glow-purple cursor-pointer hover:bg-card/80">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-4">
                     <Network className="w-5 h-5 text-purple-600" />
@@ -554,8 +771,8 @@ export default function HomePage() {
             Join other forward-thinking companies and turn compliance from a burden into a business advantage.
           </p>
           <Link to={createPageUrl('Pricing')}>
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              Start for Free Today <ArrowRight className="w-4 h-4 ml-2" />
+            <Button size="lg" className="btn-cta-unique">
+              <span>Start for Free Today</span> <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
         </div>

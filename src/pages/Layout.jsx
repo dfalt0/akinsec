@@ -2,7 +2,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils/index.js";
-import { Shield, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import LogoPng from "@/img/AkinSec_Logo.png";
 import { Button } from "@/components/ui/button";
 
 const landingNavItems = [
@@ -17,22 +18,29 @@ const landingNavItems = [
 
 const LandingHeader = () => (
 <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    {/* Announcement bar */}
+    <div className="w-full bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 text-foreground/80 text-xs">
+      <div className="container mx-auto px-4 py-1.5 text-center">
+        <span className="hidden sm:inline">AkinSec Cloud is coming. </span>
+        <Link to={createPageUrl('Pricing')} className="font-medium text-accent nav-link-inline">Sign up for early access</Link>
+      </div>
+    </div>
     <div className="container flex h-14 items-center justify-between mx-auto px-4">
       <Link to={createPageUrl('Home')} className="flex items-center space-x-2">
-        <Shield className="h-6 w-6 text-accent" />
-        <span className="font-bold">AkinSec</span>
+        <img src={LogoPng} alt="AkinSec" className="h-6 w-auto" />
+        <span className="font-bold brand-glow">AkinSec</span>
       </Link>
       
       <div className="flex items-center space-x-6">
         <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
           {landingNavItems.map(item => (
-            <Link key={item.page} to={createPageUrl(item.page)} className="text-muted-foreground hover:text-foreground transition-colors">{item.title}</Link>
+            <Link key={item.page} to={createPageUrl(item.page)} className="text-muted-foreground hover:text-foreground transition-colors nav-link">{item.title}</Link>
           ))}
         </nav>
         
         <div className="flex items-center space-x-4">
             <Link to={createPageUrl('Pricing')}>
-              <Button className="bg-accent hover:bg-accent/90">
+              <Button className="btn-gradient">
                 Get Started <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -49,7 +57,7 @@ const LandingFooter = () => (
         <div className="md:col-span-1">
           <div className="flex items-center space-x-2 mb-4">
             <Link to={createPageUrl('Home')} className="flex items-center space-x-2">
-              <Shield className="h-5 w-5 text-accent" />
+              <img src={LogoPng} alt="AkinSec" className="h-5 w-auto" />
               <span className="font-bold">AkinSec</span>
             </Link>
           </div>
