@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion } from "framer-motion";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -27,6 +28,9 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
+import { ReactFlow, Background, Controls, useNodesState, useEdgesState, MarkerType, addEdge, Handle, Position } from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
+import './Home.css';
 
 
 // Ultra-minimal hero section inspired by GreyNoise
@@ -53,9 +57,9 @@ const HeroSection = () => {
           </h1>
           
           Automated SOC-as-a-Service
-          {/* <h3 className="text-lg md:text-xl font-light text-gray-300 mb-6 tracking-wide">
+          {/* <h2 className="text-lg md:text-xl font-light text-gray-300 mb-6 tracking-wide">
             Automated SOC-as-a-Service
-          </h3> */}
+          </h2> */}
           {/* Subtitle - minimal */}
           <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
             {/* AI-powered compliance intelligence for modern security teams */}
@@ -87,6 +91,241 @@ const HeroSection = () => {
       </div>
     </section>
   );
+};
+
+// Custom Node Components for React Flow
+const DataSourceNode = ({ data }) => (
+  <div className="bg-gray-800 border-2 border-gray-600 rounded-lg px-4 py-3 shadow-lg min-w-[140px]">
+    <Handle 
+      id="source" 
+      type="source" 
+      position={Position.Right} 
+      style={{ background: '#9ca3af' }} 
+    />
+    <div className="text-sm font-medium text-white text-center">{data.label}</div>
+    <div className="text-xs text-gray-300 text-center">{data.subtitle}</div>
+  </div>
+);
+
+const SecurityVMNode = ({ data }) => (
+  <div className="bg-gray-800 border-2 border-gray-600 rounded-xl pt-6 pb-4 px-4 shadow-lg min-w-[200px] relative">
+    <Handle 
+      id="target" 
+      type="target" 
+      position={Position.Left} 
+      style={{ background: '#9ca3af' }} 
+    />
+    <Handle 
+      id="source" 
+      type="source" 
+      position={Position.Right} 
+      style={{ background: '#9ca3af' }} 
+    />
+    <div className="text-base font-bold text-white text-center mb-3">Security VM</div>
+    <div className="grid grid-cols-2 gap-2 text-xs mb-6 relative">
+      {data.tools.map((tool, index) => (
+        <div key={tool} className="bg-gray-700 border border-gray-500 rounded px-2 py-1 text-center text-gray-200 font-medium">
+          {tool}
+        </div>
+      ))}
+      {/* Single animated dotted line from tools to automation - COMMENTED OUT FOR NOW */}
+      {/* <svg className="absolute left-1/2 transform -translate-x-1/2 top-full w-2 h-6 pointer-events-none" style={{ zIndex: 10 }}>
+        <defs>
+          <marker
+            id="automation-arrow"
+            markerWidth="8"
+            markerHeight="8"
+            refX="6"
+            refY="2"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <path
+              d="M0,0 L0,4 L6,2 z"
+              fill="#9ca3af"
+            />
+          </marker>
+        </defs>
+        <line
+          x1="1"
+          y1="0"
+          x2="1"
+          y2="20"
+          stroke="#9ca3af"
+          strokeWidth="2"
+          strokeDasharray="4,4"
+          markerEnd="url(#automation-arrow)"
+          className="automation-line"
+        />
+      </svg> */}
+    </div>
+    <div className="bg-gray-700 border border-gray-500 rounded px-2 py-1 text-center text-gray-200 font-medium relative mb-1">
+      Automation
+    </div>
+  </div>
+);
+
+const CustomerGUINode = ({ data }) => (
+  <div className="bg-gray-800 border-2 border-gray-600 rounded-lg px-4 py-3 shadow-lg min-w-[140px]">
+    <Handle 
+      id="target" 
+      type="target" 
+      position={Position.Left} 
+      style={{ background: '#9ca3af' }} 
+    />
+    <div className="text-sm font-medium text-white text-center">{data.label}</div>
+  </div>
+);
+
+// Define nodeTypes outside component to prevent re-creation warnings
+const nodeTypes = {
+  dataSource: DataSourceNode,
+  securityVM: SecurityVMNode,
+  customerGUI: CustomerGUINode,
+};
+
+// Tech Stack Flowchart Component with React Flow
+const TechStackFlowchart = () => {
+
+
+
+  // React Flow implementation
+  const initialNodes = [
+    {
+      id: 'server',
+      type: 'dataSource',
+      position: { x: 100, y: 50 },
+      data: { label: 'Servers', subtitle: 'Data Source' },
+    },
+    {
+      id: 'pc',
+      type: 'dataSource',
+      position: { x: 100, y: 150 },
+      data: { label: 'PCs', subtitle: 'Endpoint' },
+    },
+    {
+      id: 'sensor',
+      type: 'dataSource',
+      position: { x: 100, y: 250 },
+      data: { label: 'Sensors', subtitle: 'IoT Device' },
+    },
+    {
+      id: 'vm',
+      type: 'securityVM',
+      position: { x: 400, y: 150 },
+      data: { 
+        tools: ['SIEM', 'HIDS', 'IR', 'EDR', 'MDR', 'XDR']
+      },
+    },
+    {
+      id: 'gui',
+      type: 'customerGUI',
+      position: { x: 700, y: 150 },
+      data: { label: 'Customer GUI' },
+    },
+  ];
+
+  const initialEdges = [
+    {
+      id: 'server-vm',
+      source: 'server',
+      sourceHandle: 'source',
+      target: 'vm',
+      targetHandle: 'target',
+      type: 'smoothstep',
+      style: { stroke: '#9ca3af', strokeWidth: 2, strokeDasharray: '5,5' },
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        color: '#9ca3af',
+      },
+    },
+    {
+      id: 'pc-vm',
+      source: 'pc',
+      sourceHandle: 'source',
+      target: 'vm',
+      targetHandle: 'target',
+      type: 'smoothstep',
+      style: { stroke: '#9ca3af', strokeWidth: 2, strokeDasharray: '5,5' },
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        color: '#9ca3af',
+      },
+    },
+    {
+      id: 'sensor-vm',
+      source: 'sensor',
+      sourceHandle: 'source',
+      target: 'vm',
+      targetHandle: 'target',
+      type: 'smoothstep',
+      style: { stroke: '#9ca3af', strokeWidth: 2, strokeDasharray: '5,5' },
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        color: '#9ca3af',
+      },
+    },
+    {
+      id: 'vm-gui',
+      source: 'vm',
+      sourceHandle: 'source',
+      target: 'gui',
+      targetHandle: 'target',
+      type: 'smoothstep',
+      style: { stroke: '#9ca3af', strokeWidth: 2, strokeDasharray: '5,5' },
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        color: '#9ca3af',
+      },
+    },
+  ];
+
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  return (
+      <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-light text-white mb-4">Our Technology Architecture</h2>
+            <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+              A comprehensive view of how our security automation platform processes and analyzes data
+            </p>
+          </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="h-[500px] bg-gray-900/20 rounded-xl border border-gray-700">
+              <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                nodeTypes={nodeTypes}
+                fitView
+                className="bg-transparent"
+                defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+                defaultEdgeOptions={{
+                  type: 'smoothstep',
+                  style: { stroke: '#9ca3af', strokeWidth: 2, strokeDasharray: '5,5' },
+                  markerEnd: {
+                    type: MarkerType.ArrowClosed,
+                    color: '#9ca3af',
+                  },
+                }}
+              >
+                <Background color="#374151" gap={20} />
+                <Controls 
+                  className="bg-gray-800 border-gray-600"
+                  style={{
+                    backgroundColor: '#1f2937',
+                    border: '1px solid #4b5563',
+                  }}
+                />
+              </ReactFlow>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
 };
 
 // Ultra-minimal feature cards
@@ -406,17 +645,9 @@ export default function HomeRedesign() {
 
   return (
     <div className="min-h-screen relative">
-      <style>{`
-        @keyframes blink {
-          50% { opacity: 0; }
-        }
-        .blinking-cursor {
-          animation: blink 1s step-end infinite;
-          font-weight: 300;
-        }
-      `}</style>
       <WaveBackground />
       <HeroSection />
+      <TechStackFlowchart key="flowchart-v2" />
       
       {/* Features Section */}
       <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">

@@ -1,0 +1,88 @@
+/* Home page specific styles */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.blinking-cursor {
+  animation: blink 1s step-end infinite;
+  font-weight: 300;
+}
+
+/* Dark mode controls styling */
+.react-flow__controls {
+  background-color: #1f2937 !important;
+  border: 1px solid #4b5563 !important;
+}
+
+.react-flow__controls-button {
+  background-color: #374151 !important;
+  border-bottom: 1px solid #4b5563 !important;
+  color: #d1d5db !important;
+}
+
+.react-flow__controls-button:hover {
+  background-color: #4b5563 !important;
+  color: #f9fafb !important;
+}
+
+.react-flow__controls-button svg {
+  fill: #d1d5db !important;
+}
+
+.react-flow__controls-button:hover svg {
+  fill: #f9fafb !important;
+}
+
+/* Arrow marker styling */
+.react-flow__arrowhead {
+  fill: #9ca3af !important;
+}
+
+.react-flow__edge-path {
+  stroke: #9ca3af !important;
+  stroke-width: 2 !important;
+  stroke-dasharray: 8,4 !important;
+  animation: dash-flow 1.5s linear infinite !important;
+}
+
+@keyframes dash-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -12;
+  }
+}
+
+marker#react-flow__arrowclosed {
+  fill: #9ca3af !important;
+}
+
+/* Single automation line styling */
+.automation-line {
+  animation: dash-flow 1s linear infinite !important;
+}
+
+/* Handle styling */
+.react-flow__handle {
+  width: 8px !important;
+  height: 8px !important;
+  border: 2px solid #9ca3af !important;
+  background: #9ca3af !important;
+}
+
+.react-flow__handle-top {
+  top: -4px !important;
+}
+
+.react-flow__handle-bottom {
+  bottom: -4px !important;
+}
+
+.react-flow__handle-left {
+  left: -4px !important;
+}
+
+.react-flow__handle-right {
+  right: -4px !important;
+}
