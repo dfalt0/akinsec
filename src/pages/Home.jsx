@@ -213,13 +213,13 @@ const HowToStartSection = () => {
   const steps = [
     {
       number: "01",
-      title: "Give Some Basics",
+      title: "Basic Info",
       description: "Explain your business structure, IT infrastructure, and security requirements to our team",
       icon: Users
     },
     {
       number: "02", 
-      title: "Download General Agent",
+      title: "Download Agent",
       description: "Install our lightweight agent on your endpoints to enable comprehensive detection and monitoring",
       icon: Download
     },
@@ -274,23 +274,23 @@ const HowToStartSection = () => {
   );
 };
 
-// Clean testimonials
-const TestimonialsSection = () => {
-  const testimonials = [
+// Startup vision section
+const VisionSection = () => {
+  const visionPillars = [
     {
-      quote: "AkinSec transformed our compliance from a nightmare into a streamlined process. SOC 2 ready in half the time.",
-      author: "Sarah Chen",
-      role: "CISO, TechCorp"
+      icon: Target,
+      title: "Our Mission",
+      description: "Democratize enterprise-grade security automation for businesses of all sizes, making compliance accessible and affordable."
     },
     {
-      quote: "The AI insights help us stay ahead of compliance requirements. It's like having an expert on our team 24/7.",
-      author: "Michael Rodriguez", 
-      role: "VP Security, DataFlow"
+      icon: TrendingUp,
+      title: "Our Vision", 
+      description: "A world where security compliance is automated, intelligent, and seamlessly integrated into every business workflow."
     },
     {
-      quote: "Finally, a compliance platform that makes sense. The automation saves us hours every week.",
-      author: "Jennifer Park",
-      role: "Security Director, CloudScale"
+      icon: Users,
+      title: "Our Promise",
+      description: "To deliver cutting-edge AI-powered security solutions that grow with your business and adapt to your unique needs."
     }
   ];
 
@@ -298,21 +298,21 @@ const TestimonialsSection = () => {
     <section className="py-24 bg-black/60 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-4xl font-light text-white mb-4">What Our Customers Say</h2>
+          <h2 className="text-4xl font-light text-white mb-4">Our Vision for the Future</h2>
           <p className="text-gray-400 text-lg">
-            Trusted by security teams at leading companies
+            Building the next generation of security automation
           </p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-gray-900/50 border-gray-800 p-8">
-              <CardContent className="p-0">
-                <p className="text-gray-300 mb-8 leading-relaxed text-sm">"{testimonial.quote}"</p>
-                <div>
-                  <div className="text-white font-medium text-sm">{testimonial.author}</div>
-                  <div className="text-gray-500 text-xs">{testimonial.role}</div>
+          {visionPillars.map((pillar, index) => (
+            <Card key={index} className="bg-gray-900/50 border-gray-800 p-8 hover:bg-gray-900/70 transition-all duration-300 group">
+              <CardContent className="p-0 text-center">
+                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700 transition-colors duration-300">
+                  <pillar.icon className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
                 </div>
+                <h3 className="text-white font-medium text-lg mb-4">{pillar.title}</h3>
+                <p className="text-gray-300 leading-relaxed text-sm">{pillar.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -487,7 +487,7 @@ export default function HomeRedesign() {
       <StatsSection />
       <TechStackSection />
       <HowToStartSection />
-      <TestimonialsSection />
+      <VisionSection />
       <CTASection />
     </div>
   );
