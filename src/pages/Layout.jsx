@@ -40,8 +40,8 @@ const LandingHeader = () => (
         
         <div className="flex items-center space-x-4">
             <Link to={createPageUrl('Pricing')}>
-              <Button className="btn-gradient">
-                Get Started <ArrowRight className="w-4 h-4 ml-2" />
+              <Button className="bg-black text-white hover:bg-white hover:text-black border-2 border-black hover:border-white transition-all duration-300 group">
+                Get Started <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
         </div>
