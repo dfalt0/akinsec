@@ -25,7 +25,7 @@ export default function ReportsExample() {
         </div>
 
         {/* Main Screenshot */}
-        <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
+        <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
           <CardContent className="p-8">
             <div className="bg-gradient-to-br from-slate-100 to-purple-100 rounded-xl p-8 min-h-[600px]">
               <div className="text-center mb-8">
@@ -36,7 +36,7 @@ export default function ReportsExample() {
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {/* Sample Chart Cards */}
-                <div className="bg-white rounded-xl p-6 shadow-lg col-span-1 lg:col-span-2">
+                <div className="bg-card rounded-xl p-6 shadow-lg col-span-1 lg:col-span-2">
                     <h4 className="font-semibold text-slate-900 mb-4">Framework Progress</h4>
                     <div className="space-y-4">
                         <div>
@@ -54,14 +54,14 @@ export default function ReportsExample() {
                     </div>
                 </div>
                 
-                <div className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="bg-card rounded-xl p-6 shadow-lg">
                     <h4 className="font-semibold text-slate-900 mb-4">Task Status</h4>
                     <div className="flex items-center justify-center h-full">
                         <PieChart className="w-24 h-24 text-blue-400" />
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl p-6 shadow-lg col-span-1 lg:col-span-3">
+                <div className="bg-card rounded-xl p-6 shadow-lg col-span-1 lg:col-span-3">
                     <h4 className="font-semibold text-slate-900 mb-4">Compliance Score Over Time</h4>
                      <div className="flex items-center justify-center h-32">
                         <TrendingUp className="w-full h-24 text-green-500" />
@@ -74,7 +74,7 @@ export default function ReportsExample() {
 
         {/* Feature Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-purple-600" />
@@ -88,7 +88,7 @@ export default function ReportsExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Download className="w-5 h-5 text-blue-600" />
@@ -102,7 +102,7 @@ export default function ReportsExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Share2 className="w-5 h-5 text-green-600" />

@@ -24,7 +24,7 @@ export default function TasksExample() {
         </div>
 
         {/* Main Screenshot */}
-        <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
+        <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
           <CardContent className="p-8">
             <div className="bg-gradient-to-br from-slate-100 to-blue-100 rounded-xl p-8 min-h-[600px]">
               <div className="text-center mb-8">
@@ -37,7 +37,7 @@ export default function TasksExample() {
                 {/* Kanban Columns */}
                 <div className="space-y-4">
                   <h4 className="font-semibold text-slate-700 text-center">To Do</h4>
-                  <div className="bg-white rounded-lg p-4 shadow-md space-y-2">
+                  <div className="bg-card rounded-lg p-4 shadow-md space-y-2">
                     <p className="font-semibold text-sm">Conduct Risk Assessment</p>
                     <Badge variant="outline" className="text-xs">ISO 27001</Badge>
                     <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
@@ -48,14 +48,14 @@ export default function TasksExample() {
 
                 <div className="space-y-4">
                   <h4 className="font-semibold text-slate-700 text-center">In Progress</h4>
-                   <div className="bg-white rounded-lg p-4 shadow-md space-y-2">
+                   <div className="bg-card rounded-lg p-4 shadow-md space-y-2">
                     <p className="font-semibold text-sm">Implement MFA Policy</p>
                     <Badge variant="outline" className="text-xs bg-red-100 text-red-800 border-red-200">High Priority</Badge>
                     <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
                       <User className="w-3 h-3" /> <span>Sarah</span>
                     </div>
                   </div>
-                   <div className="bg-white rounded-lg p-4 shadow-md space-y-2">
+                   <div className="bg-card rounded-lg p-4 shadow-md space-y-2">
                     <p className="font-semibold text-sm">Update Privacy Policy</p>
                     <Badge variant="outline" className="text-xs">GDPR</Badge>
                     <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
@@ -66,7 +66,7 @@ export default function TasksExample() {
 
                 <div className="space-y-4">
                   <h4 className="font-semibold text-slate-700 text-center">In Review</h4>
-                   <div className="bg-white rounded-lg p-4 shadow-md space-y-2">
+                   <div className="bg-card rounded-lg p-4 shadow-md space-y-2">
                     <p className="font-semibold text-sm">Employee Security Training</p>
                     <Badge variant="outline" className="text-xs">SOC 2</Badge>
                     <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
@@ -77,7 +77,7 @@ export default function TasksExample() {
 
                 <div className="space-y-4">
                   <h4 className="font-semibold text-slate-700 text-center">Done</h4>
-                   <div className="bg-white rounded-lg p-4 shadow-md space-y-2">
+                   <div className="bg-card rounded-lg p-4 shadow-md space-y-2">
                     <p className="font-semibold text-sm line-through text-slate-500">Deploy Data Encryption</p>
                     <Badge variant="outline" className="text-xs">SOC 2</Badge>
                      <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
@@ -92,7 +92,7 @@ export default function TasksExample() {
 
         {/* Feature Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <ListTodo className="w-5 h-5 text-blue-600" />
@@ -106,7 +106,7 @@ export default function TasksExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Bell className="w-5 h-5 text-amber-600" />
@@ -120,7 +120,7 @@ export default function TasksExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckSquare className="w-5 h-5 text-green-600" />

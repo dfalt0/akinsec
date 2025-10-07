@@ -25,7 +25,7 @@ export default function FrameworksExample() {
         </div>
 
         {/* Main Screenshot */}
-        <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
+        <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
           <CardContent className="p-8">
             <div className="bg-gradient-to-br from-slate-100 to-blue-100 rounded-xl p-8 min-h-[500px]">
               <div className="text-center mb-8">
@@ -36,7 +36,7 @@ export default function FrameworksExample() {
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 {/* Sample Framework Cards */}
-                <div className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="bg-card rounded-xl p-6 shadow-lg">
                   <div className="flex items-start justify-between mb-4">
                     <h4 className="font-bold text-slate-900">SOC 2 Type II</h4>
                     <Shield className="w-5 h-5 text-blue-500" />
@@ -56,7 +56,7 @@ export default function FrameworksExample() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="bg-card rounded-xl p-6 shadow-lg">
                   <div className="flex items-start justify-between mb-4">
                     <h4 className="font-bold text-slate-900">GDPR</h4>
                     <Shield className="w-5 h-5 text-purple-500" />
@@ -76,7 +76,7 @@ export default function FrameworksExample() {
                   </div>
                 </div>
 
-                <div className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="bg-card rounded-xl p-6 shadow-lg">
                   <div className="flex items-start justify-between mb-4">
                     <h4 className="font-bold text-slate-900">ISO 27001</h4>
                     <Shield className="w-5 h-5 text-green-500" />
@@ -102,7 +102,7 @@ export default function FrameworksExample() {
 
         {/* Feature Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Target className="w-5 h-5 text-blue-600" />
@@ -125,7 +125,7 @@ export default function FrameworksExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-600" />
@@ -148,7 +148,7 @@ export default function FrameworksExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-600" />

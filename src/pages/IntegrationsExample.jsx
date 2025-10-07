@@ -24,7 +24,7 @@ export default function IntegrationsExample() {
         </div>
 
         {/* Main Screenshot */}
-        <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
+        <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
           <CardContent className="p-8">
             <div className="bg-gradient-to-br from-slate-100 to-purple-100 rounded-xl p-8 min-h-[600px]">
               <div className="text-center mb-8">
@@ -36,19 +36,19 @@ export default function IntegrationsExample() {
               <div className="max-w-5xl mx-auto space-y-6">
                 {/* Stats Overview */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <div className="text-2xl font-bold text-purple-600">24</div>
                     <div className="text-sm text-slate-600">Total Integrations</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <div className="text-2xl font-bold text-green-600">18</div>
                     <div className="text-sm text-slate-600">Compliant</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <div className="text-2xl font-bold text-amber-600">4</div>
                     <div className="text-sm text-slate-600">Need Review</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <div className="text-2xl font-bold text-red-600">2</div>
                     <div className="text-sm text-slate-600">High Risk</div>
                   </div>
@@ -56,7 +56,7 @@ export default function IntegrationsExample() {
 
                 {/* Sample Integration Cards */}
                 <div className="space-y-4">
-                  <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-green-500">
+                  <div className="bg-card rounded-lg p-6 shadow-lg border-l-4 border-green-500">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -88,7 +88,7 @@ export default function IntegrationsExample() {
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-amber-500">
+                  <div className="bg-card rounded-lg p-6 shadow-lg border-l-4 border-amber-500">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -120,7 +120,7 @@ export default function IntegrationsExample() {
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-red-500">
+                  <div className="bg-card rounded-lg p-6 shadow-lg border-l-4 border-red-500">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -159,7 +159,7 @@ export default function IntegrationsExample() {
 
         {/* Feature Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="w-5 h-5 text-green-600" />
@@ -182,7 +182,7 @@ export default function IntegrationsExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-blue-600" />
@@ -205,7 +205,7 @@ export default function IntegrationsExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-600" />

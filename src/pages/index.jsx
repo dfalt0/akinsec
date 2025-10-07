@@ -12,9 +12,10 @@ import FAQ from "./FAQ";
 
 import DemoLive from "./DemoLive";
 
+import LegacyHome from "./LegacyHome";
 import Home from "./Home";
 
-import Frameworks from "./Frameworks";
+import Why from "./Why";
 
 import DashboardExample from "./DashboardExample.jsx";
 
@@ -41,6 +42,7 @@ import Setup from "./Setup.jsx";
 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const PAGES = {
     
@@ -56,9 +58,10 @@ const PAGES = {
     
     DemoLive: DemoLive,
     
+    LegacyHome: LegacyHome,
     Home: Home,
     
-    Frameworks: Frameworks,
+    Why: Why,
     
     DashboardExample: DashboardExample,
     
@@ -101,6 +104,41 @@ function _getCurrentPage(url) {
     return pageName || 'Home'; // Default to Home if no match found
 }
 
+// Page transition variants
+const pageVariants = {
+    initial: {
+        opacity: 0
+    },
+    in: {
+        opacity: 1
+    },
+    out: {
+        opacity: 0
+    }
+};
+
+const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.2
+};
+
+// Loading component for smoother transitions
+const PageLoader = () => (
+    <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center"
+    >
+        <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="w-8 h-8 border-2 border-white border-t-transparent rounded-full"
+        />
+    </motion.div>
+);
+
 // Create a wrapper component that uses useLocation inside the Router context
 function PagesContent() {
     const location = useLocation();
@@ -108,54 +146,67 @@ function PagesContent() {
     
     return (
         <Layout currentPageName={currentPage}>
-            <Routes>            
-                
-                    <Route path="/" element={<Home />} />
-                
-                
-                <Route path="/Pricing" element={<Pricing />} />
-                
-                <Route path="/About" element={<About />} />
-                
-                <Route path="/Contact" element={<Contact />} />
-                
-                {/* <Route path="/Blog" element={<Blog />} /> */}
-                
-                <Route path="/FAQ" element={<FAQ />} />
-                
-                <Route path="/DemoLive" element={<DemoLive />} />
-                
-                <Route path="/Home" element={<Home />} />
-                
-                <Route path="/Frameworks" element={<Frameworks />} />
-                
-                <Route path="/DashboardExample" element={<DashboardExample />} />
-                
-                <Route path="/FrameworksExample" element={<FrameworksExample />} />
-                
-                <Route path="/TemplatesExample" element={<TemplatesExample />} />
-                
-                <Route path="/FileAnalysisExample" element={<FileAnalysisExample />} />
-                
-                <Route path="/IntegrationsExample" element={<IntegrationsExample />} />
+            <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                    key={location.pathname}
+                    initial="initial"
+                    animate="in"
+                    exit="out"
+                    variants={pageVariants}
+                    transition={pageTransition}
+                    className="w-full"
+                >
+                    <Routes location={location}>            
+                        
+                            <Route path="/" element={<Home />} />
+                        
+                        
+                        <Route path="/Pricing" element={<Pricing />} />
+                        
+                        <Route path="/About" element={<About />} />
+                        
+                        <Route path="/Contact" element={<Contact />} />
+                        
+                        {/* <Route path="/Blog" element={<Blog />} /> */}
+                        
+                        <Route path="/FAQ" element={<FAQ />} />
+                        
+                        <Route path="/DemoLive" element={<DemoLive />} />
+                        
+                        <Route path="/LegacyHome" element={<LegacyHome />} />
+                        <Route path="/Home" element={<Home />} />
+                        
+                        <Route path="/Why" element={<Why />} />
+                        
+                        <Route path="/DashboardExample" element={<DashboardExample />} />
+                        
+                        <Route path="/FrameworksExample" element={<FrameworksExample />} />
+                        
+                        <Route path="/TemplatesExample" element={<TemplatesExample />} />
+                        
+                        <Route path="/FileAnalysisExample" element={<FileAnalysisExample />} />
+                        
+                        <Route path="/IntegrationsExample" element={<IntegrationsExample />} />
 
-                <Route path="/TasksExample" element={<TasksExample />} />
+                        <Route path="/TasksExample" element={<TasksExample />} />
 
-                <Route path="/ReportsExample" element={<ReportsExample />} />
-                
-                <Route path="/Careers" element={<Careers />} />
-                
-                <Route path="/Documentation" element={<Documentation />} />
-                
-                <Route path="/Privacy" element={<Privacy />} />
-                
-                <Route path="/Terms" element={<Terms />} />
-                <Route path="/Setup" element={<Setup />} />
-                
-                {/* Catch-all route for unmatched paths */}
-                <Route path="*" element={<Home />} />
-                
-            </Routes>
+                        <Route path="/ReportsExample" element={<ReportsExample />} />
+                        
+                        <Route path="/Careers" element={<Careers />} />
+                        
+                        <Route path="/Documentation" element={<Documentation />} />
+                        
+                        <Route path="/Privacy" element={<Privacy />} />
+                        
+                        <Route path="/Terms" element={<Terms />} />
+                        <Route path="/Setup" element={<Setup />} />
+                        
+                        {/* Catch-all route for unmatched paths */}
+                        <Route path="*" element={<Home />} />
+                        
+                    </Routes>
+                </motion.div>
+            </AnimatePresence>
         </Layout>
     );
 }

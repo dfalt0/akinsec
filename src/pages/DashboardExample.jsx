@@ -24,7 +24,7 @@ export default function DashboardExample() {
         </div>
 
         {/* Main Dashboard Screenshot */}
-        <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
+        <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
           <CardContent className="p-8">
             <div className="bg-gradient-to-br from-slate-100 to-blue-100 rounded-xl p-8 min-h-[500px] flex items-center justify-center">
               <div className="text-center">
@@ -34,19 +34,19 @@ export default function DashboardExample() {
                   This is where users see their compliance score, active tasks, integration status, and overdue items at a glance.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="bg-card rounded-lg p-4 shadow-sm">
                     <div className="text-2xl font-bold text-green-600">85%</div>
                     <div className="text-sm text-slate-600">Compliance Score</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="bg-card rounded-lg p-4 shadow-sm">
                     <div className="text-2xl font-bold text-blue-600">12</div>
                     <div className="text-sm text-slate-600">Active Tasks</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="bg-card rounded-lg p-4 shadow-sm">
                     <div className="text-2xl font-bold text-purple-600">8</div>
                     <div className="text-sm text-slate-600">Integrations</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="bg-card rounded-lg p-4 shadow-sm">
                     <div className="text-2xl font-bold text-amber-600">3</div>
                     <div className="text-sm text-slate-600">Overdue</div>
                   </div>
@@ -58,7 +58,7 @@ export default function DashboardExample() {
 
         {/* Feature Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-600" />
@@ -81,7 +81,7 @@ export default function DashboardExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-600" />
@@ -104,7 +104,7 @@ export default function DashboardExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Network className="w-5 h-5 text-purple-600" />

@@ -155,37 +155,46 @@ export default function FrameworksPage() {
       <section className="relative min-h-screen flex items-center justify-center bg-transparent overflow-hidden">
         <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
           <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight mt-32">
-            Why Us
+            Why Us?
           </h1>
           <p className="text-2xl md:text-3xl text-gray-300 mb-16 max-w-4xl mx-auto font-light leading-relaxed">
           IT Security should flow. <span className="text-white font-medium">We flow better here.</span>
           </p>
           
-          {/* Why Choose AkinSec - Fresh Tech Vibe */}
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              {/* Floating Card 1 */}
-              <div className="bg-gray-900/40 border border-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-[0_0_20px_rgba(255,255,255,0.06)] hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 hover:bg-gray-900/60 group text-center overflow-hidden">
-                <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/60 transition-colors duration-200">
-                  <Shield className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-200" />
+          {/* Why Choose AkinSec - Sleek Minimal Design */}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              {/* Card 1 - Built for Speed */}
+              <div className="group">
+                <div className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-8 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 backdrop-blur-sm text-center">
+                  <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
+                    <Shield className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-lg font-medium text-white mb-2">Built for Speed</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">Lightning-fast deployment and real-time monitoring</p>
                 </div>
-                <h3 className="text-xl font-light text-white">Built for Speed</h3>
               </div>
 
-              {/* Floating Card 2 */}
-              <div className="bg-gray-900/40 border border-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-[0_0_20px_rgba(255,255,255,0.06)] hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 hover:bg-gray-900/60 group text-center overflow-hidden">
-                <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/60 transition-colors duration-200">
-                  <Zap className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-200" />
+              {/* Card 2 - AI-First Design */}
+              <div className="group">
+                <div className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-8 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 backdrop-blur-sm text-center">
+                  <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
+                    <Zap className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-lg font-medium text-white mb-2">AI-First Design</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">Intelligent automation and predictive analytics</p>
                 </div>
-                <h3 className="text-xl font-light text-white">AI-First Design</h3>
               </div>
 
-              {/* Floating Card 3 */}
-              <div className="bg-gray-900/40 border border-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-2xl shadow-white/5 hover:shadow-white/10 transition-shadow duration-300 hover:bg-gray-900/60 group md:col-span-2 lg:col-span-1 text-center">
-                <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/60 transition-colors duration-200">
-                  <Target className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-200" />
+              {/* Card 3 - No Vendor Lock-in */}
+              <div className="group">
+                <div className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-8 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 backdrop-blur-sm text-center">
+                  <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
+                    <Target className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-lg font-medium text-white mb-2">No Vendor Lock-in</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">Open architecture with full data portability</p>
                 </div>
-                <h3 className="text-xl font-light text-white">No Vendor Lock-in</h3>
               </div>
             </div>
 
@@ -203,51 +212,6 @@ export default function FrameworksPage() {
 
       <div className="relative z-10">
 
-        {/* Why You Need Security */}
-        <section className="py-24 bg-black/30 backdrop-blur-sm">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-light text-white mb-4">Why Security Matters</h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Built for the next generation of builders.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              {/* Floating Card 1 */}
-              <div className="bg-gray-900/40 border border-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-[0_0_20px_rgba(255,255,255,0.06)] hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 hover:bg-gray-900/60 group text-center overflow-hidden">
-                <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/60 transition-colors duration-200">
-                  <Shield className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-200" />
-                </div>
-                <h3 className="text-xl font-light text-white">Comprehensive Protection</h3>
-              </div>
-
-              {/* Floating Card 2 */}
-              <div className="bg-gray-900/40 border border-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-[0_0_20px_rgba(255,255,255,0.06)] hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 hover:bg-gray-900/60 group text-center overflow-hidden">
-                <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/60 transition-colors duration-200">
-                  <Zap className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-200" />
-                </div>
-                <h3 className="text-xl font-light text-white">Fast Deployment</h3>
-              </div>
-
-              {/* Floating Card 3 */}
-              <div className="bg-gray-900/40 border border-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-[0_0_20px_rgba(255,255,255,0.06)] hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-shadow duration-300 hover:bg-gray-900/60 group text-center overflow-hidden md:col-span-2 lg:col-span-1">
-                <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/60 transition-colors duration-200">
-                  <Target className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-200" />
-                </div>
-                <h3 className="text-xl font-light text-white">AI-Powered Intelligence</h3>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-block bg-gray-900/30 border border-gray-800/30 rounded-2xl px-8 py-6 backdrop-blur-sm shadow-[0_0_30px_rgba(255,255,255,0.06)]">
-                <p className="text-gray-300 text-lg font-light">
-                  Enterprise-grade security <span className="text-white font-medium">without the complexity</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* The Cost of Inadequate Security */}
         <section className="py-24 bg-black">

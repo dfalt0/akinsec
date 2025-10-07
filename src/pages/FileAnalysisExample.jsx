@@ -25,7 +25,7 @@ export default function FileAnalysisExample() {
         </div>
 
         {/* Main Screenshot */}
-        <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
+        <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-2xl mb-12">
           <CardContent className="p-8">
             <div className="bg-gradient-to-br from-slate-100 to-purple-100 rounded-xl p-8 min-h-[600px]">
               <div className="text-center mb-8">
@@ -36,7 +36,7 @@ export default function FileAnalysisExample() {
               
               <div className="max-w-4xl mx-auto space-y-8">
                 {/* Upload Zone */}
-                <div className="bg-white rounded-xl p-8 shadow-lg border-2 border-dashed border-purple-300">
+                <div className="bg-card rounded-xl p-8 shadow-lg border-2 border-dashed border-purple-300">
                   <div className="text-center">
                     <Upload className="w-12 h-12 text-purple-600 mx-auto mb-4" />
                     <h4 className="text-lg font-semibold text-slate-900 mb-2">Upload File for Analysis</h4>
@@ -47,20 +47,20 @@ export default function FileAnalysisExample() {
 
                 {/* Sample Analysis Results */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <div className="text-3xl font-bold text-green-600 mb-1">87%</div>
                     <div className="text-sm text-slate-600">Compliance Score</div>
                     <Progress value={87} className="mt-2 h-2" />
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <Badge className="bg-yellow-100 text-yellow-800 mb-2">MEDIUM</Badge>
                     <div className="text-sm text-slate-600">Risk Level</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <Badge className="bg-blue-100 text-blue-800 mb-2">CONFIDENTIAL</Badge>
                     <div className="text-sm text-slate-600">Data Sensitivity</div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm text-center">
+                  <div className="bg-card rounded-lg p-4 shadow-sm text-center">
                     <div className="text-3xl font-bold text-blue-600 mb-1">3</div>
                     <div className="text-sm text-slate-600">Frameworks</div>
                   </div>
@@ -68,7 +68,7 @@ export default function FileAnalysisExample() {
 
                 {/* Sample Findings */}
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white rounded-lg p-6 shadow-lg">
+                  <div className="bg-card rounded-lg p-6 shadow-lg">
                     <div className="flex items-center gap-2 mb-3">
                       <Target className="w-5 h-5 text-green-600" />
                       <h4 className="font-semibold text-slate-900">Key Findings</h4>
@@ -85,7 +85,7 @@ export default function FileAnalysisExample() {
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-lg p-6 shadow-lg">
+                  <div className="bg-card rounded-lg p-6 shadow-lg">
                     <div className="flex items-center gap-2 mb-3">
                       <AlertTriangle className="w-5 h-5 text-amber-600" />
                       <h4 className="font-semibold text-slate-900">Gaps Identified</h4>
@@ -109,7 +109,7 @@ export default function FileAnalysisExample() {
 
         {/* Feature Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="w-5 h-5 text-purple-600" />
@@ -132,7 +132,7 @@ export default function FileAnalysisExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-blue-600" />
@@ -155,7 +155,7 @@ export default function FileAnalysisExample() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+          <Card className="bg-card/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Lightbulb className="w-5 h-5 text-amber-600" />

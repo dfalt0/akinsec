@@ -11,42 +11,205 @@ import {
   Shield,
   CreditCard,
   Settings,
-  Users
+  Users,
+  ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
+import WaveBackground from '@/components/WaveBackground';
 
 const FAQItem = ({ question, answer, isOpen, onToggle }) => (
-  <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
+  <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 shadow-lg">
     <CardHeader className="cursor-pointer" onClick={onToggle}>
       <div className="flex items-center justify-between">
-        <CardTitle className="text-lg font-semibold text-slate-900 pr-4">{question}</CardTitle>
+        <CardTitle className="text-lg font-medium text-white pr-4">{question}</CardTitle>
         {isOpen ? (
-          <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />
+          <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
+          <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
         )}
       </div>
     </CardHeader>
     {isOpen && (
       <CardContent className="pt-0">
-        <div className="text-slate-600 leading-relaxed">{answer}</div>
+        <div className="text-gray-300 leading-relaxed">{answer}</div>
       </CardContent>
     )}
   </Card>
 );
 
 const CategoryCard = ({ icon: Icon, title, count, color }) => (
-  <Card className="bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer">
+  <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 cursor-pointer group">
     <CardContent className="p-6 text-center">
-      <div className={`w-12 h-12 ${color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
-        <Icon className="w-6 h-6 text-white" />
+      <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-gray-700 transition-colors duration-300">
+        <Icon className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
       </div>
-      <h3 className="font-semibold text-slate-900 mb-1">{title}</h3>
-      <p className="text-sm text-slate-500">{count} questions</p>
+      <h3 className="font-medium text-white mb-1">{title}</h3>
+      <p className="text-sm text-gray-400">{count} questions</p>
     </CardContent>
   </Card>
 );
+
+// Ultra-minimal hero section
+const HeroSection = ({ searchTerm, setSearchTerm }) => {
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  return (
+    <section className="relative min-h-[60vh] flex items-center justify-center bg-transparent overflow-hidden">
+      <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
+        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight mt-32">
+            FAQ
+          </h1>
+          <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+            Find answers to common questions about AkinSec, compliance management, and getting the most out of our platform.
+          </p>
+          
+          {/* Search Bar */}
+          <div className="max-w-md mx-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Input
+                placeholder="Search FAQs..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-12 h-12 text-lg bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-none"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Clean categories section
+const CategoriesSection = ({ categories }) => {
+  return (
+    <section className="py-24 bg-black/30 backdrop-blur-sm">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-light text-white mb-4">Browse by Category</h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Find answers organized by topic
+          </p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          {categories.map((category, index) => (
+            <CategoryCard key={index} {...category} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Clean FAQ content section
+const FAQContentSection = ({ faqData, filteredQuestions, searchTerm, openItems, toggleItem, setSearchTerm }) => {
+  return (
+    <section className="py-24 bg-black">
+      <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto">
+          {searchTerm ? (
+            <>
+              <h2 className="text-3xl font-light text-white mb-2">
+                Search Results for "{searchTerm}"
+              </h2>
+              <p className="text-gray-400 mb-12">
+                Found {filteredQuestions.length} result{filteredQuestions.length !== 1 ? 's' : ''}
+              </p>
+              <div className="space-y-4">
+                {filteredQuestions.map((item) => (
+                  <FAQItem
+                    key={item.index}
+                    question={item.question}
+                    answer={item.answer}
+                    isOpen={openItems[item.index]}
+                    onToggle={() => toggleItem(item.index)}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            faqData.map((category, categoryIndex) => (
+              <div key={categoryIndex} className="mb-16">
+                <h2 className="text-3xl font-light text-white mb-8">{category.category}</h2>
+                <div className="space-y-4">
+                  {category.questions.map((item, questionIndex) => {
+                    const index = `${categoryIndex}-${questionIndex}`;
+                    return (
+                      <FAQItem
+                        key={index}
+                        question={item.question}
+                        answer={item.answer}
+                        isOpen={openItems[index]}
+                        onToggle={() => toggleItem(index)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ))
+          )}
+
+          {filteredQuestions.length === 0 && searchTerm && (
+            <div className="text-center py-16">
+              <HelpCircle className="w-16 h-16 text-gray-500 mx-auto mb-6" />
+              <h3 className="text-2xl font-light text-white mb-4">No results found</h3>
+              <p className="text-gray-400 mb-8">
+                Try different keywords or browse our categories above
+              </p>
+              <Button 
+                variant="outline" 
+                onClick={() => setSearchTerm('')}
+                className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white rounded-none"
+              >
+                Clear Search
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Minimal CTA
+const CTASection = () => {
+  return (
+    <section className="py-24 bg-white relative z-10">
+      <div className="container mx-auto px-6">
+        <Card className="max-w-2xl mx-auto bg-gray-50 border-gray-200 shadow-lg">
+          <CardContent className="p-8 text-center">
+            <h3 className="text-3xl font-light text-black mb-6">Still Have Questions?</h3>
+            <p className="text-gray-600 mb-8 text-lg">
+              Can't find what you're looking for? Our support team is here to help.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to={createPageUrl('Contact')}>
+                <Button 
+                  size="lg"
+                  className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200"
+                >
+                  Contact Support
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+              <div className="wave-button-container">
+                <span>Schedule a Demo</span>
+                <div className="wave"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+};
 
 export default function FAQPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -164,10 +327,10 @@ export default function FAQPage() {
   ];
 
   const categories = [
-    { icon: HelpCircle, title: "Getting Started", count: 8, color: "bg-blue-600" },
-    { icon: Shield, title: "Security", count: 12, color: "bg-green-600" },
-    { icon: CreditCard, title: "Billing", count: 6, color: "bg-purple-600" },
-    { icon: Users, title: "Account", count: 5, color: "bg-orange-600" }
+    { icon: HelpCircle, title: "Getting Started", count: 3 },
+    { icon: Shield, title: "Security", count: 4 },
+    { icon: CreditCard, title: "Billing", count: 4 },
+    { icon: Users, title: "Support", count: 4 }
   ];
 
   const allQuestions = faqData.flatMap((category, categoryIndex) =>
@@ -188,134 +351,19 @@ export default function FAQPage() {
     : allQuestions;
 
   return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <section className="py-20 md:py-32 text-center bg-gradient-to-b from-background to-background/90">
-        <div className="container mx-auto px-4">
-          <Badge variant="outline" className="mb-4 border-blue-500/50 text-blue-600 font-semibold py-1 px-3 rounded-full">
-            Help Center
-          </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Frequently Asked Questions
-          </h1>
-          <p className="max-w-3xl mx-auto text-lg text-muted-foreground mb-8">
-            Find answers to common questions about Akinsec, compliance management, and getting the most out of our platform.
-          </p>
-          
-          {/* Search Bar */}
-          <div className="max-w-md mx-auto">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
-              <Input
-                placeholder="Search FAQs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-12 text-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories */}
-      {!searchTerm && (
-        <section className="py-16 bg-muted/50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold text-foreground text-center mb-8">Browse by Category</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {categories.map((category, index) => (
-                <CategoryCard key={index} {...category} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* FAQ Content */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            {searchTerm ? (
-              <>
-                <h2 className="text-2xl font-bold text-foreground mb-2">
-                  Search Results for "{searchTerm}"
-                </h2>
-                <p className="text-muted-foreground mb-8">
-                  Found {filteredQuestions.length} result{filteredQuestions.length !== 1 ? 's' : ''}
-                </p>
-                <div className="space-y-4">
-                  {filteredQuestions.map((item) => (
-                    <FAQItem
-                      key={item.index}
-                      question={item.question}
-                      answer={item.answer}
-                      isOpen={openItems[item.index]}
-                      onToggle={() => toggleItem(item.index)}
-                    />
-                  ))}
-                </div>
-              </>
-            ) : (
-              faqData.map((category, categoryIndex) => (
-                <div key={categoryIndex} className="mb-12">
-                  <h2 className="text-2xl font-bold text-foreground mb-6">{category.category}</h2>
-                  <div className="space-y-4">
-                    {category.questions.map((item, questionIndex) => {
-                      const index = `${categoryIndex}-${questionIndex}`;
-                      return (
-                        <FAQItem
-                          key={index}
-                          question={item.question}
-                          answer={item.answer}
-                          isOpen={openItems[index]}
-                          onToggle={() => toggleItem(index)}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              ))
-            )}
-
-            {filteredQuestions.length === 0 && searchTerm && (
-              <div className="text-center py-12">
-                <HelpCircle className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-slate-600 mb-2">No results found</h3>
-                <p className="text-slate-500 mb-6">
-                  Try different keywords or browse our categories above
-                </p>
-                <Button variant="outline" onClick={() => setSearchTerm('')}>
-                  Clear Search
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact CTA */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <Card className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm border-slate-200/50 shadow-lg">
-            <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">Still Have Questions?</h3>
-              <p className="text-slate-600 mb-6">
-                Can't find what you're looking for? Our support team is here to help.
-              </p>
-              <div className="flex gap-3 justify-center">
-                <Link to={createPageUrl('Contact')}>
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    Contact Support
-                  </Button>
-                </Link>
-                <Button variant="outline">
-                  Schedule a Demo
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+    <div className="min-h-screen relative">
+      <WaveBackground />
+      <HeroSection searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {!searchTerm && <CategoriesSection categories={categories} />}
+      <FAQContentSection 
+        faqData={faqData}
+        filteredQuestions={filteredQuestions}
+        searchTerm={searchTerm}
+        openItems={openItems}
+        toggleItem={toggleItem}
+        setSearchTerm={setSearchTerm}
+      />
+      <CTASection />
     </div>
   );
 }

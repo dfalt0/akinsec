@@ -20,6 +20,36 @@ body {
   min-height: 100vh;
 }
 
+/* Page transition styles */
+.page-transition-enter {
+  opacity: 0;
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 150ms ease-in;
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent flash of unstyled content during transitions */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
 /* Nav link underline animation */
 .nav-link {
   position: relative;
@@ -55,14 +85,30 @@ body {
   opacity: 0.25;
 }
 
-/* Gradient primary button inspired by modern landing pages */
+/* Smooth hue rotation - ONLY blue to purple spectrum */
+@keyframes smoothRgbCycle {
+  0% { 
+    filter: hue-rotate(0deg) saturate(1.1) brightness(1.1);
+  }
+  50% { 
+    filter: hue-rotate(30deg) saturate(1.2) brightness(1.2);
+  }
+  100% { 
+    filter: hue-rotate(0deg) saturate(1.1) brightness(1.1);
+  }
+}
+
+/* Enhanced gradient primary button for dark mode */
 .btn-gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  background: linear-gradient(135deg, #1e40af 0%, #4f46e5 50%, #7c3aed 100%);
   color: white !important;
   border: none !important;
+  box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4), 0 2px 8px rgba(79, 70, 229, 0.3);
+  transition: all 0.3s ease;
 }
 .btn-gradient:hover {
-  filter: brightness(1.05) saturate(1.05);
+  animation: smoothRgbCycle 2s linear infinite;
+  transform: translateY(-1px);
 }
 
 /* Soft brand glow on wordmark */
@@ -70,7 +116,7 @@ body {
   text-shadow: 0 0 12px rgba(59, 130, 246, 0.25), 0 0 28px rgba(139, 92, 246, 0.18);
 }
 
-/* Enhanced Vercel-style Grid Background with Edge Bleeding */
+/* Enhanced Vercel-style Grid Background with Edge Bleeding - Dark Mode Optimized */
 .grid-background {
   position: fixed;
   top: 0;
@@ -79,10 +125,10 @@ body {
   height: 100%;
   z-index: -1;
   background: 
-    linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+    linear-gradient(to right, rgba(59, 130, 246, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.25) 1px, transparent 1px);
   background-size: 24px 24px;
-  opacity: 0.8;
+  opacity: 0.9;
   /* Increase the transparent center area - larger ellipse, more transparent center */
   mask: radial-gradient(ellipse 55% 55% at center, transparent 50%, rgba(0,0,0,0.3) 75%, black 100%);
   -webkit-mask: radial-gradient(ellipse 55% 55% at center, transparent 50%, rgba(0,0,0,0.3) 75%, black 100%);
@@ -274,52 +320,99 @@ body {
   }
 }
 
-/* Dark theme adjustments for gradient */
-.dark .gradient-blob-1 {
-  background: radial-gradient(ellipse 400px 300px at 15% 25%, rgba(120, 119, 198, 0.5) 0%, transparent 70%);
-  opacity: 0.75;
-  mix-blend-mode: soft-light;
-}
-
-.dark .gradient-blob-2 {
-  background: radial-gradient(ellipse 350px 250px at 85% 15%, rgba(255, 119, 198, 0.5) 0%, transparent 65%);
-  opacity: 0.75;
-  mix-blend-mode: soft-light;
-}
-
-.dark .gradient-blob-3 {
-  background: radial-gradient(ellipse 300px 400px at 45% 55%, rgba(120, 219, 255, 0.5) 0%, transparent 75%);
-  opacity: 0.75;
-  mix-blend-mode: soft-light;
-}
-
-.dark .gradient-blob-4 {
-  background: radial-gradient(ellipse 250px 350px at 90% 85%, rgba(255, 219, 120, 0.5) 0%, transparent 70%);
-  opacity: 0.75;
-  mix-blend-mode: soft-light;
-}
-
-.dark .gradient-blob-5 {
-  background: radial-gradient(ellipse 200px 160px at 70% 35%, rgba(100, 200, 255, 0.4) 0%, transparent 55%);
-  opacity: 0.75;
-  mix-blend-mode: soft-light;
-}
-
-.dark .gradient-blob-6 {
-  background: radial-gradient(ellipse 180px 220px at 30% 40%, rgba(255, 150, 100, 0.4) 0%, transparent 60%);
-  opacity: 0.75;
-  mix-blend-mode: soft-light;
-}
-
-.dark .gradient-overlay-subtle {
-  background: 
-    /* Fewer irregular diagonal patches - darker version */
-    linear-gradient(135deg, rgba(147, 51, 234, 0.12) 0%, transparent 40%, rgba(147, 51, 234, 0.06) 60%, transparent 80%),
-    linear-gradient(45deg, rgba(59, 130, 246, 0.12) 0%, transparent 35%, rgba(59, 130, 246, 0.06) 65%, transparent 85%),
-    linear-gradient(225deg, rgba(16, 185, 129, 0.12) 0%, transparent 30%, rgba(16, 185, 129, 0.06) 70%, transparent 80%),
-    /* Fewer horizontal and vertical patches */
-    linear-gradient(90deg, rgba(255, 100, 150, 0.1) 0%, transparent 25%, rgba(255, 100, 150, 0.05) 50%, transparent 75%, rgba(255, 100, 150, 0.1) 100%);
+/* Enhanced gradient blobs for dark mode - more vibrant and visible */
+.gradient-blob-1 {
+  background: radial-gradient(ellipse 600px 450px at 15% 25%, rgba(120, 119, 198, 0.4) 0%, transparent 70%);
   opacity: 0.8;
+  mix-blend-mode: soft-light;
+}
+
+.gradient-blob-2 {
+  background: radial-gradient(ellipse 560px 400px at 85% 15%, rgba(255, 119, 198, 0.4) 0%, transparent 65%);
+  opacity: 0.8;
+  mix-blend-mode: soft-light;
+}
+
+.gradient-blob-3 {
+  background: radial-gradient(ellipse 520px 680px at 45% 55%, rgba(120, 219, 255, 0.4) 0%, transparent 75%);
+  opacity: 0.8;
+  mix-blend-mode: soft-light;
+}
+
+.gradient-blob-4 {
+  background: radial-gradient(ellipse 440px 600px at 90% 85%, rgba(255, 219, 120, 0.4) 0%, transparent 70%);
+  opacity: 0.8;
+  mix-blend-mode: soft-light;
+}
+
+.gradient-blob-5 {
+  background: radial-gradient(ellipse 380px 300px at 70% 35%, rgba(100, 200, 255, 0.3) 0%, transparent 55%);
+  opacity: 0.8;
+  mix-blend-mode: soft-light;
+}
+
+.gradient-blob-6 {
+  background: radial-gradient(ellipse 340px 410px at 30% 40%, rgba(255, 150, 100, 0.3) 0%, transparent 60%);
+  opacity: 0.8;
+  mix-blend-mode: soft-light;
+}
+
+.gradient-overlay-subtle {
+  background: 
+    /* Enhanced diagonal patches for dark mode */
+    linear-gradient(135deg, rgba(147, 51, 234, 0.15) 0%, transparent 40%, rgba(147, 51, 234, 0.08) 60%, transparent 80%),
+    linear-gradient(45deg, rgba(59, 130, 246, 0.15) 0%, transparent 35%, rgba(59, 130, 246, 0.08) 65%, transparent 85%),
+    linear-gradient(225deg, rgba(16, 185, 129, 0.15) 0%, transparent 30%, rgba(16, 185, 129, 0.08) 70%, transparent 80%),
+    /* Enhanced horizontal and vertical patches */
+    linear-gradient(90deg, rgba(255, 100, 150, 0.12) 0%, transparent 25%, rgba(255, 100, 150, 0.06) 50%, transparent 75%, rgba(255, 100, 150, 0.12) 100%);
+  opacity: 0.9;
+}
+
+/* Light mode adjustments */
+.light .gradient-blob-1 {
+  background: radial-gradient(ellipse 600px 450px at 15% 25%, rgba(120, 119, 198, 0.7) 0%, transparent 70%);
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+}
+
+.light .gradient-blob-2 {
+  background: radial-gradient(ellipse 560px 400px at 85% 15%, rgba(255, 119, 198, 0.7) 0%, transparent 65%);
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+}
+
+.light .gradient-blob-3 {
+  background: radial-gradient(ellipse 520px 680px at 45% 55%, rgba(120, 219, 255, 0.7) 0%, transparent 75%);
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+}
+
+.light .gradient-blob-4 {
+  background: radial-gradient(ellipse 440px 600px at 90% 85%, rgba(255, 219, 120, 0.7) 0%, transparent 70%);
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+}
+
+.light .gradient-blob-5 {
+  background: radial-gradient(ellipse 380px 300px at 70% 35%, rgba(100, 200, 255, 0.6) 0%, transparent 55%);
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+}
+
+.light .gradient-blob-6 {
+  background: radial-gradient(ellipse 340px 410px at 30% 40%, rgba(255, 150, 100, 0.6) 0%, transparent 60%);
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+}
+
+.light .gradient-overlay-subtle {
+  background: 
+    /* Lighter patches for light mode */
+    linear-gradient(135deg, rgba(147, 51, 234, 0.15) 0%, transparent 40%, rgba(147, 51, 234, 0.08) 60%, transparent 80%),
+    linear-gradient(45deg, rgba(59, 130, 246, 0.15) 0%, transparent 35%, rgba(59, 130, 246, 0.08) 65%, transparent 85%),
+    linear-gradient(225deg, rgba(16, 185, 129, 0.15) 0%, transparent 30%, rgba(16, 185, 129, 0.08) 70%, transparent 80%),
+    linear-gradient(90deg, rgba(255, 100, 150, 0.12) 0%, transparent 25%, rgba(255, 100, 150, 0.06) 50%, transparent 75%, rgba(255, 100, 150, 0.12) 100%);
+  opacity: 0.9;
 }
 
 .dark .gradient-background {
@@ -443,10 +536,10 @@ body {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(16, 185, 129, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 15% 85%, rgba(239, 68, 68, 0.12) 0%, transparent 40%);
+    radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(147, 51, 234, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(16, 185, 129, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 15% 85%, rgba(239, 68, 68, 0.15) 0%, transparent 40%);
   /* Remove the animation */
   /* Apply similar masking to the gradient overlays - more transparent center */
   mask: 
@@ -488,7 +581,7 @@ body {
   }
 }
 
-/* Remove shimmer animation from grid lines */
+/* Enhanced grid lines for dark mode visibility */
 .grid-lines {
   position: fixed;
   top: 0;
@@ -497,10 +590,10 @@ body {
   height: 100%;
   z-index: -1;
   background: 
-    linear-gradient(90deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(59, 130, 246, 0.2) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(59, 130, 246, 0.2) 1px, transparent 1px);
   background-size: 48px 48px;
-  opacity: 0.9;
+  opacity: 0.95;
   /* Make grid lines more prominent at edges, larger transparent center */
   mask: radial-gradient(ellipse 95% 85% at center, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.3) 70%, black 100%);
   -webkit-mask: radial-gradient(ellipse 95% 85% at center, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.3) 70%, black 100%);
@@ -748,29 +841,54 @@ body {
   }
 }
 
-/* Dark theme adjustments */
-.dark .grid-background {
+/* Enhanced grid background for dark mode */
+.grid-background {
+  background: 
+    linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+}
+
+.grid-lines {
+  background: 
+    linear-gradient(90deg, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+}
+
+.particle {
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+.edge-vignette {
+  background: radial-gradient(ellipse 120% 100% at center, transparent 40%, rgba(59, 130, 246, 0.06) 70%, rgba(59, 130, 246, 0.12) 100%);
+}
+
+.content-section {
+  background: radial-gradient(ellipse 100% 100% at center, rgba(15, 15, 15, 0.15) 0%, transparent 70%);
+}
+
+/* Light mode adjustments */
+.light .grid-background {
   background: 
     linear-gradient(to right, rgba(59, 130, 246, 0.12) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
 }
 
-.dark .grid-lines {
+.light .grid-lines {
   background: 
     linear-gradient(90deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px),
     linear-gradient(0deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
 }
 
-.dark .particle {
+.light .particle {
   box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
 }
 
-.dark .edge-vignette {
+.light .edge-vignette {
   background: radial-gradient(ellipse 120% 100% at center, transparent 40%, rgba(59, 130, 246, 0.04) 70%, rgba(59, 130, 246, 0.08) 100%);
 }
 
-.dark .content-section {
-  background: radial-gradient(ellipse 100% 100% at center, rgba(15, 15, 15, 0.1) 0%, transparent 70%);
+.light .content-section {
+  background: radial-gradient(ellipse 100% 100% at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
 }
 
 /* Responsive adjustments for edge bleeding */
@@ -889,41 +1007,7 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-  .dark {
+    /* Dark theme as default - inspired by roocode.com */
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -948,6 +1032,7 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -955,6 +1040,41 @@ body {
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .light {
+    /* Light theme as alternative */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
@@ -995,21 +1115,22 @@ body {
   }
 }
 
-/* Hero gradient overlay - simplified and reduced */
+/* Enhanced hero gradient overlay for dark mode */
 .hero-gradient {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(1400px 600px at 50% 20%, hsl(var(--accent) / 0.08) 0%, transparent 60%);
-  /* Remove the animation */
+    radial-gradient(1400px 600px at 50% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(1200px 500px at 20% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(1000px 400px at 80% 40%, rgba(236, 72, 153, 0.06) 0%, transparent 45%);
 }
 
-.dark .hero-gradient {
+/* Light mode hero gradient */
+.light .hero-gradient {
   background:
-    radial-gradient(1400px 600px at 50% 20%, hsl(var(--accent) / 0.06) 0%, transparent 60%);
-  /* Remove the animation */
+    radial-gradient(1400px 600px at 50% 20%, hsl(var(--accent) / 0.08) 0%, transparent 60%);
 }
 
 /* Richer hero overlay for Home */
@@ -1077,11 +1198,14 @@ body {
   .text-rainbow-glow:hover { animation: none; }
 }
 
-/* Rainbow hover button effect */
+/* Enhanced rainbow hover button effect for dark mode */
 .btn-rainbow {
   transition: color 180ms ease, background 300ms ease, border-color 180ms ease, box-shadow 180ms ease;
   position: relative;
   overflow: hidden;
+  border: 1px solid hsl(var(--border)) !important;
+  background: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
 }
 .btn-rainbow:hover {
   color: #ffffff !important;
@@ -1096,6 +1220,8 @@ body {
   );
   background-size: 300% 300%;
   animation: rainbow-shift 3s linear infinite;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3), 0 2px 8px rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
 }
 @keyframes rainbow-shift {
   0% { background-position: 0% 50%; }
@@ -1201,7 +1327,7 @@ body {
   background: white !important;
 }
 
-/* Footer specific styling to ensure it stays above background animations */
+/* Enhanced footer styling for dark mode */
 footer {
   position: relative;
   z-index: 50;
@@ -1218,29 +1344,29 @@ footer {
   background-position: initial !important;
   background-repeat: no-repeat !important;
   background-size: initial !important;
-  /* Fallback colors */
-  background-color: #ffffff !important;
-  /* Additional styling to make footer stand out */
-  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  /* Dark mode fallback colors */
+  background-color: #0a0a0a !important;
+  /* Enhanced styling for dark mode */
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.3), 0 -2px 4px -1px rgba(0, 0, 0, 0.2);
   border-top: 2px solid hsl(var(--border));
   /* Ensure footer is above all background elements */
   transform: translateZ(0);
   will-change: transform;
   /* Additional isolation */
   contain: layout style paint;
-  /* Force solid background */
-  background: #ffffff !important;
-  background-color: #ffffff !important;
+  /* Force solid dark background */
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
 }
 
-/* Footer container styling */
+/* Enhanced footer container styling for dark mode */
 footer .container {
   position: relative;
   z-index: 1;
   background: hsl(var(--background)) !important;
   background-color: hsl(var(--background)) !important;
-  background-color: #ffffff !important;
-  background: #ffffff !important;
+  background-color: #0a0a0a !important;
+  background: #0a0a0a !important;
 }
 
 footer::before {
@@ -1251,8 +1377,8 @@ footer::before {
   background-color: hsl(var(--background)) !important;
   background-image: none !important;
   z-index: -1;
-  background-color: #ffffff !important;
-  background: #ffffff !important;
+  background-color: #0a0a0a !important;
+  background: #0a0a0a !important;
 }
 
 footer * {
@@ -1260,31 +1386,31 @@ footer * {
   z-index: 1;
 }
 
-.dark footer {
+/* Light mode footer (if needed) */
+.light footer {
   background: hsl(var(--background)) !important;
   background-color: hsl(var(--background)) !important;
   background-image: none !important;
-  background-color: #0f0f0f !important;
-  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff !important;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
   border-top: 2px solid hsl(var(--border));
-  /* Force solid background in dark mode */
-  background: #0f0f0f !important;
-  background-color: #0f0f0f !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
-.dark footer .container {
+.light footer .container {
   background: hsl(var(--background)) !important;
   background-color: hsl(var(--background)) !important;
-  background-color: #0f0f0f !important;
-  background: #0f0f0f !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
 }
 
-.dark footer::before {
+.light footer::before {
   background: hsl(var(--background)) !important;
   background-color: hsl(var(--background)) !important;
   background-image: none !important;
-  background-color: #0f0f0f !important;
-  background: #0f0f0f !important;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
 }
 
 @keyframes hero-hue-cycle {
@@ -1532,5 +1658,233 @@ footer * {
     background-position: 65% 15%;
     filter: blur(0.5px) hue-rotate(270deg) saturate(1.15) scale(0.9);
     transform: translateX(-35px) translateY(30px);
+  }
+}
+
+/* Neon Glass Animations */
+@keyframes glow {
+  0% {
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.7;
+  }
+  16% {
+    opacity: 0.3;
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+  }
+  100% {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+  }
+}
+
+@keyframes glowoff {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+    --item-opacity: 0;
+  }
+  7% {
+    opacity: 0.5;
+    --item-opacity: 1;
+  }
+  14% {
+    opacity: 0;
+    --item-opacity: 0.5;
+  }
+  21%, 100% {
+    opacity: 1;
+    --item-opacity: 1;
+  }
+}
+
+/* Neon Glass Background Styles */
+.neon-glass-bg {
+  background: #08090d;
+  background-image: url(https://assets.codepen.io/13471/abstract-light.jpg), linear-gradient(to right in oklab, hsl(222 50% 75%), hsl(255 50% 75%));
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: hard-light;
+}
+
+/* Color cycling animation for neon glass panels */
+@keyframes color-cycle {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.neon-glass-panel-cycling {
+  animation: color-cycle 20s linear infinite;
+}
+
+.neon-glass-panel-cycling:nth-child(2) {
+  animation-delay: -10s;
+  animation-duration: 25s;
+}
+
+.neon-glass-panel {
+  border-radius: 22px;
+  border: 1px solid hsl(222, 12%, 20%);
+  background: linear-gradient(235deg, hsl(255 50% 10% / 0.8), hsl(255 50% 10% / 0) 33%), 
+              linear-gradient(45deg, hsl(222 50% 10% / 0.8), hsl(222 50% 10% / 0) 33%), 
+              linear-gradient(hsl(220deg 25% 4.8% / 0.66));
+  backdrop-filter: blur(12px);
+  box-shadow: hsl(222 50% 2%) 0px 10px 16px -8px, hsl(222 50% 4%) 0px 20px 36px -14px;
+}
+
+.neon-glass-shine {
+  pointer-events: none;
+  border-radius: 0;
+  border-top-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+  border: 1px solid transparent;
+  width: 75%;
+  height: auto;
+  min-height: 0px;
+  aspect-ratio: 1;
+  display: block;
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  left: auto;
+  z-index: 1;
+  background: conic-gradient(
+    from -45deg at center in oklch,
+    transparent 12%, 
+    hsl(255, 80%, 60%), 
+    transparent 50%
+  ) border-box;
+  mask: linear-gradient(transparent), linear-gradient(black);
+  mask-repeat: no-repeat;
+  mask-clip: padding-box, border-box;
+  mask-composite: subtract;
+}
+
+.neon-glass-glow {
+  pointer-events: none;
+  border-top-right-radius: 55px;
+  border-bottom-left-radius: 55px;
+  border: 27.5px solid transparent;
+  inset: -44px;
+  width: 75%;
+  height: auto;
+  min-height: 0px;
+  aspect-ratio: 1;
+  display: block;
+  position: absolute;
+  left: auto;
+  bottom: auto;
+  mask: url('https://assets.codepen.io/13471/noise-base.png');
+  mask-mode: luminance;
+  mask-size: 29%;
+  opacity: 1;
+  filter: blur(12px) saturate(1.25) brightness(0.5);
+  mix-blend-mode: plus-lighter;
+  z-index: 3;
+}
+
+/* Wave Button Effect */
+.wave-button-container {
+  width: auto;
+  padding: 8px 32px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  background: white;
+  transition: all 0.2s;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 0;
+  height: 40px;
+}
+
+.wave-button-container:hover {
+  color: white;
+  background: transparent;
+}
+
+.wave-button-container:hover .wave {
+  top: -120px;
+}
+
+.wave-button-container span {
+  position: relative;
+  z-index: 1;
+  color: inherit;
+  font-size: 16px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+.wave-button-container .wave {
+  width: 100%;
+  height: 200px;
+  background-color: #444857;
+  box-shadow: inset 0 0 50px rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  top: -80px;
+  transition: 0.4s;
+}
+
+.wave-button-container .wave::before,
+.wave-button-container .wave::after {
+  width: 200%;
+  height: 200%;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,-75%);
+}
+
+.wave-button-container .wave::before {
+  border-radius: 45%;
+  background-color: rgba(20,20,20,1);
+  animation: wave 3s linear infinite;
+}
+
+.wave-button-container .wave::after {
+  border-radius: 40%;
+  background-color: rgba(20,20,20,0.5);
+  animation: wave 6s linear infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translate(-50%,-75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%,-75%) rotate(360deg);
   }
 }

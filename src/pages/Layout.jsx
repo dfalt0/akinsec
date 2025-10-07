@@ -7,8 +7,8 @@ import LogoPng from "@/img/AkinSec_Logo.png";
 import { Button } from "@/components/ui/button";
 
 const landingNavItems = [
-  { title: 'Live Demo', page: 'DemoLive' },
-  { title: 'Compliance', page: 'Frameworks' },
+  // { title: 'Live Demo', page: 'DemoLive' },
+  { title: 'Why Us', page: 'Why' },
   { title: 'About', page: 'About' },
   // { title: 'Blog', page: 'Blog' },
   { title: 'Pricing', page: 'Pricing' },
@@ -20,10 +20,10 @@ const LandingHeader = () => (
 <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
     {/* Announcement bar */}
     <div className="w-full bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 text-foreground/80 text-xs">
-      <div className="container mx-auto px-4 py-1.5 text-center">
+      {/* <div className="container mx-auto px-4 py-1.5 text-center">
         <span className="hidden sm:inline">AkinSec Cloud is coming. </span>
         <Link to={createPageUrl('Pricing')} className="font-medium text-accent nav-link-inline">Sign up for early access</Link>
-      </div>
+      </div> */}
     </div>
     <div className="container flex h-14 items-center justify-between mx-auto px-4">
       <Link to={createPageUrl('Home')} className="flex items-center space-x-2">
@@ -62,7 +62,7 @@ const LandingFooter = () => (
             </Link>
           </div>
           <p className="text-sm text-muted-foreground">
-            Making compliance simple and accessible for businesses of all sizes.
+            Making IT Security automated and accessible for businesses of all sizes.  
           </p>
         </div>
         <div>
@@ -115,40 +115,53 @@ const ScrollToTop = () => {
 
 
 export default function Layout({ children, currentPageName }) {
-    // This style block ensures the default theme is applied, since theme switching is removed.
-    const defaultThemeCss = `
-      --primary: 220 13% 18%;
-      --primary-foreground: 210 20% 98%;
-      --secondary: 220 14% 96%;
-      --secondary-foreground: 220 9% 46%;
-      --muted: 220 14% 96%;
-      --muted-foreground: 220 9% 46%;
-      --accent: 217 91% 60%;
-      --accent-foreground: 210 20% 98%;
-      --destructive: 0 84% 60%;
-      --destructive-foreground: 210 20% 98%;
-      --border: 220 13% 91%;
-      --input: 220 13% 91%;
-      --ring: 217 91% 60%;
-      --background: 0 0% 100%;
-      --foreground: 220 13% 18%;
-      --card: 0 0% 100%;
-      --card-foreground: 220 13% 18%;
-      --popover: 0 0% 100%;
-      --popover-foreground: 220 13% 18%;
+    // Dark theme as default - inspired by roocode.com aesthetic
+    const darkThemeCss = `
+      --background: 0 0% 3.9%;
+      --foreground: 0 0% 98%;
+      --card: 0 0% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --popover: 0 0% 3.9%;
+      --popover-foreground: 0 0% 98%;
+      --primary: 0 0% 98%;
+      --primary-foreground: 0 0% 9%;
+      --secondary: 0 0% 14.9%;
+      --secondary-foreground: 0 0% 98%;
+      --muted: 0 0% 14.9%;
+      --muted-foreground: 0 0% 63.9%;
+      --accent: 0 0% 14.9%;
+      --accent-foreground: 0 0% 98%;
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 0 0% 14.9%;
+      --input: 0 0% 14.9%;
+      --ring: 0 0% 83.1%;
+      --chart-1: 220 70% 50%;
+      --chart-2: 160 60% 45%;
+      --chart-3: 30 80% 55%;
+      --chart-4: 280 65% 60%;
+      --chart-5: 340 75% 55%;
+      --sidebar-background: 240 5.9% 10%;
+      --sidebar-foreground: 240 4.8% 95.9%;
+      --sidebar-primary: 224.3 76.3% 48%;
+      --sidebar-primary-foreground: 0 0% 100%;
+      --sidebar-accent: 240 3.7% 15.9%;
+      --sidebar-accent-foreground: 240 4.8% 95.9%;
+      --sidebar-border: 240 3.7% 15.9%;
+      --sidebar-ring: 217.2 91.2% 59.8%;
     `;
 
     return (
-      <div className={`min-h-screen flex flex-col bg-background text-foreground relative`}>
+      <div className={`min-h-screen flex flex-col bg-background text-foreground relative dark`}>
         <style jsx global>{`
           :root {
-            ${defaultThemeCss}
+            ${darkThemeCss}
           }
         `}</style>
         
         <ScrollToTop />
         <LandingHeader />
-        <main className="flex-1 relative z-10">{children}</main>
+        <main className="flex-1 relative z-10 transition-all duration-300 ease-in-out">{children}</main>
         <div className="relative z-50">
           <LandingFooter />
         </div>
