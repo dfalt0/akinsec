@@ -73,12 +73,12 @@ const WaveBackground = () => {
   const variatorsRef = useRef([]);
   const maxLinesRef = useRef(35);
   const [isVisible, setIsVisible] = useState(false);
-  const speedRef = useRef(0.0005); // Base speed - will be randomized
+  const speedRef = useRef(0.0015); // Base speed - will be randomized (increased from 0.0005)
   const amplitudeRef = useRef(120); // Base amplitude - will be randomized
 
   useEffect(() => {
-    // Randomize wave speed on page load (slower than current speed)
-    const baseSpeed = 0.0005; // Current speed as maximum
+    // Randomize wave speed on page load (faster than current speed)
+    const baseSpeed = 0.0015; // Increased speed for faster wave height changes
     const randomMultiplier = 0.3 + Math.random() * 0.7; // Random between 30% and 100% of base speed
     speedRef.current = baseSpeed * randomMultiplier;
     
