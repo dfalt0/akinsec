@@ -71,7 +71,7 @@ const HeroSection = () => {
             <Link to={createPageUrl('Pricing')}>
               <Button 
                 size="lg" 
-                className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200 group backdrop-blur-sm"
+                className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-base font-medium rounded-md border-0 transition-all duration-200 group backdrop-blur-sm"
               >
                 Get Started
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -81,7 +81,7 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-gray-600 text-gray-300 hover:bg-gray-900 hover:text-white px-8 py-3 text-base font-medium rounded-none transition-all duration-200 backdrop-blur-sm"
+                className="border-gray-600 text-gray-300 hover:bg-gray-900 hover:text-white px-8 py-3 text-base font-medium rounded-md transition-all duration-200 backdrop-blur-sm"
               >
                 View Dashboard
               </Button>
@@ -576,7 +576,7 @@ const CTASection = () => {
           <Link to={createPageUrl('Pricing')}>
             <Button 
               size="lg" 
-              className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200"
+              className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-md border-0 transition-all duration-200"
             >
               Start Free Trial
               <ArrowRight className="w-4 h-4 ml-2" />
