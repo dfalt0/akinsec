@@ -41,18 +41,84 @@ import './Home.css';
 // Ultra-minimal hero section inspired by GreyNoise
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [attendantText, setAttendantText] = useState('Attendant');
+  const [attendantIndex, setAttendantIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const attendantSynonyms = [
+    'Attendant',
+    'Assistant',
+    'Aide',
+    'Advisor',
+    'Guardian',
+    'Protector',
+    'Companion',
+    'Helper',
+    'Steward',
+    'Custodian'
+  ];
+
+  const typingSpeed = 100;
+  const deletingSpeed = 80;
+  const pauseDuration = 4000;
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
+  useEffect(() => {
+    let timeoutId;
+    
+    const currentWord = attendantSynonyms[attendantIndex % attendantSynonyms.length];
+    
+    if (isDeleting) {
+      // Deleting: remove one character at a time
+      if (attendantText.length > 0) {
+        timeoutId = setTimeout(() => {
+          setAttendantText(prev => prev.slice(0, -1));
+        }, deletingSpeed);
+      } else {
+        // Finished deleting, immediately move to next word and start typing
+        const nextIndex = (attendantIndex + 1) % attendantSynonyms.length;
+        const nextWord = attendantSynonyms[nextIndex];
+        setAttendantIndex(nextIndex);
+        setIsDeleting(false);
+        // Start typing the first character immediately
+        setAttendantText(nextWord[0]);
+      }
+    } else {
+      // Typing: add one character at a time
+      if (attendantText.length < currentWord.length) {
+        timeoutId = setTimeout(() => {
+          setAttendantText(currentWord.substring(0, attendantText.length + 1));
+        }, typingSpeed);
+      } else if (attendantText === currentWord) {
+        // Finished typing current word, pause then start deleting
+        timeoutId = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseDuration);
+      }
+    }
+    
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [attendantText, isDeleting, attendantIndex]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Security Jarvis - Big Bold Text */}
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight tracking-tight bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
-            Your Security Jarvis
+          {/* Security Attendant - Big Bold Text with Cycling */}
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-tight">
+            <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+              Your Security
+            </span>
+            {' '}
+            <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent inline-block">
+              {attendantText}
+              <span className="blinking-cursor" aria-hidden="true">|</span>
+            </span>
           </h2>
           {/* Main headline - very clean */}
           <h1 className="text-6xl md:text-8xl font-light text-white mb-8 leading-none tracking-tight">
