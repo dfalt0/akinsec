@@ -24,7 +24,12 @@ import {
   Lock,
   Eye,
   TrendingUp,
-  Download
+  Download,
+  Bot,
+  Sparkles,
+  Brain,
+  Settings,
+  Activity
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
@@ -45,25 +50,21 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Testing different additional text/taglines */}
-          {/* Automated SOC-as-a-Service */}
-          {/* Tagline above main headline */}
-          {/* <p className="text-lg text-gray-400 mb-6 font-light tracking-wide">
-            Automated SOC-as-a-Service
-          </p> */}
+          {/* Security Jarvis - Big Bold Text */}
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight tracking-tight bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
+            Your Security Jarvis
+          </h2>
           {/* Main headline - very clean */}
           <h1 className="text-6xl md:text-8xl font-light text-white mb-8 leading-none tracking-tight">
             AkinSec
           </h1>
           
-          Automated SOC-as-a-Service
-          {/* <h2 className="text-lg md:text-xl font-light text-gray-300 mb-6 tracking-wide">
-            Automated SOC-as-a-Service
-          </h2> */}
           {/* Subtitle - minimal */}
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-            {/* AI-powered compliance intelligence for modern security teams */}
-            AI-powered security intelligence for modern security teams.
+          <p className="text-xl md:text-2xl text-gray-300 mb-6 max-w-3xl mx-auto font-light leading-relaxed">
+            Simple Automated Security.
+          </p>
+          <p className="text-lg text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+          AI-powered security intelligence for every business.
           </p>
           
           {/* Simple CTA */}
@@ -71,19 +72,21 @@ const HeroSection = () => {
             <Link to={createPageUrl('Pricing')}>
               <Button 
                 size="lg" 
-                className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-base font-medium rounded-md border-0 transition-all duration-200 group backdrop-blur-sm"
+                className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
               >
-                Get Started
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10 flex items-center">
+                  Get Started
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Button>
             </Link>
             <Link to="https://app.akinsec.com">
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-gray-600 text-gray-300 hover:bg-gray-900 hover:text-white px-8 py-3 text-base font-medium rounded-md transition-all duration-200 backdrop-blur-sm"
+                className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
               >
-                View Dashboard
+                <span className="relative z-10">Ask Akin</span>
               </Button>
             </Link>
           </div>
@@ -341,13 +344,13 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }) => {
     <div 
       className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
     >
-      <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 hover:border-gray-700 group cursor-pointer">
+      <Card className="card-enhanced group cursor-pointer">
         <CardContent className="p-8">
-          <div className="w-8 h-8 text-gray-400 mb-6 group-hover:text-white transition-colors duration-300">
+          <div className="w-8 h-8 text-gray-400 mb-6 card-icon-glow">
             <Icon className="w-full h-full" />
           </div>
-          <h3 className="text-lg text-white font-medium mb-3">{title}</h3>
-          <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
+          <h3 className="text-lg text-white font-medium mb-3 group-hover:text-indigo-300 transition-colors duration-300">{title}</h3>
+          <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">{description}</p>
         </CardContent>
       </Card>
     </div>
@@ -372,6 +375,70 @@ const StatsSection = () => {
               <div className="text-4xl font-light text-white mb-2">{stat.number}</div>
               <div className="text-gray-500 text-sm font-medium">{stat.label}</div>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Automation capabilities section - NEW
+const AutomationSection = () => {
+  const capabilities = [
+    {
+      icon: Bot,
+      title: "SOAR Automation",
+      description: "AI automatically creates and manages playbooks, orchestrates workflows, and executes responses. No manual configuration needed—just connect your tools and let AI handle the rest.",
+      benefit: "90% reduction in manual SOAR management"
+    },
+    {
+      icon: Brain,
+      title: "SIEM Intelligence",
+      description: "Self-configuring SIEM that automatically parses logs, creates correlation rules, tunes alerts, and adapts to your environment. Set it up once, AI manages it forever.",
+      benefit: "Zero-configuration SIEM operations"
+    },
+    {
+      icon: Zap,
+      title: "MDR Automation",
+      description: "Managed Detection and Response that configures itself. AI monitors your endpoints, detects threats, and responds automatically—like having a 24/7 security team that never sleeps.",
+      benefit: "Automated threat detection & response"
+    },
+    {
+      icon: Settings,
+      title: "Tool Integration & Setup",
+      description: "Connect your security tools once. AI handles all the complex integrations, API configurations, and data mapping. No technical expertise required.",
+      benefit: "One-click tool integration"
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl font-light text-white mb-4">Automation That Actually Works</h2>
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+            Stop managing security tools. Let AI handle SOARs, SIEMs, and MDRs so you can focus on what matters—your business.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {capabilities.map((capability, index) => (
+            <Card key={index} className="card-automation group">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 card-automation-icon rounded-lg flex items-center justify-center flex-shrink-0">
+                    <capability.icon className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-medium text-white mb-2 group-hover:text-indigo-300 transition-colors duration-300">{capability.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-3 group-hover:text-gray-300 transition-colors duration-300">{capability.description}</p>
+                    <Badge variant="outline" className="badge-enhanced text-gray-300 text-xs">
+                      {capability.benefit}
+                    </Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
@@ -421,16 +488,16 @@ const TechStackSection = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {techStack.map((tech, index) => (
-            <Card key={index} className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 group">
+            <Card key={index} className="card-enhanced group">
               <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-700 transition-colors duration-300">
+                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300 card-icon-glow">
                   <tech.icon className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <Badge variant="outline" className="bg-gray-800 text-gray-300 border-gray-600 mb-3 text-xs">
+                <Badge variant="outline" className="badge-enhanced text-gray-300 mb-3 text-xs">
                   {tech.category}
                 </Badge>
-                <h3 className="text-lg font-medium text-white mb-3">{tech.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{tech.description}</p>
+                <h3 className="text-lg font-medium text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300">{tech.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">{tech.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -452,20 +519,20 @@ const HowToStartSection = () => {
   const steps = [
     {
       number: "01",
-      title: "Basic Info",
-      description: "Explain your business structure, IT infrastructure, and security requirements to our team",
-      icon: Users
+      title: "Connect Your Tools",
+      description: "Connect your SOAR, SIEM, MDR, or other security tools. Our AI handles all the complex API configurations and integrations automatically.",
+      icon: Network
     },
     {
       number: "02", 
-      title: "Download Agent",
-      description: "Install our lightweight agent on your endpoints to enable comprehensive detection and monitoring",
-      icon: Download
+      title: "AI Configures Everything",
+      description: "Sit back while AI automatically configures your tools, creates playbooks, sets up monitoring, and optimizes settings based on your environment.",
+      icon: Bot
     },
     {
       number: "03",
-      title: "Access & Login to UI", 
-      description: "Get real-time security and compliance insights for your business through our intuitive dashboard",
+      title: "Monitor & Relax", 
+      description: "Access your dashboard to see real-time security insights. AI handles all the monitoring, detection, and response—you just review the results.",
       icon: BarChart3
     }
   ];
@@ -476,7 +543,7 @@ const HowToStartSection = () => {
         <div className="text-center mb-20">
           <h2 className="text-4xl font-light text-white mb-4">How To Start?</h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Three simple steps to get your security automation up and running
+            Three simple steps to get your AI-powered security automation running—no technical expertise required
           </p>
         </div>
         
@@ -519,17 +586,17 @@ const VisionSection = () => {
     {
       icon: Target,
       title: "Our Mission",
-      description: "Democratize enterprise-grade security automation for businesses of all sizes, making compliance accessible and affordable."
+      description: "Eliminate the complexity of security tool management. Make enterprise-grade SOAR, SIEM, and MDR automation accessible to everyone—no technical expertise required."
     },
     {
       icon: TrendingUp,
       title: "Our Vision", 
-      description: "A world where security compliance is automated, intelligent, and seamlessly integrated into every business workflow."
+      description: "A future where security tools are truly autonomous. Where AI handles setup, configuration, monitoring, and response—freeing security teams to focus on strategy."
     },
     {
-      icon: Users,
+      icon: Bot,
       title: "Our Promise",
-      description: "To deliver cutting-edge AI-powered security solutions that grow with your business and adapt to your unique needs."
+      description: "Your security Jarvis. We promise to automate your security infrastructure so completely that you can set it and forget it—while staying fully protected."
     }
   ];
 
@@ -539,19 +606,19 @@ const VisionSection = () => {
         <div className="text-center mb-20">
           <h2 className="text-4xl font-light text-white mb-4">Our Vision for the Future</h2>
           <p className="text-gray-400 text-lg">
-            Building the next generation of security automation
+            A world where security tools manage themselves—where AI handles complexity so you can focus on innovation
           </p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
           {visionPillars.map((pillar, index) => (
-            <Card key={index} className="bg-gray-900/50 border-gray-800 p-8 hover:bg-gray-900/70 transition-all duration-300 group">
+            <Card key={index} className="card-enhanced p-8 group">
               <CardContent className="p-0 text-center">
-                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700 transition-colors duration-300">
+                <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300 card-icon-glow">
                   <pillar.icon className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-white font-medium text-lg mb-4">{pillar.title}</h3>
-                <p className="text-gray-300 leading-relaxed text-sm">{pillar.description}</p>
+                <h3 className="text-white font-medium text-lg mb-4 group-hover:text-indigo-300 transition-colors duration-300">{pillar.title}</h3>
+                <p className="text-gray-300 leading-relaxed text-sm group-hover:text-gray-200 transition-colors duration-300">{pillar.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -567,26 +634,31 @@ const CTASection = () => {
     <section className="py-24 bg-white relative z-10">
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-4xl font-light text-black mb-6">
-          Ready to Transform Your Business?
+          Ready to Let AI Handle Your Security?
         </h2>
         <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
-          Join AkinSec to get automated, streamlined security for your IT.
+          Stop managing complex security tools. Connect your SOAR, SIEM, and MDR platforms once, and let our AI handle all the setup, configuration, and monitoring for you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to={createPageUrl('Pricing')}>
             <Button 
               size="lg" 
-              className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-md border-0 transition-all duration-200"
+              className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
             >
-              Start Free Trial
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <span className="relative z-10 flex items-center">
+                Start Free Trial
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </span>
             </Button>
           </Link>
           <Link to={createPageUrl('Contact')}>
-            <div className="wave-button-container">
-              <span>Schedule Demo</span>
-              <div className="wave"></div>
-            </div>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+            >
+              <span className="relative z-10">Schedule Demo</span>
+            </Button>
           </Link>
         </div>
       </div>
@@ -601,19 +673,19 @@ export default function HomeRedesign() {
   const [isDeleting, setIsDeleting] = useState(false);
   
   const phrases = [
-    "Powerful Features",
-    "AI-Powered Automation",
-    "IT + Simplicity + AI", 
-    "Simplify Security, Instantly",
-    "Continuous Monitoring Made Easy",
-    "Evidence Collection, Automated",
-    "Ship Faster, Stay Compliant",
-    "Compliance Made Simple",
-    "Automated Compliance Intelligence",
-    "This is Next-Gen Compliance",
-    "AI-Driven Organization",
-    "AI File Analysis",
-    "Automating Trust & Security"
+    "Automated SOAR Management",
+    "AI-Powered SIEM Operations",
+    "Zero-Touch MDR Setup",
+    "Your Security Jarvis",
+    "Automation That Works",
+    "Set It and Forget It",
+    "AI Handles the Complexity",
+    "Automated Threat Response",
+    "Intelligent Security Operations",
+    "No Configuration Required",
+    "AI-Driven Security Automation",
+    "Automated Monitoring & Response",
+    "Security Made Autonomous"
   ];
   const typingSpeed = 150;
   const deletingSpeed = 75;
@@ -647,6 +719,7 @@ export default function HomeRedesign() {
     <div className="min-h-screen relative">
       <WaveBackground />
       <HeroSection />
+      <AutomationSection />
       <TechStackFlowchart key="flowchart-v2" />
       
       {/* Features Section */}
@@ -658,59 +731,167 @@ export default function HomeRedesign() {
               <span className="blinking-cursor" aria-hidden="true">|</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Everything you need to manage security with confidence.
+              AI and automation handle the complexity—you get enterprise-grade security without the operational burden.
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Link to={createPageUrl('FileAnalysisExample')} className="block">
-              <FeatureCard
-                icon={Search}
-                title="AI File Analysis"
-                description="Automatically analyze documents for compliance gaps and get actionable recommendations."
-                delay={0}
-              />
-            </Link>
-            <Link to={createPageUrl('TasksExample')} className="block">
-              <FeatureCard
-                icon={CheckCircle}
-                title="Task Management"
-                description="Streamline compliance tasks with automated workflows and progress tracking."
-                delay={100}
-              />
-            </Link>
-            <Link to={createPageUrl('TemplatesExample')} className="block">
-              <FeatureCard
-                icon={FileText}
-                title="Template Library"
-                description="Access pre-built policies and procedures for various compliance frameworks."
-                delay={200}
-              />
-            </Link>
-            <Link to={createPageUrl('IntegrationsExample')} className="block">
-              <FeatureCard
-                icon={Shield}
-                title="Integration Auditing"
-                description="Assess third-party vendor risk and maintain compliant app ecosystems."
-                delay={300}
-              />
-            </Link>
-            <Link to={createPageUrl('FrameworksExample')} className="block">
-              <FeatureCard
-                icon={Target}
-                title="Framework Alignment"
-                description="Align controls with SOC 2, ISO 27001, and other compliance frameworks."
-                delay={400}
-              />
-            </Link>
-            <Link to={createPageUrl('ReportsExample')} className="block">
-              <FeatureCard
-                icon={BarChart3}
-                title="Analytics & Reporting"
-                description="Generate comprehensive reports and insights on your compliance posture."
-                delay={500}
-              />
-            </Link>
+            <FeatureCard
+              icon={Bot}
+              title="Automated SOAR Operations"
+              description="AI automatically configures and manages your SOAR platform—no manual playbook creation or workflow setup required."
+              delay={0}
+            />
+            <FeatureCard
+              icon={Brain}
+              title="Intelligent SIEM Management"
+              description="Our AI handles SIEM configuration, log parsing, correlation rules, and alert tuning—set it up once and let automation take over."
+              delay={100}
+            />
+            <FeatureCard
+              icon={Zap}
+              title="Zero-Touch MDR Setup"
+              description="MDR services that configure themselves. AI monitors, detects, and responds to threats without requiring your team's constant attention."
+              delay={200}
+            />
+            <FeatureCard
+              icon={Settings}
+              title="Automated Configuration"
+              description="No more complex setup processes. AI automatically configures security tools based on your environment and requirements."
+              delay={300}
+            />
+            <FeatureCard
+              icon={Activity}
+              title="Continuous AI Monitoring"
+              description="24/7 AI-powered monitoring that learns your environment, adapts to new threats, and responds automatically—no human intervention needed."
+              delay={400}
+            />
+            <FeatureCard
+              icon={Sparkles}
+              title="Self-Managing Security"
+              description="Security systems that optimize themselves. AI handles updates, tuning, and maintenance so you can focus on your business."
+              delay={500}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Compliance Section */}
+      <section className="py-24 bg-black/60 backdrop-blur-sm relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-light text-white mb-4">Compliance Frameworks</h2>
+            <p className="text-gray-400 text-lg max-w-3xl mx-auto">Built-in alignment with major standards and regulations.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <h3 className="text-lg text-white font-medium mb-2 group-hover:text-indigo-300 transition-colors duration-300">PCI DSS</h3>
+                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Global security standard for entities that process, store, or transmit payment cardholder data.</p>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <h3 className="text-lg text-white font-medium mb-2 group-hover:text-indigo-300 transition-colors duration-300">GDPR</h3>
+                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Guidelines for processing personal data under the EU General Data Protection Regulation.</p>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <h3 className="text-lg text-white font-medium mb-2 group-hover:text-indigo-300 transition-colors duration-300">HIPAA</h3>
+                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">US regulation providing privacy and security provisions for safeguarding medical information.</p>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <h3 className="text-lg text-white font-medium mb-2 group-hover:text-indigo-300 transition-colors duration-300">NIST 800-53</h3>
+                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Guidelines for security and privacy controls for federal information systems.</p>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <h3 className="text-lg text-white font-medium mb-2 group-hover:text-indigo-300 transition-colors duration-300">TSC</h3>
+                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Trust Services Criteria for Security, Availability, Processing Integrity, Confidentiality, and Privacy.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Security Operations Integrations */}
+      <section className="py-24 bg-black relative z-10">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-light text-white mb-4">Security Operations Integrations</h2>
+            <p className="text-gray-400 text-lg max-w-3xl mx-auto">Connect your infrastructure and SaaS to centralize visibility and response.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300 card-icon-glow"><Network className="w-full h-full" /></div>
+                  <div>
+                    <h3 className="text-lg text-white font-medium mb-1 group-hover:text-indigo-300 transition-colors duration-300">Docker</h3>
+                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Monitor Docker container lifecycle events: creation, start, stop, and pause.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300 card-icon-glow"><Globe className="w-full h-full" /></div>
+                  <div>
+                    <h3 className="text-lg text-white font-medium mb-1 group-hover:text-indigo-300 transition-colors duration-300">Amazon Web Services</h3>
+                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Collect security events from AWS services directly via AWS APIs.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300 card-icon-glow"><Globe className="w-full h-full" /></div>
+                  <div>
+                    <h3 className="text-lg text-white font-medium mb-1 group-hover:text-indigo-300 transition-colors duration-300">Google Cloud</h3>
+                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Ingest security events from GCP services through native integrations.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300 card-icon-glow"><Network className="w-full h-full" /></div>
+                  <div>
+                    <h3 className="text-lg text-white font-medium mb-1 group-hover:text-indigo-300 transition-colors duration-300">GitHub</h3>
+                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Monitor organization audit logs to track security-relevant events.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300 card-icon-glow"><Network className="w-full h-full" /></div>
+                  <div>
+                    <h3 className="text-lg text-white font-medium mb-1 group-hover:text-indigo-300 transition-colors duration-300">Office 365</h3>
+                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Centralize security events related to your Office 365 services.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300 card-icon-glow"><Network className="w-full h-full" /></div>
+                  <div>
+                    <h3 className="text-lg text-white font-medium mb-1 group-hover:text-indigo-300 transition-colors duration-300">Microsoft Graph API</h3>
+                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Collect security events from Microsoft Graph-powered services via API.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
