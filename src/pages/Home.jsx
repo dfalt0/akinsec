@@ -429,7 +429,7 @@ const StatsSection = () => {
     { number: "99.9%", label: "Uptime Target" },
     { number: "500+", label: "Integration Goals" },
     { number: "24/7", label: "Monitoring Target" },
-    { number: "Fully compliant.", label: "Compliance Goal" }
+    { number: "110%", label: "Compliance Goal" }
   ];
 
   return (
