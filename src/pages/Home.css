@@ -120,20 +120,35 @@ marker#react-flow__arrowclosed {
 }
 
 .btn-secondary-gradient {
-  background: transparent;
-  border: 2px solid rgba(99, 102, 241, 0.5);
+  background: rgba(17, 24, 39, 0.3);
+  border: 2px solid transparent;
   color: #e0e7ff;
   font-weight: 600;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  background-image: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)),
-                    linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  isolation: isolate;
 }
 
 .btn-secondary-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -2;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.btn-secondary-gradient::after {
   content: '';
   position: absolute;
   top: 0;
@@ -144,9 +159,14 @@ marker#react-flow__arrowclosed {
   transition: width 0.3s ease;
   z-index: -1;
   border-radius: inherit;
+  pointer-events: none;
 }
 
 .btn-secondary-gradient:hover::before {
+  opacity: 1;
+}
+
+.btn-secondary-gradient:hover::after {
   width: 100%;
 }
 
@@ -154,7 +174,8 @@ marker#react-flow__arrowclosed {
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
-  border-color: rgba(99, 102, 241, 0.8);
+  border-color: transparent;
+  background: rgba(17, 24, 39, 0.5);
 }
 
 /* Enhanced Card Styles */
