@@ -58,9 +58,10 @@ const HeroSection = () => {
     'Custodian'
   ];
 
-  const typingSpeed = 100;
+  const typingSpeed = 60;
   const deletingSpeed = 80;
   const pauseDuration = 4000;
+  const pauseAfterDelete = 300;
 
   useEffect(() => {
     setIsVisible(true);
@@ -78,13 +79,15 @@ const HeroSection = () => {
           setAttendantText(prev => prev.slice(0, -1));
         }, deletingSpeed);
       } else {
-        // Finished deleting, immediately move to next word and start typing
-        const nextIndex = (attendantIndex + 1) % attendantSynonyms.length;
-        const nextWord = attendantSynonyms[nextIndex];
-        setAttendantIndex(nextIndex);
-        setIsDeleting(false);
-        // Start typing the first character immediately
-        setAttendantText(nextWord[0]);
+        // Finished deleting, pause with just cursor blinking before moving to next word
+        timeoutId = setTimeout(() => {
+          const nextIndex = (attendantIndex + 1) % attendantSynonyms.length;
+          const nextWord = attendantSynonyms[nextIndex];
+          setAttendantIndex(nextIndex);
+          setIsDeleting(false);
+          // Start typing the first character
+          setAttendantText(nextWord[0]);
+        }, pauseAfterDelete);
       }
     } else {
       // Typing: add one character at a time
