@@ -46,16 +46,19 @@ const HeroSection = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const attendantSynonyms = [
-    'Attendant',
-    'Assistant',
-    'Aide',
-    'Advisor',
-    'Guardian',
-    'Protector',
-    'Companion',
-    'Helper',
-    'Steward',
-    'Custodian'
+    'Attendant.',
+    'Friend.',
+    'Assistant.',
+    'AI.',
+    'Agent.',
+    'Aide.',
+    'Advisor.',
+    'Guardian.',
+    'Protector.',
+    'Companion.',
+    'Helper.',
+    'Steward.',
+    'Custodian.'
   ];
 
   const typingSpeed = 60;
@@ -113,12 +116,12 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Security Attendant - Big Bold Text with Cycling */}
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-relaxed tracking-tight overflow-visible">
             <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
               Your Security
             </span>
             {' '}
-            <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent inline-block">
+            <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent inline-block overflow-visible pb-2">
               {attendantText}
               <span className="blinking-cursor" aria-hidden="true">|</span>
             </span>
