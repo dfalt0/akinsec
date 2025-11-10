@@ -408,15 +408,15 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }) => {
 
   return (
     <div 
-      className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+      className={`h-full transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
     >
-      <Card className="card-enhanced group cursor-pointer">
-        <CardContent className="p-8">
-          <div className="w-8 h-8 text-gray-400 mb-6 card-icon-glow">
+      <Card className="card-enhanced group cursor-pointer h-full flex flex-col">
+        <CardContent className="p-8 flex flex-col flex-1">
+          <div className="w-8 h-8 text-gray-400 mb-6 card-icon-glow flex-shrink-0">
             <Icon className="w-full h-full" />
           </div>
-          <h3 className="text-lg text-white font-medium mb-3 group-hover:text-indigo-300 transition-colors duration-300">{title}</h3>
-          <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">{description}</p>
+          <h3 className="text-lg text-white font-medium mb-3 group-hover:text-indigo-300 transition-colors duration-300 flex-shrink-0">{title}</h3>
+          <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300 flex-1">{description}</p>
         </CardContent>
       </Card>
     </div>
@@ -426,15 +426,19 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0 }) => {
 // Clean stats section
 const StatsSection = () => {
   const stats = [
-    { number: "99.9%", label: "Uptime" },
-    { number: "500+", label: "Integrations" },
-    { number: "24/7", label: "Monitoring" },
-    { number: "SOC 2", label: "Compliant" }
+    { number: "99.9%", label: "Uptime Target" },
+    { number: "500+", label: "Integration Goals" },
+    { number: "24/7", label: "Monitoring Target" },
+    { number: "Fully compliant.", label: "Compliance Goal" }
   ];
 
   return (
-    <section className="py-24 bg-black/60 backdrop-blur-sm relative z-10">
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-light text-white mb-2">Uptime Targets</h2>
+          <p className="text-gray-400 text-sm">Our commitment to excellence</p>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
@@ -478,7 +482,7 @@ const AutomationSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <h2 className="text-4xl font-light text-white mb-4">Automation That Actually Works</h2>
@@ -491,13 +495,13 @@ const AutomationSection = () => {
           {capabilities.map((capability, index) => (
             <Card key={index} className="card-automation group">
               <CardContent className="p-8">
-                <div className="flex items-start gap-4 mb-4">
+                <div className="flex items-start gap-5">
                   <div className="w-12 h-12 card-automation-icon rounded-lg flex items-center justify-center flex-shrink-0">
                     <capability.icon className="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors duration-300" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-medium text-white mb-2 group-hover:text-indigo-300 transition-colors duration-300">{capability.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-3 group-hover:text-gray-300 transition-colors duration-300">{capability.description}</p>
+                  <div className="flex-1 space-y-3">
+                    <h3 className="text-xl font-medium text-white group-hover:text-indigo-300 transition-colors duration-300">{capability.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">{capability.description}</p>
                     <Badge variant="outline" className="badge-enhanced text-gray-300 text-xs">
                       {capability.benefit}
                     </Badge>
@@ -542,7 +546,7 @@ const TechStackSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-black">
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
         <h2 className="text-4xl font-light text-white mb-4">Powered by Industry-Leading Technology</h2>
@@ -604,7 +608,7 @@ const HowToStartSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-black">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <h2 className="text-4xl font-light text-white mb-4">How To Start?</h2>
@@ -619,9 +623,9 @@ const HowToStartSection = () => {
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-800 hidden md:block"></div>
             
             {steps.map((step, index) => (
-              <div key={index} className="relative flex items-start mb-16 last:mb-0">
+              <div key={index} className="relative flex items-center mb-16 last:mb-0">
                 {/* Step number circle */}
-                <div className="flex-shrink-0 w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center border-2 border-gray-800 relative z-10">
+                <div className="flex-shrink-0 w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center border-2 border-gray-800 relative z-10 self-center">
                   <span className="text-white font-medium text-lg">{step.number}</span>
                 </div>
                 
@@ -667,7 +671,7 @@ const VisionSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-black/60 backdrop-blur-sm relative z-10">
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <h2 className="text-4xl font-light text-white mb-4">Our Vision for the Future</h2>
@@ -697,12 +701,12 @@ const VisionSection = () => {
 // Minimal CTA
 const CTASection = () => {
   return (
-    <section className="py-24 bg-white relative z-10">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl font-light text-black mb-6">
+        <h2 className="text-4xl font-light text-white mb-6">
           Ready to Let AI Handle Your Security?
         </h2>
-        <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
           Stop managing complex security tools. Connect your SOAR, SIEM, and MDR platforms once, and let our AI handle all the setup, configuration, and monitoring for you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -789,7 +793,7 @@ export default function HomeRedesign() {
       <TechStackFlowchart key="flowchart-v2" />
       
       {/* Features Section */}
-      <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
+      <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-4xl font-light text-white mb-4 flex items-center justify-center min-h-[60px]">
@@ -843,13 +847,19 @@ export default function HomeRedesign() {
       </section>
 
       {/* Compliance Section */}
-      <section className="py-24 bg-black/60 backdrop-blur-sm relative z-10">
+      <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-light text-white mb-4">Compliance Frameworks</h2>
             <p className="text-gray-400 text-lg max-w-3xl mx-auto">Built-in alignment with major standards and regulations.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="card-enhanced group cursor-pointer">
+              <CardContent className="p-8">
+                <h3 className="text-lg text-white font-medium mb-2 group-hover:text-indigo-300 transition-colors duration-300">SOC 2</h3>
+                <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Service Organization Control 2 framework ensuring security, availability, processing integrity, confidentiality, and privacy of data.</p>
+              </CardContent>
+            </Card>
             <Card className="card-enhanced group cursor-pointer">
               <CardContent className="p-8">
                 <h3 className="text-lg text-white font-medium mb-2 group-hover:text-indigo-300 transition-colors duration-300">PCI DSS</h3>
@@ -885,7 +895,7 @@ export default function HomeRedesign() {
       </section>
 
       {/* Security Operations Integrations */}
-      <section className="py-24 bg-black relative z-10">
+      <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-light text-white mb-4">Security Operations Integrations</h2>
