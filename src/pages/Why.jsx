@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
 import WaveBackground from '@/components/WaveBackground';
 import RepercussionModal from '../components/frameworks/RepercussionModal';
+import './Home.css';
 
 const frameworkDetails = [
   {
@@ -166,7 +167,7 @@ export default function FrameworksPage() {
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {/* Card 1 - Built for Speed */}
               <div className="group">
-                <div className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-8 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 backdrop-blur-sm text-center">
+                <div className="card-enhanced p-8 text-center">
                   <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
                     <Shield className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
                   </div>
@@ -177,7 +178,7 @@ export default function FrameworksPage() {
 
               {/* Card 2 - AI-First Design */}
               <div className="group">
-                <div className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-8 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 backdrop-blur-sm text-center">
+                <div className="card-enhanced p-8 text-center">
                   <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
                     <Zap className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
                   </div>
@@ -188,7 +189,7 @@ export default function FrameworksPage() {
 
               {/* Card 3 - No Vendor Lock-in */}
               <div className="group">
-                <div className="bg-gray-900/30 border border-gray-800/40 rounded-lg p-8 hover:bg-gray-900/50 hover:border-gray-700/60 transition-all duration-300 backdrop-blur-sm text-center">
+                <div className="card-enhanced p-8 text-center">
                   <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
                     <Target className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
                   </div>
@@ -200,7 +201,7 @@ export default function FrameworksPage() {
 
             {/* Bottom Statement */}
             <div className="text-center">
-              <div className="inline-block bg-gray-900/30 border border-gray-800/30 rounded-2xl px-8 py-6 backdrop-blur-sm shadow-[0_0_30px_rgba(255,255,255,0.06)]">
+              <div className="inline-block card-enhanced px-8 py-6 rounded-xl">
                 <p className="text-gray-300 text-lg font-light">
                   Security that <span className="text-white font-medium">actually makes sense</span>
                 </p>
@@ -214,7 +215,7 @@ export default function FrameworksPage() {
 
 
         {/* The Cost of Inadequate Security */}
-        <section className="py-24 bg-black">
+        <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 mb-6">
@@ -231,7 +232,7 @@ export default function FrameworksPage() {
                 <Card 
                   key={index} 
                   onClick={() => setSelectedRepercussion(item)}
-                  className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 hover:border-gray-700 cursor-pointer transition-all duration-300 group"
+                  className="card-enhanced cursor-pointer group"
                 >
                   <CardContent className="p-6">
                     <h4 className="font-medium text-white mb-3 group-hover:text-red-300 transition-colors">{item.title}</h4>
@@ -244,7 +245,7 @@ export default function FrameworksPage() {
         </section>
 
         {/* Security Standards & Compliance Frameworks */}
-        <section className="py-24 bg-black/30 backdrop-blur-sm">
+        <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-light text-white mb-4">Security Standards & Compliance Frameworks</h2>
@@ -254,7 +255,7 @@ export default function FrameworksPage() {
             </div>
             <div className="space-y-8">
               {frameworkDetails.map((framework, index) => (
-                <Card key={index} className="bg-gray-900/50 border-gray-800 shadow-lg overflow-hidden hover:bg-gray-900/70 transition-all duration-300">
+                <Card key={index} className="card-enhanced overflow-hidden group">
                   <div className="md:flex">
                     <div className="md:w-1/3 bg-gray-800/50 p-8 flex flex-col justify-center">
                       <div className="w-16 h-16 bg-gray-700 rounded-lg flex items-center justify-center mb-6">
@@ -292,33 +293,38 @@ export default function FrameworksPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 bg-white relative z-10">
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-4xl font-light text-black mb-6">
-              Ready to Strengthen Your Security Posture?
-            </h2>
-            <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
-              AkinSec provides comprehensive cybersecurity tools, compliance management, and security automation to protect your business.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to={createPageUrl('Pricing')}>
-                <Button 
-                  size="lg" 
-                  className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200"
-                >
-                  Try the App for Free
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-              <Link to={createPageUrl('Contact')}>
-                <div className="wave-button-container">
-                  <span>Schedule Demo</span>
-                  <div className="wave"></div>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </section>
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
+      <div className="container mx-auto px-6 text-center">
+        <h2 className="text-4xl font-light text-white mb-6">
+          Ready to Strengthen Your Security Posture?
+        </h2>
+        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
+          AkinSec provides comprehensive cybersecurity tools, compliance management, and security automation to protect your business.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link to={createPageUrl('Pricing')}>
+            <Button 
+              size="lg" 
+              className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+            >
+              <span className="relative z-10 flex items-center">
+                Try the App for Free
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Button>
+          </Link>
+          <Link to={createPageUrl('Contact')}>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+            >
+              <span className="relative z-10">Schedule Demo</span>
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
 
       </div>
       {selectedRepercussion && (

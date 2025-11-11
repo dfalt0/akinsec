@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { createPageUrl } from '@/utils/index.js';
 import WaveBackground from '@/components/WaveBackground';
+import './Home.css';
 
 // Ultra-minimal hero section
 const HeroSection = () => {
@@ -36,19 +37,21 @@ const HeroSection = () => {
             <Link to={createPageUrl('Contact')}>
               <Button 
                 size="lg" 
-                className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200 group backdrop-blur-sm"
+                className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
               >
-                Talk to us
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10 flex items-center">
+                  Talk to us
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Button>
             </Link>
             <Link to={createPageUrl('Pricing')}>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-gray-600 text-gray-300 hover:bg-gray-900 hover:text-white px-8 py-3 text-base font-medium rounded-none transition-all duration-200 backdrop-blur-sm"
+                className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
               >
-                Get started
+                <span className="relative z-10">Get started</span>
               </Button>
             </Link>
           </div>
@@ -61,7 +64,7 @@ const HeroSection = () => {
 // Profile picture placeholder section
 const ProfileSection = () => {
   return (
-    <section className="py-16 bg-black/30 backdrop-blur-sm">
+    <section className="py-16 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
         <div className="flex justify-center">
           <div className="w-32 h-32 bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-700 hover:border-gray-600 transition-colors duration-300">
@@ -80,11 +83,11 @@ const ProfileSection = () => {
 // Clean mission section
 const MissionSection = () => {
   return (
-    <section className="py-24 bg-black/30 backdrop-blur-sm">
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-3 gap-8 items-stretch">
           <div className="lg:col-span-2">
-            <Card className="bg-gray-900/50 border-gray-800 shadow-lg">
+            <Card className="card-enhanced group">
               <CardContent className="p-8">
                 <div className="flex items-center gap-2 mb-4 text-white">
                   <Target className="w-5 h-5" />
@@ -100,7 +103,7 @@ const MissionSection = () => {
               </CardContent>
             </Card>
           </div>
-          <Card className="bg-gray-900/50 border-gray-800 shadow-lg">
+          <Card className="card-enhanced group h-full flex flex-col">
             <CardContent className="p-8 flex flex-col justify-between h-full">
               <div>
                 <h3 className="text-xl font-medium text-white mb-6">Impact in numbers</h3>
@@ -152,7 +155,7 @@ const ValuesSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-black">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-white mb-4">Our Values</h2>
@@ -162,7 +165,7 @@ const ValuesSection = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            <Card key={index} className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 group">
+            <Card key={index} className="card-enhanced group">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700 transition-colors duration-300">
                   <value.icon className="w-8 h-8 text-gray-400 group-hover:text-white transition-colors duration-300" />
@@ -202,7 +205,7 @@ const TimelineSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-black/30 backdrop-blur-sm">
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-white mb-4">Our Journey</h2>
@@ -216,7 +219,7 @@ const TimelineSection = () => {
             {milestones.map((milestone, index) => (
               <div key={index} className="relative">
                 <div className="absolute left-1/2 -translate-x-1/2 -top-2 w-4 h-4 rounded-full bg-white" />
-                <Card className={`bg-gray-900/50 border-gray-800 shadow-lg max-w-[45%] ${milestone.side === 'left' ? 'mr-auto' : 'ml-auto'}`}>
+                <Card className={`card-enhanced max-w-[45%] ${milestone.side === 'left' ? 'mr-auto' : 'ml-auto'}`}>
                   <CardContent className="p-6">
                     <div className="text-sm text-gray-400 mb-2">{milestone.year}</div>
                     <h4 className="font-medium text-white mb-2">{milestone.title}</h4>
@@ -235,29 +238,34 @@ const TimelineSection = () => {
 // Minimal CTA
 const CTASection = () => {
   return (
-    <section className="py-24 bg-white relative z-10">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl font-light text-black mb-6">
+        <h2 className="text-4xl font-light text-white mb-6">
           Join Me in Solving Real Problems
         </h2>
-        <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
           As a solo founder, I'm building this because I believe in the problem we're solving. Ready to see if AkinSec can help your team? Let's explore how we can work together.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to={createPageUrl('Contact')}>
             <Button 
               size="lg" 
-              className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200"
+              className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
             >
-              Get in Touch
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <span className="relative z-10 flex items-center">
+                Get in Touch
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </span>
             </Button>
           </Link>
           <Link to={createPageUrl('Careers')}>
-            <div className="wave-button-container">
-              <span>View Careers</span>
-              <div className="wave"></div>
-            </div>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+            >
+              <span className="relative z-10">View Careers</span>
+            </Button>
           </Link>
         </div>
       </div>

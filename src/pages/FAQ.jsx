@@ -17,9 +17,10 @@ import {
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
 import WaveBackground from '@/components/WaveBackground';
+import './Home.css';
 
 const FAQItem = ({ question, answer, isOpen, onToggle }) => (
-  <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 shadow-lg">
+  <Card className="card-enhanced group">
     <CardHeader className="cursor-pointer" onClick={onToggle}>
       <div className="flex items-center justify-between">
         <CardTitle className="text-lg font-medium text-white pr-4">{question}</CardTitle>
@@ -39,7 +40,7 @@ const FAQItem = ({ question, answer, isOpen, onToggle }) => (
 );
 
 const CategoryCard = ({ icon: Icon, title, count, color }) => (
-  <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 cursor-pointer group">
+  <Card className="card-enhanced cursor-pointer group">
     <CardContent className="p-6 text-center">
       <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-gray-700 transition-colors duration-300">
         <Icon className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
@@ -77,7 +78,7 @@ const HeroSection = ({ searchTerm, setSearchTerm }) => {
                 placeholder="Search FAQs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-12 text-lg bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-none"
+                className="pl-12 h-12 text-lg bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-lg"
               />
             </div>
           </div>
@@ -90,7 +91,7 @@ const HeroSection = ({ searchTerm, setSearchTerm }) => {
 // Clean categories section
 const CategoriesSection = ({ categories }) => {
   return (
-    <section className="py-24 bg-black/30 backdrop-blur-sm">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-white mb-4">Browse by Category</h2>
@@ -111,7 +112,7 @@ const CategoriesSection = ({ categories }) => {
 // Clean FAQ content section
 const FAQContentSection = ({ faqData, filteredQuestions, searchTerm, openItems, toggleItem, setSearchTerm }) => {
   return (
-    <section className="py-24 bg-black">
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           {searchTerm ? (
@@ -166,7 +167,7 @@ const FAQContentSection = ({ faqData, filteredQuestions, searchTerm, openItems, 
               <Button 
                 variant="outline" 
                 onClick={() => setSearchTerm('')}
-                className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white rounded-none"
+                className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg"
               >
                 Clear Search
               </Button>
@@ -181,28 +182,35 @@ const FAQContentSection = ({ faqData, filteredQuestions, searchTerm, openItems, 
 // Minimal CTA
 const CTASection = () => {
   return (
-    <section className="py-24 bg-white relative z-10">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
-        <Card className="max-w-2xl mx-auto bg-gray-50 border-gray-200 shadow-lg">
+        <Card className="max-w-2xl mx-auto card-enhanced">
           <CardContent className="p-8 text-center">
-            <h3 className="text-3xl font-light text-black mb-6">Still Have Questions?</h3>
-            <p className="text-gray-600 mb-8 text-lg">
+            <h3 className="text-3xl font-light text-white mb-6">Still Have Questions?</h3>
+            <p className="text-gray-300 mb-8 text-lg">
               Can't find what you're looking for? Our support team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to={createPageUrl('Contact')}>
                 <Button 
                   size="lg"
-                  className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200"
+                  className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
                 >
-                  Contact Support
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <span className="relative z-10 flex items-center">
+                    Contact Support
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Button>
               </Link>
-              <div className="wave-button-container">
-                <span>Schedule a Demo</span>
-                <div className="wave"></div>
-              </div>
+              <Link to={createPageUrl('Contact')}>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+                >
+                  <span className="relative z-10">Schedule a Demo</span>
+                </Button>
+              </Link>
             </div>
           </CardContent>
         </Card>

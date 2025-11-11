@@ -18,10 +18,11 @@ import {
   ArrowRight
 } from 'lucide-react';
 import WaveBackground from '@/components/WaveBackground';
+import './Home.css';
 // Contact form functionality removed for static website
 
 const ContactCard = ({ icon: Icon, title, content, description }) => (
-  <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 text-center p-6 group">
+  <Card className="card-enhanced text-center p-6 group">
     <div className="w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-700 transition-colors duration-300">
       <Icon className="w-8 h-8 text-gray-400 group-hover:text-white transition-colors duration-300" />
     </div>
@@ -66,7 +67,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
   };
 
   return (
-    <section className="py-24 bg-black/30 backdrop-blur-sm">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
@@ -110,7 +111,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
             </div>
             
             <div>
-              <Card className="p-8 bg-gray-900/50 border-gray-800 shadow-lg">
+              <Card className="p-8 card-enhanced">
                 {isSubmitted ? (
                   <div className="text-center py-8">
                     <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
@@ -128,7 +129,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
                           placeholder="John" 
                           value={formData.firstName || ''}
                           onChange={handleInputChange}
-                          className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-none"
+                          className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-lg"
                         />
                       </div>
                       <div>
@@ -139,7 +140,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
                           placeholder="Doe" 
                           value={formData.lastName || ''}
                           onChange={handleInputChange}
-                          className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-none"
+                          className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-lg"
                         />
                       </div>
                     </div>
@@ -153,7 +154,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
                         placeholder="john@company.com" 
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-none"
+                        className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-lg"
                       />
                     </div>
                     
@@ -165,7 +166,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
                         placeholder="Your Company" 
                         value={formData.company}
                         onChange={handleInputChange}
-                        className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-none"
+                        className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-lg"
                       />
                     </div>
                     
@@ -178,7 +179,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
                         rows={4} 
                         value={formData.message}
                         onChange={handleInputChange}
-                        className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-none"
+                        className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-gray-500 rounded-lg"
                       />
                     </div>
                     
@@ -189,19 +190,21 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
                     <Button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full bg-white text-black hover:bg-gray-100 rounded-none border-0 transition-all duration-200"
+                      className="w-full btn-primary-gradient rounded-lg border-0 transition-all duration-200 group relative"
                     >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          Send Message
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </>
-                      )}
+                      <span className="relative z-10 flex items-center justify-center">
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            Send Message
+                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
+                      </span>
                     </Button>
                   </form>
                 )}
@@ -238,7 +241,7 @@ const ContactInfoSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-black">
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-light text-white mb-4">Other Ways to Reach Us</h2>
@@ -259,26 +262,31 @@ const ContactInfoSection = () => {
 // Minimal CTA
 const CTASection = () => {
   return (
-    <section className="py-24 bg-white relative z-10">
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl font-light text-black mb-6">
+        <h2 className="text-4xl font-light text-white mb-6">
           Ready to Get Started?
         </h2>
-        <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
           Join thousands of teams already using AkinSec to streamline their compliance workflows.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
             size="lg" 
-            className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200"
+            className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
           >
-            Start Free Trial
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <span className="relative z-10 flex items-center">
+              Start Free Trial
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </span>
           </Button>
-          <div className="wave-button-container">
-            <span>Schedule Demo</span>
-            <div className="wave"></div>
-          </div>
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+          >
+            <span className="relative z-10">Schedule Demo</span>
+          </Button>
         </div>
       </div>
     </section>
