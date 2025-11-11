@@ -45,7 +45,7 @@ const pricingPlans = {
       frequency: '/month',
       description: 'For growing businesses with comprehensive security needs.',
       features: [
-        'Up to 50 Users',
+        '20+ Users',
         'Advanced AI Analysis (more tokens)',
         'Integration Auditing',
         'Customizable Reports',
@@ -181,8 +181,22 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
     setIsVisible(true);
   }, []);
 
+  const earlyAdopterPrices = {
+    monthly: {
+      starter: '$25',
+      business: '$75',
+    },
+    annually: {
+      starter: '$253',
+      business: '$763',
+    }
+  };
+
+  const prices = isAnnual ? earlyAdopterPrices.annually : earlyAdopterPrices.monthly;
+  const frequency = isAnnual ? '/year' : '/month';
+
   return (
-    <section className="relative min-h-[40vh] flex items-center justify-center bg-transparent overflow-hidden">
+    <section className="relative min-h-[60vh] flex items-center justify-center bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight mt-32">
@@ -196,7 +210,7 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
           </p>
           
           {/* Billing Toggle */}
-          <div className="flex items-center justify-center space-x-4 mb-8">
+          <div className="flex items-center justify-center space-x-4 mb-12">
             <span className="text-gray-300">Monthly</span>
             <Switch 
               checked={isAnnual} 
@@ -209,6 +223,104 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
                 Save 15%
               </span>
             </span>
+          </div>
+
+          {/* Early Adopter Section */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <Card className="card-enhanced border-2 border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-indigo-900/20">
+              <CardContent className="p-8 md:p-12">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full mb-4 border border-purple-500/30">
+                    <Star className="w-4 h-4 fill-purple-400 text-purple-400" />
+                    <span className="text-sm font-medium">Early Adopter Program</span>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+                    Join as an Early Adopter
+                  </h2>
+                  <p className="text-lg text-gray-300 mb-2 max-w-2xl mx-auto">
+                    Be among the first to use AkinSec and lock in <span className="text-purple-300 font-medium">75% off</span> for life.
+                  </p>
+                  <p className="text-sm text-gray-400 max-w-2xl mx-auto">
+                    Limited time offer for early supporters. Your discount applies to all future renewals.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700/50">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-xl font-medium text-white">Starter</h3>
+                      <div className="text-right">
+                        <div className="text-2xl font-light text-purple-300">{prices.starter}</div>
+                        <div className="text-sm text-gray-400">{frequency}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
+                      <span className="line-through">${isAnnual ? '1010' : '99'}</span>
+                      <span className="text-purple-300 font-medium">75% off</span>
+                    </div>
+                    <ul className="space-y-2 mt-4">
+                      <li className="flex items-center gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                        <span>All Starter features</span>
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                        <span>Lifetime discount</span>
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                        <span>Priority feature requests</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700/50">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-xl font-medium text-white">Business</h3>
+                      <div className="text-right">
+                        <div className="text-2xl font-light text-purple-300">{prices.business}</div>
+                        <div className="text-sm text-gray-400">{frequency}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
+                      <span className="line-through">${isAnnual ? '3050' : '299'}</span>
+                      <span className="text-purple-300 font-medium">75% off</span>
+                    </div>
+                    <ul className="space-y-2 mt-4">
+                      <li className="flex items-center gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                        <span>All Business features</span>
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                        <span>Lifetime discount</span>
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                        <span>Priority feature requests</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <Link to={createPageUrl('Contact')}>
+                    <Button 
+                      size="lg" 
+                      className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+                    >
+                      <span className="relative z-10 flex items-center">
+                        Claim Early Adopter Discount
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </Button>
+                  </Link>
+                  <p className="text-xs text-gray-500 mt-4">
+                    Contact us to verify eligibility and activate your discount
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
@@ -312,126 +424,6 @@ const ComparisonSection = () => {
   );
 };
 
-// Early Adopter Section
-const EarlyAdopterSection = ({ isAnnual }) => {
-  const earlyAdopterPrices = {
-    monthly: {
-      starter: '$25',
-      business: '$75',
-    },
-    annually: {
-      starter: '$253',
-      business: '$763',
-    }
-  };
-
-  const prices = isAnnual ? earlyAdopterPrices.annually : earlyAdopterPrices.monthly;
-  const frequency = isAnnual ? '/year' : '/month';
-
-  return (
-    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
-          <Card className="card-enhanced border-2 border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-indigo-900/20">
-            <CardContent className="p-8 md:p-12">
-              <div className="text-center mb-8">
-                <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full mb-4 border border-purple-500/30">
-                  <Star className="w-4 h-4 fill-purple-400 text-purple-400" />
-                  <span className="text-sm font-medium">Early Adopter Program</span>
-                </div>
-                <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
-                  Join as an Early Adopter
-                </h2>
-                <p className="text-lg text-gray-300 mb-2 max-w-2xl mx-auto">
-                  Be among the first to use AkinSec and lock in <span className="text-purple-300 font-medium">75% off</span> for life.
-                </p>
-                <p className="text-sm text-gray-400 max-w-2xl mx-auto">
-                  Limited time offer for early supporters. Your discount applies to all future renewals.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700/50">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-medium text-white">Starter</h3>
-                    <div className="text-right">
-                      <div className="text-2xl font-light text-purple-300">{prices.starter}</div>
-                      <div className="text-sm text-gray-400">{frequency}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
-                    <span className="line-through">${isAnnual ? '1010' : '99'}</span>
-                    <span className="text-purple-300 font-medium">75% off</span>
-                  </div>
-                  <ul className="space-y-2 mt-4">
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
-                      <span>All Starter features</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
-                      <span>Lifetime discount</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
-                      <span>Priority feature requests</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-900/50 rounded-lg p-6 border border-gray-700/50">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-medium text-white">Business</h3>
-                    <div className="text-right">
-                      <div className="text-2xl font-light text-purple-300">{prices.business}</div>
-                      <div className="text-sm text-gray-400">{frequency}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
-                    <span className="line-through">${isAnnual ? '3050' : '299'}</span>
-                    <span className="text-purple-300 font-medium">75% off</span>
-                  </div>
-                  <ul className="space-y-2 mt-4">
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
-                      <span>All Business features</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
-                      <span>Lifetime discount</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
-                      <span>Priority feature requests</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="text-center">
-                <Link to={createPageUrl('Contact')}>
-                  <Button 
-                    size="lg" 
-                    className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
-                  >
-                    <span className="relative z-10 flex items-center">
-                      Claim Early Adopter Discount
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </Button>
-                </Link>
-                <p className="text-xs text-gray-500 mt-4">
-                  Contact us to verify eligibility and activate your discount
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 // Minimal CTA
 const CTASection = () => {
   return (
@@ -478,7 +470,6 @@ export default function PricingPage() {
     <div className="min-h-screen relative">
       <WaveBackground />
       <HeroSection isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
-      <EarlyAdopterSection isAnnual={isAnnual} />
       <StandardPricingSection plans={plans} />
       <ComparisonSection />
       <CTASection />
