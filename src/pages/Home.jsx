@@ -116,12 +116,12 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Security Attendant - Big Bold Text with Cycling */}
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-relaxed tracking-tight overflow-visible">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-relaxed tracking-tight overflow-visible" style={{ paddingBottom: '0.75rem', minHeight: '1.5em' }}>
             <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
               Your Security
             </span>
             {' '}
-            <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent inline-block overflow-visible pb-2">
+            <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 bg-clip-text text-transparent inline-block overflow-visible" style={{ paddingBottom: '1rem', lineHeight: '1.3', verticalAlign: 'baseline' }}>
               {attendantText}
               <span className="blinking-cursor" aria-hidden="true">|</span>
             </span>
@@ -752,7 +752,6 @@ export default function HomeRedesign() {
     "Automated SOAR Management",
     "AI-Powered SIEM Operations",
     "Zero-Touch MDR Setup",
-    "Your Security Jarvis",
     "Automation That Works",
     "Set It and Forget It",
     "AI Handles the Complexity",
