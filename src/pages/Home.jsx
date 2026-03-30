@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionIndex } from '@/components/marketing/SectionIndex';
@@ -12,32 +12,40 @@ import {
   PRODUCT_SUBLINE,
   AI_WORKFLOW_DECK,
 } from '@/marketing/voice.js';
-import { ReactFlow, Background, Controls, useNodesState, useEdgesState, MarkerType, Handle, Position } from '@xyflow/react';
+import { ReactFlow, Background, useNodesState, useEdgesState, MarkerType, Handle, Position } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import './Home.css';
 
+const HERO_ATTENDANT_SYNONYMS = [
+  'Attendant.',
+  'SIEM.',
+  'Workflow.',
+  'Timeline.',
+  'Assistant.',
+  'Advisor.',
+  'Analyst.',
+  'Operator.',
+  'Guardian.',
+];
+
+const HOME_FEATURE_PHRASES = [
+  'SIEM that stays readable',
+  'AI-assisted triage in workflow',
+  'BYO model APIs in settings',
+  'From alert to owned task', 
+  'MDR context in one timeline', 
+  'Framework mapping you can show',
+  'Evidence that travels with the case',
+  'Fewer tabs. Clearer owners.',
+];
 
 // Ultra-minimal hero section inspired by GreyNoise
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [attendantText, setAttendantText] = useState('Attendant');
+  // Must start empty (or match synonyms[0]) — "Attendant" + first word "Monitor." left the effect with no branch to schedule timeouts
+  const [attendantText, setAttendantText] = useState('');
   const [attendantIndex, setAttendantIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-
-  const attendantSynonyms = [
-    'Monitor.',
-    'Detect.',
-    'Respond.',
-    'SIEM.',
-    'Coverage.',
-    'Triage.',
-    'Evidence.',
-    'Timeline.',
-    'Console.',
-    'Alert.',
-    'Signal.',
-    'Workflow.',
-  ];
 
   const typingSpeed = 60;
   const deletingSpeed = 80;
@@ -51,7 +59,7 @@ const HeroSection = () => {
   useEffect(() => {
     let timeoutId;
     
-    const currentWord = attendantSynonyms[attendantIndex % attendantSynonyms.length];
+    const currentWord = HERO_ATTENDANT_SYNONYMS[attendantIndex % HERO_ATTENDANT_SYNONYMS.length];
     
     if (isDeleting) {
       // Deleting: remove one character at a time
@@ -62,8 +70,8 @@ const HeroSection = () => {
       } else {
         // Finished deleting, pause with just cursor blinking before moving to next word
         timeoutId = setTimeout(() => {
-          const nextIndex = (attendantIndex + 1) % attendantSynonyms.length;
-          const nextWord = attendantSynonyms[nextIndex];
+          const nextIndex = (attendantIndex + 1) % HERO_ATTENDANT_SYNONYMS.length;
+          const nextWord = HERO_ATTENDANT_SYNONYMS[nextIndex];
           setAttendantIndex(nextIndex);
           setIsDeleting(false);
           // Start typing the first character
@@ -87,7 +95,7 @@ const HeroSection = () => {
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [attendantText, isDeleting, attendantIndex]);
+  }, [attendantText, isDeleting, attendantIndex, typingSpeed, deletingSpeed, pauseDuration, pauseAfterDelete]);
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-transparent">
@@ -111,7 +119,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="mx-auto mb-6 max-w-3xl text-xl font-normal leading-relaxed text-muted-foreground md:text-2xl">
-            Security monitoring and correlation in one SIEM—AI assists triage and reporting when you connect your own model APIs.
+            AkinSec provides the tools that bridge the gap between AI and cybersecurity for a better, faster, more personalized workflow.
           </p>
           <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-muted-foreground/90">
             {PRODUCT_SUBLINE}
@@ -172,7 +180,8 @@ const ProofStrip = () => {
   );
 };
 
-// Custom Node Components for React Flow
+// Custom Node Components for React Flow (`data` is provided by React Flow node defs)
+/* eslint-disable react/prop-types */
 const DataSourceNode = ({ data }) => (
   <div className="bg-gray-800 border-2 border-gray-600 rounded-lg px-4 py-3 shadow-lg min-w-[140px]">
     <Handle 
@@ -202,7 +211,7 @@ const SecurityVMNode = ({ data }) => (
     />
     <div className="text-base font-bold text-white text-center mb-3">Security VM</div>
     <div className="grid grid-cols-2 gap-2 text-xs mb-6 relative">
-      {data.tools.map((tool, index) => (
+      {data.tools.map((tool) => (
         <div key={tool} className="bg-gray-700 border border-gray-500 rounded px-2 py-1 text-center text-gray-200 font-medium">
           {tool}
         </div>
@@ -255,6 +264,7 @@ const CustomerGUINode = ({ data }) => (
     <div className="text-sm font-medium text-white text-center">{data.label}</div>
   </div>
 );
+/* eslint-enable react/prop-types */
 
 // Define nodeTypes outside component to prevent re-creation warnings
 const nodeTypes = {
@@ -359,8 +369,8 @@ const TechStackFlowchart = () => {
     },
   ];
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
 
   return (
       <section className="relative z-10 border-y border-border/50 bg-background/20 py-24 backdrop-blur-sm">
@@ -385,6 +395,15 @@ const TechStackFlowchart = () => {
                 fitView
                 className="bg-transparent"
                 defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+                nodesDraggable
+                nodesConnectable={false}
+                elementsSelectable={false}
+                panOnDrag={false}
+                panOnScroll={false}
+                zoomOnScroll={false}
+                zoomOnPinch={false}
+                zoomOnDoubleClick={false}
+                preventScrolling
                 defaultEdgeOptions={{
                   type: 'smoothstep',
                   style: { stroke: '#9ca3af', strokeWidth: 2, strokeDasharray: '5,5' },
@@ -395,13 +414,6 @@ const TechStackFlowchart = () => {
                 }}
               >
                 <Background color="#374151" gap={20} />
-                <Controls 
-                  className="bg-gray-800 border-gray-600"
-                  style={{
-                    backgroundColor: '#1f2937',
-                    border: '1px solid #4b5563',
-                  }}
-                />
               </ReactFlow>
             </div>
           </div>
@@ -448,6 +460,7 @@ const ProductProofBento = () => {
   );
 };
 
+/* eslint-disable react/prop-types -- local presentation component */
 const FeatureCard = ({ title, description, delay = 0 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -688,24 +701,14 @@ export default function HomeRedesign() {
   const [text, setText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  
-  const phrases = [
-    'SIEM that stays readable',
-    'AI-assisted triage in workflow',
-    'BYO model APIs in settings',
-    'From alert to owned task',
-    'MDR context in one timeline',
-    'Framework mapping you can show',
-    'Evidence that travels with the case',
-    'Fewer tabs. Clearer owners.',
-  ];
+
   const typingSpeed = 150;
   const deletingSpeed = 75;
   const pauseDuration = 2000;
 
   useEffect(() => {
     const handleType = () => {
-      const currentPhrase = phrases[phraseIndex % phrases.length];
+      const currentPhrase = HOME_FEATURE_PHRASES[phraseIndex % HOME_FEATURE_PHRASES.length];
       const currentText = isDeleting 
         ? currentPhrase.substring(0, text.length - 1)
         : currentPhrase.substring(0, text.length + 1);
@@ -725,7 +728,7 @@ export default function HomeRedesign() {
     const timeout = setTimeout(handleType, isDeleting ? deletingSpeed : typingSpeed);
     
     return () => clearTimeout(timeout);
-  }, [text, isDeleting, phraseIndex, phrases, pauseDuration, typingSpeed, deletingSpeed]);
+  }, [text, isDeleting, phraseIndex, pauseDuration, typingSpeed, deletingSpeed]);
 
   return (
     <div className="relative min-h-screen">
