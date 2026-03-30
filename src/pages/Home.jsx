@@ -29,20 +29,20 @@ const HERO_ATTENDANT_SYNONYMS = [
 ];
 
 const HOME_FEATURE_PHRASES = [
-  'SIEM that stays readable',
-  'AI-assisted triage in workflow',
-  'BYO model APIs in settings',
-  'From alert to owned task', 
-  'MDR context in one timeline', 
-  'Framework mapping you can show',
-  'Evidence that travels with the case',
-  'Fewer tabs. Clearer owners.',
+  "SIEM that stays readable",
+  "AI-assisted triage in workflow",
+  "BYO model APIs in settings",
+  "From alert to owned task",
+  "MDR context in one timeline",
+  "Framework mapping you can show",
+  "Evidence that travels with the case",
+  "Fewer tabs. Clearer owners.",
 ];
 
 // Ultra-minimal hero section inspired by GreyNoise
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  // Must start empty (or match synonyms[0]) — "Attendant" + first word "Monitor." left the effect with no branch to schedule timeouts
+  // Start empty so the first synonym types in cleanly.
   const [attendantText, setAttendantText] = useState('');
   const [attendantIndex, setAttendantIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
