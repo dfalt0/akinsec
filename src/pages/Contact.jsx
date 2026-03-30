@@ -6,29 +6,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock,
-  MessageSquare,
-  Send,
-  CheckCircle,
-  Loader2,
-  ArrowRight
-} from 'lucide-react';
-import WaveBackground from '@/components/WaveBackground';
+import { Send, CheckCircle, Loader2, ArrowRight } from 'lucide-react';
+import { SectionIndex } from '@/components/marketing/SectionIndex';
 import './Home.css';
 // Contact form functionality removed for static website
 
-const ContactCard = ({ icon: Icon, title, content, description }) => (
-  <Card className="card-enhanced text-center p-6 group">
-    <div className="w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-700 transition-colors duration-300">
-      <Icon className="w-8 h-8 text-gray-400 group-hover:text-white transition-colors duration-300" />
-    </div>
-    <h3 className="text-xl font-medium text-white mb-2">{title}</h3>
+const ContactCard = ({ title, content, description }) => (
+  <Card className="card-enhanced p-6 group text-left">
+    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">{title}</p>
     <p className="text-lg font-medium text-white mb-2">{content}</p>
-    <p className="text-sm text-gray-400">{description}</p>
+    <p className="text-sm text-gray-400 leading-relaxed">{description}</p>
   </Card>
 );
 
@@ -44,11 +31,14 @@ const HeroSection = () => {
     <section className="relative min-h-[60vh] flex items-center justify-center bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight mt-32">
-            Get in Touch
+          <div className="mb-6 mt-24 flex justify-center md:mt-32">
+            <SectionIndex index={1} label="CONTACT" />
+          </div>
+          <h1 className="mb-6 text-5xl font-semibold leading-none tracking-tight text-foreground md:text-7xl">
+            Get in touch
           </h1>
-          <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-            Have questions about AkinSec? Want to learn more about how we can help your business achieve compliance? We'd love to hear from you.
+          <p className="mx-auto mb-12 max-w-3xl text-xl font-light leading-relaxed text-muted-foreground">
+            Tell us what is breaking today—integrations, audits, or alert overload—and we will respond with next steps, not a generic brochure.
           </p>
         </div>
       </div>
@@ -190,7 +180,7 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
                     <Button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full btn-primary-gradient rounded-lg border-0 transition-all duration-200 group relative"
+                      className="btn-primary-gradient w-full rounded-button border-0 transition-all duration-200 group relative"
                     >
                       <span className="relative z-10 flex items-center justify-center">
                         {isSubmitting ? (
@@ -221,22 +211,19 @@ const ContactFormSection = ({ formData, setFormData, isSubmitting, isSubmitted, 
 const ContactInfoSection = () => {
   const contactInfo = [
     {
-      icon: Mail,
-      title: "Email Support",
+      title: "Email",
       content: "hello@akinsec.com",
-      description: "Get help with your account"
+      description: "Best for scoped questions and follow-ups after you try the product."
     },
     {
-      icon: MessageSquare,
-      title: "Live Chat",
-      content: "Available 24/7",
-      description: "Chat with our support team"
+      title: "Chat",
+      content: "In-app during trial",
+      description: "When live chat is enabled, you will see it in the workspace."
     },
     {
-      icon: Phone,
-      title: "Phone Support",
-      content: "+1 (555) 123-4567",
-      description: "Call us during business hours"
+      title: "Phone",
+      content: "By appointment",
+      description: "Book through email first so the right person joins the call."
     }
   ];
 
@@ -273,7 +260,7 @@ const CTASection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
             size="lg" 
-            className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+            className="btn-primary-gradient rounded-button px-8 py-3 text-base border-0 group relative"
           >
             <span className="relative z-10 flex items-center">
               Start Free Trial
@@ -283,7 +270,7 @@ const CTASection = () => {
           <Button 
             size="lg" 
             variant="outline" 
-            className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+            className="btn-secondary-gradient rounded-button px-8 py-3 text-base font-medium backdrop-blur-sm relative"
           >
             <span className="relative z-10">Schedule Demo</span>
           </Button>
@@ -333,7 +320,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen relative">
-      <WaveBackground />
       <HeroSection />
       <ContactFormSection 
         formData={formData}

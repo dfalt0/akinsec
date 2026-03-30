@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { 
   ChevronDown,
   ChevronUp,
   Search,
-  HelpCircle,
-  Shield,
-  CreditCard,
-  Settings,
-  Users,
   ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
-import WaveBackground from '@/components/WaveBackground';
+import { SectionIndex } from '@/components/marketing/SectionIndex';
+import { MARKETING_THESIS, MODELS_FAQ_SUMMARY } from '@/marketing/voice.js';
 import './Home.css';
 
 const FAQItem = ({ question, answer, isOpen, onToggle }) => (
@@ -39,12 +34,9 @@ const FAQItem = ({ question, answer, isOpen, onToggle }) => (
   </Card>
 );
 
-const CategoryCard = ({ icon: Icon, title, count, color }) => (
+const CategoryCard = ({ title, count }) => (
   <Card className="card-enhanced cursor-pointer group">
     <CardContent className="p-6 text-center">
-      <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-gray-700 transition-colors duration-300">
-        <Icon className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
-      </div>
       <h3 className="font-medium text-white mb-1">{title}</h3>
       <p className="text-sm text-gray-400">{count} questions</p>
     </CardContent>
@@ -63,11 +55,17 @@ const HeroSection = ({ searchTerm, setSearchTerm }) => {
     <section className="relative min-h-[60vh] flex items-center justify-center bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight mt-32">
+          <div className="mb-6 mt-24 flex justify-center md:mt-32">
+            <SectionIndex index={1} label="FAQ" />
+          </div>
+          <h1 className="mb-6 text-5xl font-semibold leading-none tracking-tight text-foreground md:text-7xl">
             FAQ
           </h1>
-          <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-            Find answers to common questions about AkinSec, compliance management, and getting the most out of our platform.
+          <p className="mx-auto mb-4 max-w-3xl text-xl font-light leading-relaxed text-muted-foreground">
+            {MARKETING_THESIS}
+          </p>
+          <p className="mx-auto mb-12 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Short answers below—including how the SIEM app and AI workflows fit together. Contact us when you need depth on your environment.
           </p>
           
           {/* Search Bar */}
@@ -159,7 +157,6 @@ const FAQContentSection = ({ faqData, filteredQuestions, searchTerm, openItems, 
 
           {filteredQuestions.length === 0 && searchTerm && (
             <div className="text-center py-16">
-              <HelpCircle className="w-16 h-16 text-gray-500 mx-auto mb-6" />
               <h3 className="text-2xl font-light text-white mb-4">No results found</h3>
               <p className="text-gray-400 mb-8">
                 Try different keywords or browse our categories above
@@ -194,7 +191,7 @@ const CTASection = () => {
               <Link to={createPageUrl('Contact')}>
                 <Button 
                   size="lg"
-                  className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+                  className="btn-primary-gradient rounded-button px-8 py-3 text-base border-0 group relative"
                 >
                   <span className="relative z-10 flex items-center">
                     Contact Support
@@ -206,7 +203,7 @@ const CTASection = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+                  className="btn-secondary-gradient rounded-button px-8 py-3 text-base font-medium backdrop-blur-sm relative"
                 >
                   <span className="relative z-10">Schedule a Demo</span>
                 </Button>
@@ -235,16 +232,20 @@ export default function FAQPage() {
       category: "Getting Started",
       questions: [
         {
-          question: "What is Akinsec and how does it help with compliance?",
-          answer: "Akinsec is an AI-powered compliance management platform that helps businesses automate their compliance processes. We provide tools for document analysis, task management, integration auditing, and reporting across multiple frameworks like SOC 2, GDPR, ISO 27001, and more."
+          question: "What is AkinSec?",
+          answer: "AkinSec is a cloud SIEM and security monitoring product you use at app.akinsec.com: connect sources, correlate and alert, run tasks and playbooks, map evidence to frameworks, and export for reviews. We sell software—not an MSP or integration consulting shop as the default offer. GRC and AI-assisted workflows sit inside that monitoring workspace."
         },
         {
-          question: "How quickly can I get started with Akinsec?",
-          answer: "You can start using Akinsec immediately after signing up. Our onboarding process takes about 15 minutes, and you'll have access to templates, AI file analysis, and task management right away. For full integration auditing and custom reports, setup typically takes 1-2 business days."
+          question: "Is AkinSec just a chatbot?",
+          answer: "No. Monitoring and alerts come first. AI assists triage, summaries, reporting, and guided steps inside workflows. If there is a chat-style surface, it is optional—not the product category."
         },
         {
-          question: "Do I need technical expertise to use Akinsec?",
-          answer: "No technical expertise is required. Akinsec is designed for compliance professionals, not developers. Our intuitive interface guides you through each step, and our AI handles the complex analysis work for you."
+          question: "How quickly can I get started?",
+          answer: "You can open an account and explore templates and tasks quickly. Deeper integration auditing and tailored reporting usually follow once you connect the systems you care about; expect that part to take a day or two depending on scope."
+        },
+        {
+          question: "Do I need to be an engineer?",
+          answer: "No. Operators, GRC leads, and IT managers use the product day to day. Engineering helps when you wire new APIs or custom log sources, but the UI is aimed at people running the program—not only developers."
         }
       ]
     },
@@ -252,20 +253,20 @@ export default function FAQPage() {
       category: "Features & Functionality",
       questions: [
         {
-          question: "What compliance frameworks does Akinsec support?",
-          answer: "Akinsec supports major compliance frameworks including SOC 2 Type I & II, ISO 27001, GDPR, HIPAA, PCI DSS, NIST, and many others. Our AI can also analyze documents for custom or industry-specific requirements."
+          question: "Which frameworks can I map work to?",
+          answer: "The product supports common programs—including SOC 2, ISO 27001, GDPR, HIPAA, PCI DSS, and NIST-style control language. We help you align tasks and evidence; we do not certify your organization for you."
         },
         {
-          question: "How does the AI file analysis work?",
-          answer: "Upload any compliance-related document (PDF, Word, Excel, images) and our AI will analyze it for compliance gaps, risks, and recommendations. The AI examines content against multiple frameworks and provides actionable insights within minutes."
+          question: "How does AI document analysis work?",
+          answer: "You upload policy packs, architecture notes, or other artifacts. The assistant highlights gaps, suggests controls or tasks, and ties recommendations to the frameworks you select. It accelerates review; you still approve what ships."
         },
         {
-          question: "Can I track multiple compliance frameworks simultaneously?",
-          answer: "Yes, Akinsec is designed to handle multiple frameworks at once. You can create tasks, track progress, and generate reports across all your compliance requirements from a single dashboard."
+          question: "Can I track multiple frameworks at once?",
+          answer: "Yes. Tasks, owners, and reports can reference more than one framework so you are not duplicating work for every audit thread."
         },
         {
-          question: "What types of integrations can I audit?",
-          answer: "You can audit any third-party service your organization uses - cloud storage, communication tools, CRM systems, development platforms, analytics tools, and more. We help assess their compliance status, certifications, and risk levels."
+          question: "What integrations can I audit?",
+          answer: "Cloud providers, identity, SaaS, code hosting, payment tools—generally any vendor you can document. The goal is a clear record of who stores what and which controls apply."
         }
       ]
     },
@@ -273,20 +274,20 @@ export default function FAQPage() {
       category: "Pricing & Plans",
       questions: [
         {
-          question: "What's included in the free trial?",
-          answer: "The 14-day free trial includes full access to all features: AI file analysis, template library, task management, integration auditing, and basic reporting. No credit card required to start."
+          question: "What is included in the trial?",
+          answer: "Paid tiers ship with a 14-day trial so you can run real workflows. Exact caps depend on the plan you pick; start free if you only need light exploration."
         },
         {
-          question: "Can I change my plan at any time?",
-          answer: "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and billing is prorated. There are no long-term contracts or cancellation fees."
+          question: "Can I change plans later?",
+          answer: "Yes. Upgrade or downgrade when your team size or workload changes. We prorate billing on the next invoice instead of locking you into a long contract."
         },
         {
-          question: "Is there a setup fee?",
-          answer: "No setup fees for any plan. Enterprise customers get dedicated onboarding support included in their plan at no additional cost."
+          question: "Are there setup fees?",
+          answer: "Standard plans do not include setup fees. Enterprise-style engagements may include scoped onboarding—spelled out before you sign."
         },
         {
-          question: "What payment methods do you accept?",
-          answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and wire transfers for Enterprise customers. All payments are processed securely through Stripe."
+          question: "How do you bill?",
+          answer: "Most customers pay by card through our payments provider. Invoicing and wires are available for larger deals when needed."
         }
       ]
     },
@@ -294,20 +295,24 @@ export default function FAQPage() {
       category: "Security & Privacy",
       questions: [
         {
-          question: "How secure is my data on Akinsec?",
-          answer: "Security is our top priority. We use enterprise-grade encryption (AES-256), maintain SOC 2 Type II certification, and follow strict access controls. Your data is encrypted at rest and in transit, and we never share it with third parties."
+          question: "How do you handle AI models and data?",
+          answer: MODELS_FAQ_SUMMARY + " See our Privacy Policy and DPA for retention and subprocessors; we do not claim to operate a GPU farm or proprietary foundation models unless we publish that separately."
         },
         {
-          question: "Where is my data stored?",
-          answer: "Data is stored in secure, SOC 2 compliant data centers in the United States. Enterprise customers can request specific geographic data residency requirements."
+          question: "How do you protect customer data?",
+          answer: "We use modern encryption in transit and at rest, strict internal access controls, and logging appropriate to a security product. Specific attestations (for example SOC 2) are available as we publish them—ask for the latest details."
+        },
+        {
+          question: "Where is data hosted?",
+          answer: "Primary regions are US-based today. If you need a different region or data residency terms, talk to us before purchase."
         },
         {
           question: "Can I delete my data?",
-          answer: "Yes, you have complete control over your data. You can delete individual files, documents, or your entire account at any time. Data deletion is permanent and irreversible."
+          answer: "Yes. You can remove artifacts and workspaces, or close an account. Some retention may apply where law or backup policies require it—documented in our privacy terms."
         },
         {
-          question: "Do you have a Data Processing Agreement (DPA)?",
-          answer: "Yes, we provide a comprehensive DPA for all customers to ensure GDPR compliance. Enterprise customers can also sign custom data agreements as needed."
+          question: "Do you offer a DPA?",
+          answer: "Yes. We provide a DPA for GDPR-style engagements. Enterprise customers can layer additional terms when required."
         }
       ]
     },
@@ -315,30 +320,30 @@ export default function FAQPage() {
       category: "Support & Resources",
       questions: [
         {
-          question: "What kind of support do you provide?",
-          answer: "We offer email support for all customers, with response times under 2 hours during business hours. Business and Enterprise customers get priority support, and Enterprise customers have access to dedicated account managers."
+          question: "How do I get help?",
+          answer: "Email is the default channel. Business plans get faster response targets; enterprise customers can add named contacts when negotiated."
         },
         {
-          question: "Do you provide compliance consulting?",
-          answer: "While Akinsec automates much of the compliance process, we also offer professional consulting services for complex implementations, custom frameworks, and compliance strategy development."
+          question: "Do you sell compliance consulting?",
+          answer: "The software is the focus. For complex rollouts we can introduce partners or scope light advisory work—always separate from the subscription."
         },
         {
-          question: "Is training available for my team?",
-          answer: "Yes, we provide comprehensive training resources including video tutorials, documentation, and webinars. Enterprise customers get personalized training sessions and ongoing education."
+          question: "Is training available?",
+          answer: "Documentation and recorded walkthroughs ship with the product. Live sessions are available for larger teams by arrangement."
         },
         {
-          question: "Can you help with audit preparation?",
-          answer: "Absolutely. Akinsec generates audit-ready reports and evidence packages. Our team can also provide guidance on audit preparation and work with your auditors during the process."
+          question: "Can you help before an audit?",
+          answer: "You can export evidence packs and status reports from the workspace. We do not replace your auditor—but we make it easier to show what you did and when."
         }
       ]
     }
   ];
 
   const categories = [
-    { icon: HelpCircle, title: "Getting Started", count: 3 },
-    { icon: Shield, title: "Security", count: 4 },
-    { icon: CreditCard, title: "Billing", count: 4 },
-    { icon: Users, title: "Support", count: 4 }
+    { title: "Getting started", count: 4 },
+    { title: "Product", count: 4 },
+    { title: "Pricing", count: 4 },
+    { title: "Security & help", count: 9 },
   ];
 
   const allQuestions = faqData.flatMap((category, categoryIndex) =>
@@ -360,7 +365,6 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen relative">
-      <WaveBackground />
       <HeroSection searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {!searchTerm && <CategoriesSection categories={categories} />}
       <FAQContentSection 

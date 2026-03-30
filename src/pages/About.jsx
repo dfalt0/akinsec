@@ -1,18 +1,11 @@
 
 import React from 'react';
-import { 
-  Shield, 
-  Users, 
-  Zap,
-  Target,
-  TrendingUp,
-  ArrowRight
-} from 'lucide-react';
+import { ArrowRight, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { createPageUrl } from '@/utils/index.js';
-import WaveBackground from '@/components/WaveBackground';
+import { SectionIndex } from '@/components/marketing/SectionIndex';
 import './Home.css';
 
 // Ultra-minimal hero section
@@ -24,20 +17,23 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-transparent overflow-hidden">
-      <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-transparent">
+      <div className="container relative z-10 mx-auto max-w-6xl px-6 text-center">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight">
-            Who am I
+          <div className="mb-8 flex justify-center">
+            <SectionIndex index={1} label="ABOUT" />
+          </div>
+          <h1 className="mb-6 text-5xl font-semibold leading-none tracking-tight text-foreground md:text-7xl">
+            Who we are
           </h1>
-            <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-              A mission to solve real security challenges for teams that need enterprise-grade protection but lack the budget for traditional solutions.
+            <p className="mx-auto mb-12 max-w-3xl text-xl font-light leading-relaxed text-muted-foreground">
+              We are building a modern SIEM product—monitoring, tasks, and evidence in one workspace—with AI-assisted workflows when you connect your own providers. Not an MSP headline; software you can try in the app.
             </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link to={createPageUrl('Contact')}>
               <Button 
                 size="lg" 
-                className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+                className="btn-primary-gradient rounded-button px-8 py-3 text-base border-0 group relative"
               >
                 <span className="relative z-10 flex items-center">
                   Talk to us
@@ -49,7 +45,7 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+                className="btn-secondary-gradient rounded-button px-8 py-3 text-base font-medium backdrop-blur-sm relative"
               >
                 <span className="relative z-10">Get started</span>
               </Button>
@@ -68,10 +64,10 @@ const ProfileSection = () => {
       <div className="container mx-auto px-6">
         <div className="flex justify-center">
           <div className="w-32 h-32 bg-gray-800 rounded-full flex items-center justify-center border-2 border-gray-700 hover:border-gray-600 transition-colors duration-300">
-            <div className="text-gray-500 text-sm text-center">
-              <div className="text-4xl mb-2">👤</div>
-              <div>Profile Photo</div>
-              <div className="text-xs mt-1">Coming Soon</div>
+            <div className="text-gray-500 text-sm text-center font-mono uppercase tracking-widest">
+              <div className="text-xs text-gray-600 mb-2">Founder</div>
+              <div className="text-foreground text-lg font-semibold tracking-tight">AK</div>
+              <div className="text-xs mt-2 text-gray-600">Photo soon</div>
             </div>
           </div>
         </div>
@@ -93,12 +89,12 @@ const MissionSection = () => {
                   <Target className="w-5 h-5" />
                   <span className="text-sm font-medium">Our Mission</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-light text-white mb-6">A Solo Founder's Mission</h2>
+                <h2 className="text-3xl md:text-4xl font-light text-white mb-6">A Solo Founder&apos;s Mission</h2>
                 <p className="text-lg text-gray-400 mb-6 leading-relaxed">
-                  As a solo founder, I've experienced firsthand how compliance can become a bottleneck for innovation. I'm building AkinSec because I believe there's a real problem here that needs solving.
+                  Compliance and monitoring toil often land on the same small teams. I am building AkinSec as a product-first SIEM workspace—so you can connect sources, run alerts and tasks, and ship evidence without treating integration consulting as the SKU.
                 </p>
                 <p className="text-lg text-gray-400 leading-relaxed">
-                  This isn't just another startup idea—it's a genuine attempt to democratize security automation and make compliance accessible to teams of all sizes. I'm convinced this business can be a real problem solver for organizations struggling with security complexity.
+                  Bridge-style integrations still matter when you outgrow spreadsheets, but the sell is the app: approachable monitoring, governed AI where you wire providers, and exports that survive a real review.
                 </p>
               </CardContent>
             </Card>
@@ -122,10 +118,9 @@ const MissionSection = () => {
                   </li>
                 </ul>
               </div>
-              <div className="mt-6 flex items-center gap-2 text-gray-400">
-                <TrendingUp className="w-4 h-4" />
-                <span className="text-sm">Focused on meaningful outcomes</span>
-              </div>
+              <p className="mt-6 text-sm text-gray-500 leading-relaxed">
+                Numbers shift as we ship; this page stays about outcomes, not vanity metrics.
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -134,23 +129,19 @@ const MissionSection = () => {
   );
 };
 
-// Clean values section
 const ValuesSection = () => {
   const values = [
     {
-      icon: Shield,
-      title: "Security First",
-      description: "We prioritize the security of our platform and our customers' data above all else."
+      title: "Security first",
+      description: "We treat customer data like production data: access controls, encryption, and logging appropriate to what we build."
     },
     {
-      icon: Users,
-      title: "Customer Success", 
-      description: "Your success is our success. We're committed to helping you achieve your compliance goals."
+      title: "Program success",
+      description: "If operators cannot show progress to leadership, we failed. The UI and exports have to survive a real review."
     },
     {
-      icon: Zap,
-      title: "Innovation",
-      description: "We continuously innovate to stay ahead of evolving compliance requirements and threats."
+      title: "Straightforward roadmap",
+      description: "We ship incremental value—integrations, tasks, evidence—without promising magic autonomy."
     }
   ];
 
@@ -158,20 +149,17 @@ const ValuesSection = () => {
     <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-light text-white mb-4">Our Values</h2>
+          <h2 className="text-4xl font-light text-white mb-4">Values</h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            The principles that guide everything we do
+            How we decide what to build
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {values.map((value, index) => (
             <Card key={index} className="card-enhanced group">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700 transition-colors duration-300">
-                  <value.icon className="w-8 h-8 text-gray-400 group-hover:text-white transition-colors duration-300" />
-                </div>
+              <CardContent className="p-8 text-left">
                 <h3 className="text-xl font-medium text-white mb-4">{value.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{value.description}</p>
+                <p className="text-gray-400 text-sm leading-relaxed">{value.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -186,20 +174,20 @@ const TimelineSection = () => {
   const milestones = [
     {
       year: "July 2025",
-      title: "The idea takes shape",
-      description: "As a solo founder, I recognized a real problem: compliance is too complex and time-consuming for most teams. I decided to build something that could genuinely help.",
+      title: "Problem framed",
+      description: "Compliance and SecOps were eating time that should go to product. The goal became one credible workspace instead of ten tabs.",
       side: "right"
     },
     {
-      year: "Aug 2025", 
-      title: "Building the foundation",
-      description: "Started developing the core platform with a focus on making security automation accessible and practical for real-world use cases.",
+      year: "Aug 2025",
+      title: "Core build",
+      description: "Tasks, templates, and integrations first—features people could try without a sales call.",
       side: "left"
     },
     {
       year: "Oct 2025",
-      title: "The vision continues", 
-      description: "Continuing to iterate and improve based on the belief that this business can solve real problems for organizations of all sizes.",
+      title: "Iteration",
+      description: "Shipping against feedback from operators who need proof, not slides.",
       side: "right"
     }
   ];
@@ -241,16 +229,16 @@ const CTASection = () => {
     <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-4xl font-light text-white mb-6">
-          Join Me in Solving Real Problems
+          Talk with us
         </h2>
-        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
-          As a solo founder, I'm building this because I believe in the problem we're solving. Ready to see if AkinSec can help your team? Let's explore how we can work together.
+        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+          If your program feels stretched across too many tools, we should compare notes. No pitch deck required—bring your current bottlenecks.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to={createPageUrl('Contact')}>
             <Button 
               size="lg" 
-              className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+              className="btn-primary-gradient rounded-button px-8 py-3 text-base border-0 group relative"
             >
               <span className="relative z-10 flex items-center">
                 Get in Touch
@@ -262,7 +250,7 @@ const CTASection = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+              className="btn-secondary-gradient rounded-button px-8 py-3 text-base font-medium backdrop-blur-sm relative"
             >
               <span className="relative z-10">View Careers</span>
             </Button>
@@ -276,7 +264,6 @@ const CTASection = () => {
 export default function AboutPage() {
   return (
     <div className="min-h-screen relative">
-      <WaveBackground />
       <HeroSection />
       <ProfileSection />
       <MissionSection />

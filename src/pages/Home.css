@@ -10,36 +10,36 @@
 
 /* Dark mode controls styling */
 .react-flow__controls {
-  background-color: #1f2937 !important;
-  border: 1px solid #4b5563 !important;
+  background-color: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
 }
 
 .react-flow__controls-button {
-  background-color: #374151 !important;
-  border-bottom: 1px solid #4b5563 !important;
-  color: #d1d5db !important;
+  background-color: hsl(var(--secondary)) !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--muted-foreground)) !important;
 }
 
 .react-flow__controls-button:hover {
-  background-color: #4b5563 !important;
-  color: #f9fafb !important;
+  background-color: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
 }
 
 .react-flow__controls-button svg {
-  fill: #d1d5db !important;
+  fill: hsl(var(--muted-foreground)) !important;
 }
 
 .react-flow__controls-button:hover svg {
-  fill: #f9fafb !important;
+  fill: hsl(var(--foreground)) !important;
 }
 
 /* Arrow marker styling */
 .react-flow__arrowhead {
-  fill: #9ca3af !important;
+  fill: hsl(var(--muted-foreground)) !important;
 }
 
 .react-flow__edge-path {
-  stroke: #9ca3af !important;
+  stroke: hsl(var(--muted-foreground)) !important;
   stroke-width: 2 !important;
   stroke-dasharray: 8,4 !important;
   animation: dash-flow 1.5s linear infinite !important;
@@ -55,20 +55,18 @@
 }
 
 marker#react-flow__arrowclosed {
-  fill: #9ca3af !important;
+  fill: hsl(var(--muted-foreground)) !important;
 }
 
-/* Single automation line styling */
 .automation-line {
   animation: dash-flow 1s linear infinite !important;
 }
 
-/* Handle styling */
 .react-flow__handle {
   width: 8px !important;
   height: 8px !important;
-  border: 2px solid #9ca3af !important;
-  background: #9ca3af !important;
+  border: 2px solid hsl(var(--muted-foreground)) !important;
+  background: hsl(var(--muted-foreground)) !important;
 }
 
 .react-flow__handle-top {
@@ -87,104 +85,45 @@ marker#react-flow__arrowclosed {
   right: -4px !important;
 }
 
-/* Enhanced Button Styles */
+/* Primary CTA — single accent, no rainbow */
 .btn-primary-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-  color: #000;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
   font-weight: 600;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.btn-primary-gradient::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.5s ease;
-}
-
-.btn-primary-gradient:hover::before {
-  left: 100%;
+  border-radius: var(--radius-button, 0.75rem);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .btn-primary-gradient:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
-  background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%);
+  background: hsl(var(--foreground) / 0.92);
+  transform: translateY(-1px);
 }
 
+/* Secondary — outline accent */
 .btn-secondary-gradient {
-  background: rgba(17, 24, 39, 0.3);
-  border: 2px solid transparent;
-  color: #e0e7ff;
-  font-weight: 600;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  isolation: isolate;
-}
-
-.btn-secondary-gradient::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -2;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.btn-secondary-gradient::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-  transition: width 0.3s ease;
-  z-index: -1;
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-.btn-secondary-gradient:hover::before {
-  opacity: 1;
-}
-
-.btn-secondary-gradient:hover::after {
-  width: 100%;
+  background: transparent;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  font-weight: 500;
+  border-radius: var(--radius-button, 0.75rem);
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .btn-secondary-gradient:hover {
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
-  border-color: transparent;
-  background: rgba(17, 24, 39, 0.5);
+  border-color: hsl(var(--accent));
+  background: hsl(var(--accent) / 0.08);
 }
 
-/* Enhanced Card Styles */
+/* Cards — industrial frame */
 .card-enhanced {
-  background: rgba(17, 24, 39, 0.6);
-  border: 1px solid rgba(75, 85, 99, 0.5);
+  background: hsl(var(--card) / 0.5);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius, 0.5rem);
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.25s ease, background 0.25s ease;
 }
 
 .card-enhanced::before {
@@ -193,10 +132,15 @@ marker#react-flow__arrowclosed {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, #ec4899, transparent);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--accent) / 0.5),
+    transparent
+  );
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.25s ease;
 }
 
 .card-enhanced:hover::before {
@@ -204,76 +148,48 @@ marker#react-flow__arrowclosed {
 }
 
 .card-enhanced:hover {
-  background: rgba(17, 24, 39, 0.8);
-  border-color: rgba(99, 102, 241, 0.5);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.08), 0 0 30px rgba(99, 102, 241, 0.05);
-  filter: blur(0);
+  background: hsl(var(--card) / 0.75);
+  border-color: hsl(var(--accent) / 0.45);
 }
 
 .card-icon-glow {
-  transition: all 0.4s ease;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .card-enhanced:hover .card-icon-glow {
-  color: #6366f1;
-  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.4));
-  transform: scale(1.1) rotate(5deg);
+  color: hsl(var(--accent));
 }
 
 /* Automation Section Cards */
 .card-automation {
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.6) 100%);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: hsl(var(--card) / 0.55);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius, 0.5rem);
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-automation::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.card-automation:hover::after {
-  opacity: 1;
+  transition: border-color 0.25s ease;
 }
 
 .card-automation:hover {
-  border-color: rgba(99, 102, 241, 0.5);
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 25px 50px rgba(99, 102, 241, 0.1), 0 0 40px rgba(139, 92, 246, 0.08);
-  filter: blur(0);
+  border-color: hsl(var(--accent) / 0.4);
 }
 
 .card-automation-icon {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
-  transition: all 0.4s ease;
+  background: hsl(var(--muted) / 0.5);
+  transition: background 0.25s ease;
 }
 
 .card-automation:hover .card-automation-icon {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.4));
-  transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+  background: hsl(var(--accent) / 0.15);
 }
-
 
 /* Badge Enhancement */
 .badge-enhanced {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  transition: all 0.3s ease;
+  background: hsl(var(--accent) / 0.1);
+  border: 1px solid hsl(var(--accent) / 0.25);
+  transition: border-color 0.2s ease;
 }
 
 .card-enhanced:hover .badge-enhanced {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
-  border-color: rgba(99, 102, 241, 0.5);
-  transform: scale(1.05);
+  border-color: hsl(var(--accent) / 0.4);
 }

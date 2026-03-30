@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, AlertTriangle, Scale, Target, Globe, CreditCard, Heart, Building, Zap } from 'lucide-react';
+import { ArrowRight, Scale, Globe, CreditCard } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
-import WaveBackground from '@/components/WaveBackground';
 import RepercussionModal from '../components/frameworks/RepercussionModal';
+import { SectionIndex } from '@/components/marketing/SectionIndex';
 import './Home.css';
 
 const frameworkDetails = [
   {
-    icon: Globe,
     title: "SOC 2 (Service Organization Control 2)",
     category: "Security & Availability",
     appliesTo: "Technology companies and service providers that store customer data in the cloud. Essential for B2B SaaS.",
@@ -25,7 +24,6 @@ const frameworkDetails = [
     ]
   },
   {
-    icon: Target,
     title: "ISO 27001",
     category: "Information Security Management",
     appliesTo: "Any organization, regardless of size or industry, seeking to formalize its information security management system (ISMS).",
@@ -39,7 +37,6 @@ const frameworkDetails = [
     ]
   },
   {
-    icon: Scale,
     title: "GDPR (General Data Protection Regulation)",
     category: "Data Privacy Law",
     appliesTo: "Organizations that process the personal data of individuals residing in the European Union (EU), regardless of the company's location.",
@@ -53,7 +50,6 @@ const frameworkDetails = [
     ]
   },
   {
-    icon: Heart,
     title: "HIPAA (Health Insurance Portability and Accountability Act)",
     category: "Healthcare Data",
     appliesTo: "Healthcare providers, health plans, and healthcare clearinghouses (Covered Entities) and their business associates.",
@@ -67,7 +63,6 @@ const frameworkDetails = [
     ]
   },
   {
-    icon: CreditCard,
     title: "PCI DSS (Payment Card Industry Data Security Standard)",
     category: "Financial Data",
     appliesTo: "Any organization that accepts, transmits, or stores cardholder data, regardless of size or number of transactions.",
@@ -150,52 +145,40 @@ export default function FrameworksPage() {
 
   return (
     <div className="min-h-screen relative">
-      <WaveBackground />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-transparent overflow-hidden">
-        <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
-          <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight mt-32">
-            Why Us?
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-transparent">
+        <div className="container relative z-10 mx-auto max-w-6xl px-6 text-center">
+          <div className="mb-6 mt-24 flex justify-center md:mt-32">
+            <SectionIndex index={1} label="WHY US" />
+          </div>
+          <h1 className="mb-6 text-5xl font-semibold leading-none tracking-tight text-foreground md:text-7xl">
+            Why us
           </h1>
-          <p className="text-2xl md:text-3xl text-gray-300 mb-16 max-w-4xl mx-auto font-light leading-relaxed">
-          IT Security should flow. <span className="text-white font-medium">We flow better here.</span>
+          <p className="mb-16 max-w-3xl text-xl font-light leading-relaxed text-muted-foreground md:text-2xl">
+            Teams outgrow spreadsheets but dread legacy SIEM friction—weak posture still compounds into fines, blocked deals, and outages. Below is what “inadequate” costs—and how frameworks fit in.
           </p>
           
           {/* Why Choose AkinSec - Sleek Minimal Design */}
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {/* Card 1 - Built for Speed */}
-              <div className="group">
-                <div className="card-enhanced p-8 text-center">
-                  <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
-                    <Shield className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <h3 className="text-lg font-medium text-white mb-2">Built for Speed</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">Lightning-fast deployment and real-time monitoring</p>
-                </div>
+              <div className="card-enhanced p-8 text-center">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">Coverage</p>
+                <h3 className="text-lg font-medium text-white mb-2">Frameworks as guardrails</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">They tell you what “good” looks like for your industry.</p>
               </div>
 
-              {/* Card 2 - AI-First Design */}
-              <div className="group">
-                <div className="card-enhanced p-8 text-center">
-                  <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
-                    <Zap className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <h3 className="text-lg font-medium text-white mb-2">AI-First Design</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">Intelligent automation and predictive analytics</p>
-                </div>
+              <div className="card-enhanced p-8 text-center">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">Operations</p>
+                <h3 className="text-lg font-medium text-white mb-2">Execution beats posters</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">Policies matter when tied to tickets, owners, and proof.</p>
               </div>
 
-              {/* Card 3 - No Vendor Lock-in */}
-              <div className="group">
-                <div className="card-enhanced p-8 text-center">
-                  <div className="w-16 h-16 bg-gray-800/60 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-700/80 transition-colors duration-300">
-                    <Target className="w-8 h-8 text-gray-300 group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <h3 className="text-lg font-medium text-white mb-2">No Vendor Lock-in</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">Open architecture with full data portability</p>
-                </div>
+              <div className="card-enhanced p-8 text-center">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">Proof</p>
+                <h3 className="text-lg font-medium text-white mb-2">Evidence wins reviews</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">Buyers and regulators ask for artifacts—not vibes.</p>
               </div>
             </div>
 
@@ -218,10 +201,7 @@ export default function FrameworksPage() {
         <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-3 mb-6">
-                <AlertTriangle className="w-8 h-8 text-red-400" />
-                <h2 className="text-4xl font-light text-white">The Cost of Inadequate Security</h2>
-              </div>
+              <h2 className="text-4xl font-light text-white mb-6">The cost of inadequate security</h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
                 Weak security posture doesn't just lead to compliance violations—it creates vulnerabilities that can devastate your business. 
                 These risks impact every aspect of operations, from financial stability to customer trust.
@@ -258,9 +238,6 @@ export default function FrameworksPage() {
                 <Card key={index} className="card-enhanced overflow-hidden group">
                   <div className="md:flex">
                     <div className="md:w-1/3 bg-gray-800/50 p-8 flex flex-col justify-center">
-                      <div className="w-16 h-16 bg-gray-700 rounded-lg flex items-center justify-center mb-6">
-                        <framework.icon className="w-8 h-8 text-white" />
-                      </div>
                       <h3 className="text-xl font-medium text-white mb-3">{framework.title}</h3>
                       <Badge variant="outline" className="bg-gray-800 text-gray-300 border-gray-600 self-start">{framework.category}</Badge>
                     </div>
@@ -305,7 +282,7 @@ export default function FrameworksPage() {
           <Link to={createPageUrl('Pricing')}>
             <Button 
               size="lg" 
-              className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+              className="btn-primary-gradient rounded-button px-8 py-3 text-base border-0 group relative"
             >
               <span className="relative z-10 flex items-center">
                 Try the App for Free
@@ -317,7 +294,7 @@ export default function FrameworksPage() {
             <Button 
               size="lg" 
               variant="outline" 
-              className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+              className="btn-secondary-gradient rounded-button px-8 py-3 text-base font-medium backdrop-blur-sm relative"
             >
               <span className="relative z-10">Schedule Demo</span>
             </Button>

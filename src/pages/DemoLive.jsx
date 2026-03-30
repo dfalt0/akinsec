@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import WaveBackground from '@/components/WaveBackground';
 import { 
   Shield, 
   CheckCircle, 
@@ -32,6 +31,8 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
+import { SectionIndex } from '@/components/marketing/SectionIndex';
+import './Home.css';
 
 // Mock enterprise data
 const enterpriseData = {
@@ -304,15 +305,14 @@ export default function DemoLiveDashboard() {
 
   return (
     <div className="min-h-screen relative">
-      <WaveBackground />
       
       {/* Simple Header */}
       <div className="relative z-10 bg-black/80 backdrop-blur-sm border-b border-gray-800">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Shield className="w-8 h-8 text-white" />
-              <h1 className="text-2xl font-light text-white">AkinSec Dashboard</h1>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-gray-500">Preview</span>
+              <h1 className="text-2xl font-light text-white">AkinSec workspace</h1>
             </div>
             <div className="flex gap-3">
               <Link to={createPageUrl('Home')}>
@@ -340,12 +340,15 @@ export default function DemoLiveDashboard() {
 
       <div className="relative z-10">
         {/* Dashboard Content */}
-        <section className="py-12 bg-black/30 backdrop-blur-sm">
+        <section className="bg-black/30 py-12 backdrop-blur-sm">
           <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div className="mb-6">
+              <SectionIndex index={1} label="DEMO" />
+            </div>
+            <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
               <div>
-                <h2 className="text-3xl font-light text-white mb-2">Security Dashboard</h2>
-                <p className="text-gray-400">Real-time security monitoring and compliance status</p>
+                <h2 className="mb-2 text-3xl font-semibold tracking-tight text-foreground">Sample dashboard</h2>
+                <p className="text-gray-400">Illustrative tasks, integrations, and scores—swap in your data after signup.</p>
               </div>
               <div className="flex gap-3 self-start md:self-center">
                 <Button variant="outline" className="gap-2 border-gray-600 text-gray-300 hover:bg-gray-900 hover:text-white">
@@ -606,16 +609,16 @@ export default function DemoLiveDashboard() {
         <section className="py-24 bg-white relative z-10">
           <div className="container mx-auto px-6 text-center">
             <h2 className="text-4xl font-light text-black mb-6">
-              Ready to Get Started?
+              Run it on your estate
             </h2>
-            <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
-              This is just a preview. Get full access to enterprise features with a free trial.
+            <p className="text-gray-600 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+              This page is mock data. Start a trial to connect real sources and export evidence your way.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to={createPageUrl('Pricing')}>
                 <Button 
                   size="lg" 
-                  className="bg-black text-white hover:bg-gray-800 px-8 py-3 text-base font-medium rounded-none border-0 transition-all duration-200"
+                  className="rounded-button border-0 bg-black px-8 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-gray-800"
                 >
                   Start Free Trial
                   <ArrowRight className="w-4 h-4 ml-2" />

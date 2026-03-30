@@ -1,25 +1,24 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Shield, FileText, Calendar, AlertTriangle } from 'lucide-react';
-import WaveBackground from '@/components/WaveBackground';
+import { Shield, AlertTriangle } from 'lucide-react';
+import { SectionIndex } from '@/components/marketing/SectionIndex';
+import './Home.css';
 
 export default function TermsPage() {
   return (
     <div className="min-h-screen relative">
-      <WaveBackground />
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-transparent overflow-hidden">
-        <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
-          <div className="transition-all duration-1000 opacity-100 translate-y-0">
-            <Badge variant="outline" className="mb-6 border-gray-600 text-gray-300 font-medium py-1 px-3 rounded-none">
-              Legal & Terms
-            </Badge>
-            <h1 className="text-6xl md:text-8xl font-light text-white mb-8 leading-none tracking-tight">
-              Terms of Service
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-transparent">
+        <div className="container relative z-10 mx-auto max-w-6xl px-6 text-center">
+          <div className="transition-all duration-1000 translate-y-0 opacity-100">
+            <div className="mb-6 mt-20 flex justify-center md:mt-28">
+              <SectionIndex index={1} label="LEGAL" />
+            </div>
+            <h1 className="mb-8 text-5xl font-semibold leading-none tracking-tight text-foreground md:text-7xl">
+              Terms of service
             </h1>
-            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-              These terms govern your use of AkinSec's cybersecurity platform and services.
+            <p className="mx-auto mb-12 max-w-2xl text-xl font-light leading-relaxed text-muted-foreground">
+              These terms govern access to the AkinSec SIEM and security monitoring product (including GRC-oriented workflows in the same workspace).
             </p>
             <p className="text-sm text-gray-500">
               Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -36,9 +35,8 @@ export default function TermsPage() {
             {/* Acceptance of Terms */}
             <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 hover:border-gray-700 group">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl text-white">
-                  <FileText className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
-                  Acceptance of Terms
+                <CardTitle className="text-2xl text-white">
+                  Acceptance of terms
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -63,17 +61,28 @@ export default function TermsPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-gray-400 mb-4">
-                  AkinSec provides a comprehensive cybersecurity platform that includes:
+                  AkinSec provides software for security monitoring and compliance operations, including:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-gray-400 ml-4">
-                  <li>AI-powered security analysis and threat detection</li>
-                  <li>Automated security task management and incident response</li>
-                  <li>Security policy templates and best practices library</li>
-                  <li>Vendor security assessment and integration monitoring</li>
-                  <li>Real-time security reporting and threat intelligence</li>
-                  <li>Compliance management and audit preparation tools</li>
-                  <li>Customer support and security training resources</li>
+                  <li>SIEM-style log ingestion, correlation, alerting, and investigation workflows in the product</li>
+                  <li>Workspace for tasks, evidence, and framework mapping</li>
+                  <li>Assisted analysis of policies and artifacts you upload</li>
+                  <li>Integrations and vendor documentation you connect</li>
+                  <li>Reporting exports for internal review or audit support</li>
                 </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 hover:border-gray-700 group">
+              <CardHeader>
+                <CardTitle className="text-2xl text-white">
+                  Third-party AI providers
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-gray-400">
+                  Where the product offers AI-assisted features, inference is typically performed by third-party providers (for example large language model APIs) using credentials or API keys you supply or authorize in the service. Unless we publish otherwise, AkinSec does not operate proprietary foundation-model infrastructure as the product core. Your agreements with those providers govern their processing of prompts and outputs; you are responsible for lawful use and for any fees they charge.
+                </p>
               </CardContent>
             </Card>
 
@@ -103,9 +112,8 @@ export default function TermsPage() {
             {/* Data and Privacy */}
             <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 hover:border-gray-700 group">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl text-white">
-                  <Shield className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
-                  Data and Privacy
+                <CardTitle className="text-2xl text-white">
+                  Data and privacy
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -125,9 +133,8 @@ export default function TermsPage() {
             {/* Contact Information */}
             <Card className="bg-gray-900/50 border-gray-800 hover:bg-gray-900/70 transition-all duration-300 hover:border-gray-700 group">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl text-white">
-                  <Calendar className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
-                  Contact Information
+                <CardTitle className="text-2xl text-white">
+                  Contact
                 </CardTitle>
               </CardHeader>
               <CardContent>

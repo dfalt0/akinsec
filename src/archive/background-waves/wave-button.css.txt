@@ -1,0 +1,81 @@
+/* Snapshot from src/index.css — wave CTA button (Frameworks.jsx, DemoLive.jsx) */
+
+.wave-button-container {
+  width: auto;
+  padding: 8px 32px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  background: white;
+  transition: all 0.2s;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  height: 40px;
+}
+
+.wave-button-container:hover {
+  color: white;
+  background: transparent;
+}
+
+.wave-button-container:hover .wave {
+  top: -120px;
+}
+
+.wave-button-container span {
+  position: relative;
+  z-index: 1;
+  color: inherit;
+  font-size: 16px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+.wave-button-container .wave {
+  width: 100%;
+  height: 200px;
+  background-color: #444857;
+  box-shadow: inset 0 0 50px rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  top: -80px;
+  transition: 0.4s;
+}
+
+.wave-button-container .wave::before,
+.wave-button-container .wave::after {
+  width: 200%;
+  height: 200%;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,-75%);
+}
+
+.wave-button-container .wave::before {
+  border-radius: 45%;
+  background-color: rgba(20,20,20,1);
+  animation: wave 3s linear infinite;
+}
+
+.wave-button-container .wave::after {
+  border-radius: 40%;
+  background-color: rgba(20,20,20,0.5);
+  animation: wave 6s linear infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translate(-50%,-75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%,-75%) rotate(360deg);
+  }
+}

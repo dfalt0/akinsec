@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
-import { Check, ArrowRight, Shield, Zap, Users, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Star, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
-import WaveBackground from '@/components/WaveBackground';
+import { APP_URL, MARKETING_THESIS, PRODUCT_SUBLINE } from '@/marketing/voice.js';
+import { SectionIndex } from '@/components/marketing/SectionIndex';
 import './Home.css';
 
 const pricingPlans = {
@@ -14,12 +15,12 @@ const pricingPlans = {
       name: 'Free',
       price: '$0',
       frequency: '',
-      description: 'Test out the platform for free.',
+      description: 'Try templates, tasks, and light AI-assisted analysis (BYO provider where applicable).',
       features: [
-        '1 User',
-        'Basic AI File Analysis',
-        'Standard Template Library',
-        'Task Management',
+        '1 seat',
+        'Starter AI-assisted workflows',
+        'Template library',
+        'Task workflows',
       ],
       cta: 'Free',
       popular: true,
@@ -28,13 +29,13 @@ const pricingPlans = {
       name: 'Starter',
       price: '$99',
       frequency: '/month',
-      description: 'For small teams getting started with cybersecurity.',
+      description: 'Small teams running SIEM monitoring, controls, and vendor evidence.',
       features: [
-        'Up to 20 Users',
-        'Basic AI File Analysis',
-        'Standard Template Library',
-        'Task Management',
-        'Community Support',
+        'Up to 20 seats',
+        'Starter AI-assisted workflows',
+        'Template library',
+        'Task workflows',
+        'Community support',
       ],
       cta: 'Get Started',
       popular: false,
@@ -43,13 +44,13 @@ const pricingPlans = {
       name: 'Business',
       price: '$299',
       frequency: '/month',
-      description: 'For growing businesses with comprehensive security needs.',
+      description: 'Growing programs that need deeper monitoring, analysis, and reporting.',
       features: [
-        '20+ Users',
-        'Advanced AI Analysis (more tokens)',
-        'Integration Auditing',
-        'Customizable Reports',
-        'Priority Email Support',
+        '20+ seats',
+        'Higher AI-assisted usage limits',
+        'Integration auditing',
+        'Customizable reports',
+        'Priority email support',
       ],
       cta: 'Choose Business',
       popular: false,
@@ -76,12 +77,12 @@ const pricingPlans = {
       name: 'Free',
       price: '$0',
       frequency: '',
-      description: 'Test out the platform for free.',
+      description: 'Try templates, tasks, and light AI-assisted analysis (BYO provider where applicable).',
       features: [
-        '1 User',
-        'Basic AI File Analysis',
-        'Standard Template Library',
-        'Task Management',
+        '1 seat',
+        'Starter AI-assisted workflows',
+        'Template library',
+        'Task workflows',
       ],
       cta: 'Free',
       popular: true,
@@ -90,13 +91,13 @@ const pricingPlans = {
       name: 'Starter',
       price: '$1010',
       frequency: '/year',
-      description: 'For small teams getting started with cybersecurity.',
+      description: 'Small teams running SIEM monitoring, controls, and vendor evidence.',
       features: [
-        'Up to 20 Users',
-        'Basic AI File Analysis',
-        'Standard Template Library',
-        'Task Management',
-        'Community Support',
+        'Up to 20 seats',
+        'Starter AI-assisted workflows',
+        'Template library',
+        'Task workflows',
+        'Community support',
       ],
       cta: 'Get Started',
       popular: false,
@@ -105,13 +106,13 @@ const pricingPlans = {
       name: 'Business',
       price: '$3050',
       frequency: '/year',
-      description: 'For growing businesses with comprehensive security needs.',
+      description: 'Growing programs that need deeper monitoring, analysis, and reporting.',
       features: [
-        'Up to 50 Users',
-        'Advanced AI Analysis (more tokens)',
-        'Integration Auditing',
-        'Customizable Reports',
-        'Priority Email Support',
+        'Up to 50 seats',
+        'Higher AI-assisted usage limits',
+        'Integration auditing',
+        'Customizable reports',
+        'Priority email support',
       ],
       cta: 'Choose Business',
       popular: false,
@@ -155,20 +156,20 @@ const PricingCard = ({ plan }) => (
         </div>
         <ul className="space-y-3">
           {plan.features.map((feature, index) => (
-            <li key={index} className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-400" />
+            <li key={index} className="flex items-start gap-3">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-500" aria-hidden />
               <span className="text-sm text-gray-300">{feature}</span>
             </li>
           ))}
         </ul>
       </div>
-      <Link to={createPageUrl('Setup')}>
+      <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="block">
         <Button 
-          className={`w-full mt-8 rounded-lg border-0 transition-all duration-200 group relative ${plan.popular ? 'btn-primary-gradient' : 'btn-secondary-gradient'}`}
+          className={`w-full mt-8 rounded-button border-0 transition-all duration-200 group relative ${plan.popular ? 'btn-primary-gradient' : 'btn-secondary-gradient'}`}
         >
           <span className="relative z-10">{plan.cta}</span>
         </Button>
-      </Link>
+      </a>
     </CardContent>
   </Card>
 );
@@ -199,14 +200,20 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
     <section className="relative min-h-[60vh] flex items-center justify-center bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-none tracking-tight mt-32">
-            Simple Pricing
+          <div className="mb-6 mt-24 flex justify-center md:mt-32">
+            <SectionIndex index={1} label="PRICING" />
+          </div>
+          <h1 className="mb-6 mt-0 text-5xl font-semibold leading-none tracking-tight text-foreground md:text-7xl">
+            SIEM subscription pricing
           </h1>
-          <p className="text-xl text-gray-400 mb-4 max-w-3xl mx-auto font-light leading-relaxed">
-            Start for free, then upgrade to a plan that fits your needs. All plans come with a 14-day free trial.
+          <p className="mx-auto mb-4 max-w-3xl text-xl font-light leading-relaxed text-muted-foreground">
+            {MARKETING_THESIS}
+          </p>
+          <p className="mx-auto mb-2 max-w-3xl text-base leading-relaxed text-muted-foreground/90">
+            {PRODUCT_SUBLINE}
           </p>
           <p className="text-sm text-gray-500 mb-12 max-w-3xl mx-auto">
-            Significantly more affordable than traditional compliance platforms.
+            Start free. Paid plans include a 14-day trial. Tiers bundle monitoring workspace seats with governed AI-assisted workflows—not consulting packages.
           </p>
           
           {/* Billing Toggle */}
@@ -227,18 +234,18 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
 
           {/* Early Adopter Section */}
           <div className="max-w-4xl mx-auto mb-16">
-            <Card className="card-enhanced border-2 border-purple-500/50 bg-gradient-to-br from-purple-900/20 to-indigo-900/20">
+            <Card className="card-enhanced border border-[hsl(var(--accent)/0.35)] bg-[hsl(var(--accent)/0.06)]">
               <CardContent className="p-8 md:p-12">
                 <div className="text-center mb-8">
-                  <div className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-300 px-4 py-2 rounded-full mb-4 border border-purple-500/30">
-                    <Star className="w-4 h-4 fill-purple-400 text-purple-400" />
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-md border border-[hsl(var(--accent)/0.35)] bg-[hsl(var(--accent)/0.12)] px-4 py-2 text-[hsl(var(--accent))]">
+                    <Star className="w-4 h-4 text-[hsl(var(--accent))]" />
                     <span className="text-sm font-medium">Early Adopter Program</span>
                   </div>
                   <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
                     Join as an Early Adopter
                   </h2>
                   <p className="text-lg text-gray-300 mb-2 max-w-2xl mx-auto">
-                    Be among the first to use AkinSec and lock in <span className="text-purple-300 font-medium">75% off</span> for life.
+                    Be among the first to use AkinSec and lock in <span className="text-[hsl(var(--accent))] font-medium">75% off</span> for life.
                   </p>
                   <p className="text-sm text-gray-400 max-w-2xl mx-auto">
                     Limited time offer for early supporters. Your discount applies to all future renewals.
@@ -250,25 +257,25 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-xl font-medium text-white">Starter</h3>
                       <div className="text-right">
-                        <div className="text-2xl font-light text-purple-300">{prices.starter}</div>
+                        <div className="text-2xl font-light text-[hsl(var(--accent))]">{prices.starter}</div>
                         <div className="text-sm text-gray-400">{frequency}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
                       <span className="line-through">${isAnnual ? '1010' : '99'}</span>
-                      <span className="text-purple-300 font-medium">75% off</span>
+                      <span className="text-[hsl(var(--accent))] font-medium">75% off</span>
                     </div>
                     <ul className="space-y-2 mt-4">
-                      <li className="flex items-center gap-2 text-sm text-gray-300">
-                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <li className="flex items-start gap-2 text-sm text-gray-300">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-500" aria-hidden />
                         <span>All Starter features</span>
                       </li>
-                      <li className="flex items-center gap-2 text-sm text-gray-300">
-                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <li className="flex items-start gap-2 text-sm text-gray-300">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-500" aria-hidden />
                         <span>Lifetime discount</span>
                       </li>
-                      <li className="flex items-center gap-2 text-sm text-gray-300">
-                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <li className="flex items-start gap-2 text-sm text-gray-300">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-500" aria-hidden />
                         <span>Priority feature requests</span>
                       </li>
                     </ul>
@@ -278,25 +285,25 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-xl font-medium text-white">Business</h3>
                       <div className="text-right">
-                        <div className="text-2xl font-light text-purple-300">{prices.business}</div>
+                        <div className="text-2xl font-light text-[hsl(var(--accent))]">{prices.business}</div>
                         <div className="text-sm text-gray-400">{frequency}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
                       <span className="line-through">${isAnnual ? '3050' : '299'}</span>
-                      <span className="text-purple-300 font-medium">75% off</span>
+                      <span className="text-[hsl(var(--accent))] font-medium">75% off</span>
                     </div>
                     <ul className="space-y-2 mt-4">
-                      <li className="flex items-center gap-2 text-sm text-gray-300">
-                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <li className="flex items-start gap-2 text-sm text-gray-300">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-500" aria-hidden />
                         <span>All Business features</span>
                       </li>
-                      <li className="flex items-center gap-2 text-sm text-gray-300">
-                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <li className="flex items-start gap-2 text-sm text-gray-300">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-500" aria-hidden />
                         <span>Lifetime discount</span>
                       </li>
-                      <li className="flex items-center gap-2 text-sm text-gray-300">
-                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <li className="flex items-start gap-2 text-sm text-gray-300">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gray-500" aria-hidden />
                         <span>Priority feature requests</span>
                       </li>
                     </ul>
@@ -307,7 +314,7 @@ const HeroSection = ({ isAnnual, setIsAnnual }) => {
                   <Link to={createPageUrl('Contact')}>
                     <Button 
                       size="lg" 
-                      className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+                      className="btn-primary-gradient rounded-button px-8 py-3 text-base border-0 group relative"
                     >
                       <span className="relative z-10 flex items-center">
                         Claim Early Adopter Discount
@@ -375,9 +382,8 @@ const ComparisonSection = () => {
                 </thead>
                 <tbody>
                   <tr className="border-b border-gray-700">
-                    <td className="p-6 font-medium text-gray-300 flex items-center gap-2">
-                      <Users className="w-4 h-4 text-gray-400"/>
-                      Number of Users
+                    <td className="p-6 font-medium text-gray-300">
+                      Seats
                     </td>
                     <td className="p-6 text-center text-white">1</td>
                     <td className="p-6 text-center text-white">20</td>
@@ -387,7 +393,7 @@ const ComparisonSection = () => {
                   <tr className="border-b border-gray-700">
                     <td className="p-6 font-medium text-gray-300 flex items-center gap-2">
                       <Zap className="w-4 h-4 text-gray-400"/>
-                      AI Tokens
+                      AI-assisted usage
                     </td>
                     <td className="p-6 text-center text-white">Basic</td>
                     <td className="p-6 text-center text-white">Basic</td>
@@ -395,24 +401,22 @@ const ComparisonSection = () => {
                     <td className="p-6 text-center text-white">Premium</td>
                   </tr>
                   <tr className="border-b border-gray-700">
-                    <td className="p-6 font-medium text-gray-300 flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-gray-400"/>
-                      Integration Auditing
+                    <td className="p-6 font-medium text-gray-300">
+                      Integration auditing
                     </td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-gray-500 mx-auto"/></td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-gray-500 mx-auto"/></td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-green-400 mx-auto"/></td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-green-400 mx-auto"/></td>
+                    <td className="p-6 text-center text-gray-400">Limited</td>
+                    <td className="p-6 text-center text-gray-400">Limited</td>
+                    <td className="p-6 text-center text-white">Full</td>
+                    <td className="p-6 text-center text-white">Full</td>
                   </tr>
                   <tr>
-                    <td className="p-6 font-medium text-gray-300 flex items-center gap-2">
-                      <ArrowRight className="w-4 h-4 text-gray-400"/>
-                      Dedicated Support
+                    <td className="p-6 font-medium text-gray-300">
+                      Dedicated support
                     </td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-gray-500 mx-auto"/></td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-gray-500 mx-auto"/></td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-gray-500 mx-auto"/></td>
-                    <td className="p-6 text-center"><Check className="w-5 h-5 text-green-400 mx-auto"/></td>
+                    <td className="p-6 text-center text-gray-500">—</td>
+                    <td className="p-6 text-center text-gray-500">—</td>
+                    <td className="p-6 text-center text-gray-500">—</td>
+                    <td className="p-6 text-center text-white">Yes</td>
                   </tr>
                 </tbody>
               </table>
@@ -432,26 +436,26 @@ const CTASection = () => {
         <h2 className="text-4xl font-light text-white mb-6">
           Ready to Get Started?
         </h2>
-        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
-          Join thousands of teams already using AkinSec to strengthen their cybersecurity posture.
+        <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+          Pick a tier, open the app, run the trial, and see whether one SIEM console beats stitching vendors together by hand.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to={createPageUrl('Setup')}>
+          <a href={APP_URL} target="_blank" rel="noopener noreferrer">
             <Button 
               size="lg" 
-              className="btn-primary-gradient px-8 py-3 text-base rounded-lg border-0 group relative"
+              className="btn-primary-gradient rounded-button px-8 py-3 text-base border-0 group relative"
             >
               <span className="relative z-10 flex items-center">
-                Start Free Trial
+                Open app
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </span>
             </Button>
-          </Link>
+          </a>
           <Link to={createPageUrl('Contact')}>
             <Button 
               size="lg" 
               variant="outline" 
-              className="btn-secondary-gradient px-8 py-3 text-base font-medium rounded-lg backdrop-blur-sm relative"
+              className="btn-secondary-gradient rounded-button px-8 py-3 text-base font-medium backdrop-blur-sm relative"
             >
               <span className="relative z-10">Contact Sales</span>
             </Button>
@@ -468,7 +472,6 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen relative">
-      <WaveBackground />
       <HeroSection isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
       <StandardPricingSection plans={plans} />
       <ComparisonSection />
