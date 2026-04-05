@@ -193,3 +193,35 @@ marker#react-flow__arrowclosed {
 .card-enhanced:hover .badge-enhanced {
   border-color: hsl(var(--accent) / 0.4);
 }
+
+/* Claude-inspired home sections — layout only; palette stays AkinSec tokens */
+/* Visible grid on dark UIs — token border + zinc fallback for contrast */
+.home-mock-grid {
+  background-image:
+    linear-gradient(rgb(63 63 70 / 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(63 63 70 / 0.45) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.home-mock-glass {
+  background: rgb(24 24 27 / 0.85);
+  border: 1px solid rgb(63 63 70);
+  box-shadow:
+    0 20px 50px -12px rgb(0 0 0 / 0.55),
+    0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+.home-film-stage {
+  background: linear-gradient(
+    145deg,
+    rgb(24 24 27) 0%,
+    rgb(39 39 42) 50%,
+    rgb(24 24 27 / 0.95) 100%
+  );
+  border-color: rgb(82 82 91);
+}
+
+.home-pricing-popular {
+  border-color: hsl(var(--accent) / 0.5);
+  box-shadow: 0 0 0 1px hsl(var(--accent) / 0.2), 0 24px 60px -20px rgb(0 0 0 / 0.5);
+}

@@ -7,7 +7,31 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
 import RepercussionModal from '../components/frameworks/RepercussionModal';
 import { SectionIndex } from '@/components/marketing/SectionIndex';
+import { MARKETING_THESIS, OPERATIONS_PLANE_TAGLINE } from '@/marketing/voice.js';
 import './Home.css';
+
+const operationsCapabilities = [
+  {
+    title: 'SOAR',
+    description: 'Runbooks and case flow with less repetitive wiring between tools.',
+    label: 'Orchestration',
+  },
+  {
+    title: 'SIEM',
+    description: 'Normalized logs and correlation so alerts point to work you can finish.',
+    label: 'Signal',
+  },
+  {
+    title: 'MDR',
+    description: 'Endpoint and cloud context on the same timeline as the rest of your stack.',
+    label: 'Response',
+  },
+  {
+    title: 'Onboarding',
+    description: 'Connect sources once; expand coverage without rebuilding everything by hand.',
+    label: 'Integration',
+  },
+];
 
 const frameworkDetails = [
   {
@@ -140,7 +164,7 @@ const repercussionDetails = [
     }
 ];
 
-export default function FrameworksPage() {
+export default function WhyPage() {
   const [selectedRepercussion, setSelectedRepercussion] = useState(null);
 
   return (
@@ -190,6 +214,31 @@ export default function FrameworksPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 border-y border-border/30 bg-black/25 py-24 backdrop-blur-md">
+        <div className="container mx-auto px-6">
+          <div className="mx-auto mb-14 max-w-3xl text-center">
+            <h2 className="text-3xl font-semibold leading-snug tracking-tight text-white md:text-5xl">Modern SIEM, one console</h2>
+            <p className="mt-4 text-lg leading-relaxed text-gray-400">{MARKETING_THESIS}</p>
+            <p className="mt-3 text-base leading-relaxed text-gray-500">{OPERATIONS_PLANE_TAGLINE}</p>
+          </div>
+          <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+            {operationsCapabilities.map((capability, index) => (
+              <Card key={index} className="card-automation group">
+                <CardContent className="space-y-3 p-8">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{capability.label}</p>
+                  <h3 className="text-xl font-medium text-white transition-colors duration-300 group-hover:text-[hsl(var(--accent))]">
+                    {capability.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-400 transition-colors duration-300 group-hover:text-gray-300">
+                    {capability.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>

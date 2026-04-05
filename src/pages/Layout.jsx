@@ -127,7 +127,9 @@ export default function Layout({ children }) {
         <MarketingBackground />
         <ScrollToTop />
         <LandingHeader />
-        <main className="relative z-10 flex-1 transition-all duration-300 ease-in-out">{children}</main>
+        <main className="relative z-10 flex-1 isolation-isolate transition-all duration-300 ease-in-out">
+          {children}
+        </main>
         <LandingFooter />
       </div>
     );

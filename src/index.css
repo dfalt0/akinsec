@@ -44,11 +44,8 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Prevent flash of unstyled content during transitions */
-* {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
+/* Do not set backface-visibility on * — it can blank entire pages in some GPU/compositing paths.
+   Scope compositing hints only to animated route wrappers if needed. */
 
 /* Nav link underline animation */
 .nav-link {

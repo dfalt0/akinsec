@@ -74,6 +74,32 @@ const frameworkDetails = [
       "Implement strong access control measures",
       "Regularly monitor and test networks"
     ]
+  },
+  {
+    title: "NIST SP 800-53",
+    category: "Federal / Control Baselines",
+    appliesTo: "US federal agencies, contractors, and teams aligning security programs to NIST control language.",
+    purpose: "Catalog of security and privacy controls used to protect organizational systems and data; common reference for FedRAMP-style discussions.",
+    requirements: [
+      "Select controls appropriate to system categorization",
+      "Implement and assess controls continuously",
+      "Document control inheritance where applicable",
+      "Maintain Plans of Action & Milestones where gaps exist",
+      "Coordinate with organizational risk management processes"
+    ]
+  },
+  {
+    title: "TSC (Trust Services Criteria)",
+    category: "SOC 2 Evidence Buckets",
+    appliesTo: "Teams mapping work to SOC 2 and customer security questionnaires.",
+    purpose: "Criteria buckets—security, availability, processing integrity, confidentiality, privacy—that structure what a SOC 2 examination covers.",
+    requirements: [
+      "Identify which TSC categories apply to your service",
+      "Design controls that satisfy chosen criteria",
+      "Collect evidence that ties operations to controls",
+      "Prepare for independent examination when required",
+      "Track changes that affect control operation over time"
+    ]
   }
 ];
 

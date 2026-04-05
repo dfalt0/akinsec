@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { createPageUrl } from '@/utils/index.js';
 import { SectionIndex } from '@/components/marketing/SectionIndex';
+import { MARKETING_THESIS } from '@/marketing/voice.js';
 import './Home.css';
 
 // Ultra-minimal hero section
@@ -123,6 +124,114 @@ const MissionSection = () => {
               </p>
             </CardContent>
           </Card>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/** Merged from Home: practical onboarding framing */
+const HowYouWorkSection = () => {
+  const steps = [
+    {
+      number: '01',
+      title: 'Connect sources',
+      description:
+        'Link cloud, identity, SaaS, and endpoints. We normalize what the plane needs for detections and evidence.',
+    },
+    {
+      number: '02',
+      title: 'Tune and align',
+      description:
+        'Map control families to the frameworks you care about. Turn defaults into something operators can run week over week.',
+    },
+    {
+      number: '03',
+      title: 'Operate from one console',
+      description:
+        'Review timelines, tasks, and exports where stakeholders already look—without re-exporting from five tools.',
+    },
+  ];
+  return (
+    <section className="py-24 bg-black/20 backdrop-blur-md relative z-10">
+      <div className="container mx-auto px-6">
+        <div className="mb-12 flex justify-center">
+          <SectionIndex index={2} label="Getting started" />
+        </div>
+        <div className="text-center mb-14">
+          <h2 className="text-3xl font-semibold leading-snug tracking-tight text-white md:text-5xl">How you get going</h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto mt-4">{MARKETING_THESIS}</p>
+        </div>
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-800 hidden md:block" />
+            {steps.map((step, index) => (
+              <div key={step.number} className="relative flex items-center mb-16 last:mb-0">
+                <div className="flex-shrink-0 w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center border-2 border-gray-800 relative z-10 self-center">
+                  <span className="text-white font-medium text-lg">{step.number}</span>
+                </div>
+                <div className="ml-8 flex-1">
+                  <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-6 hover:bg-gray-900/70 transition-all duration-300">
+                    <h3 className="text-xl font-medium text-white mb-3">{step.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/** Merged from Home: pillar blurbs */
+const PlatformPillarsSection = () => {
+  const techStack = [
+    {
+      title: 'Detection fabric',
+      description: 'Cross-source detections and context so investigations start with evidence, not guesswork.',
+      category: 'Security',
+    },
+    {
+      title: 'Event automation',
+      description: 'Routing from alert to task to playbook—fewer stale tickets, clearer owners.',
+      category: 'Automation',
+    },
+    {
+      title: 'Tenant isolation',
+      description: 'Separate workspaces so customer data and policies do not cross streams.',
+      category: 'Infrastructure',
+    },
+    {
+      title: 'Operations console',
+      description: 'Tasks, reports, and status in one UI instead of a pile of vendor tabs.',
+      category: 'Product',
+    },
+  ];
+  return (
+    <section className="py-24 bg-black/30 backdrop-blur-sm relative z-10">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl font-semibold leading-snug tracking-tight text-white md:text-5xl">What sits under the hood</h2>
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto mt-4">
+            Open components and automation you can reason about—no black-box magic words required.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {techStack.map((tech) => (
+            <Card key={tech.title} className="card-enhanced group">
+              <CardContent className="p-6 text-left">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">{tech.category}</p>
+                <h3 className="text-lg font-medium text-white mb-3 group-hover:text-[hsl(var(--accent))] transition-colors duration-300">
+                  {tech.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+                  {tech.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
@@ -267,6 +376,8 @@ export default function AboutPage() {
       <HeroSection />
       <ProfileSection />
       <MissionSection />
+      <HowYouWorkSection />
+      <PlatformPillarsSection />
       <ValuesSection />
       <TimelineSection />
       <CTASection />

@@ -5,7 +5,7 @@ import { Switch } from '@/components/ui/switch';
 import { ArrowRight, Star, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils/index.js';
-import { APP_URL, MARKETING_THESIS, PRODUCT_SUBLINE } from '@/marketing/voice.js';
+import { APP_URL, MARKETING_THESIS, PRODUCT_SUBLINE, AI_WORKFLOW_DECK } from '@/marketing/voice.js';
 import { SectionIndex } from '@/components/marketing/SectionIndex';
 import './Home.css';
 
@@ -473,6 +473,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen relative">
       <HeroSection isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
+      <TierContextSection />
       <StandardPricingSection plans={plans} />
       <ComparisonSection />
       <CTASection />

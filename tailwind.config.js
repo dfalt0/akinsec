@@ -7,6 +7,7 @@ module.exports = {
   		fontFamily: {
   			sans: ['"Geist Variable"', 'Geist', 'system-ui', 'sans-serif'],
   			mono: ['"JetBrains Mono Variable"', 'JetBrains Mono', 'ui-monospace', 'monospace'],
+  			display: ['"Instrument Serif"', 'Georgia', 'Times New Roman', 'serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
