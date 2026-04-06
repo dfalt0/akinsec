@@ -1,0 +1,56 @@
+1. n8n: webhook workflow
+New workflow → add Webhook (trigger).
+HTTP Method: POST.
+Path: e.g. wazuh-alerts (production URL will look like .../webhook/wazuh-alerts or similar depending on n8n version).
+Response: “Respond immediately” or a simple 200 JSON so Wazuh doesn’t wait long (integrator has timeouts).
+Authentication (strongly recommended):
+In Webhook node: Header Auth or Query Auth with a secret only Wazuh will send.
+Or use n8n’s webhook Authentication options if your version exposes them.
+Save and Activate the workflow.
+Copy the Production webhook URL.
+Add nodes after the webhook: Set / Code to normalize payload, then your actions (Slack, email, HTTP, etc.). Wazuh sends JSON when alert_format is json—inspect one execution to see the exact shape.
+
+2. Connectivity: what to put in hook_url
+The Wazuh manager container must reach n8n. localhost inside the manager is wrong (that’s the manager itself).
+
+Pick one:
+
+Setup	Example hook_url idea
+Shared Docker network (both stacks attached to the same external network, e.g. Hostinger Traefik shared network)	http://<n8n_service_name>:5678/webhook/... (internal port 5678, not 32768)
+Via host published port (manager → host IP → n8n)	http://<VPS_LAN_or_bridge_IP>:32768/webhook/... using the host port you showed (32768)
+Public HTTPS (n8n behind Traefik with a hostname)	https://n8n.yourdomain.com/webhook/...
+Test from inside the manager container (Hostinger terminal / docker exec):
+
+curl -sS -o /dev/null -w "%{http_code}" -X POST "YOUR_WEBHOOK_URL" -H "Content-Type: application/json" -d "{}"
+You want 200 (or whatever your webhook returns). Fix DNS/network until this works before editing Wazuh.
+
+3. Wazuh manager: custom integration
+Edit the manager config (on the VPS: typically ossec.conf or a fragment under etc/ossec.conf.d/ depending on image). Add something like:
+
+<integration>
+  <name>custom-n8n</name>
+  <hook_url>https://YOUR_N8N_HOST/webhook/SECRET_PATH</hook_url>
+  <alert_format>json</alert_format>
+  <level>7</level>
+</integration>
+Adjust:
+
+hook_url: full production webhook URL (include any secret header only if Wazuh supports it—see note below).
+level: minimum rule level to forward (e.g. 7 or 10); omit to send more alerts (noisy).
+Optional filters from the docs: rule_id, group, event_location, etc.
+Official reference: integration (ossec.conf).
+
+Headers: If n8n requires Authorization or X-My-Secret, check whether your Wazuh version’s custom integration supports extra headers in options or if you need a tiny proxy; many setups use a long random path as the secret instead.
+
+Restart the Wazuh manager after saving (Docker: restart the manager container / stack).
+
+4. Verify
+n8n → Executions: confirm incoming runs when alerts fire.
+Wazuh manager logs if silent: look for integratord / integration errors.
+Temporarily lower <level> or widen filters if you get nothing (or generate a test alert).
+5. Order of operations
+Webhook workflow active in n8n.
+curl from manager container to webhook OK.
+<integration> on manager + restart.
+Tune level / rule_id / group so n8n isn’t flooded.
+If you paste how n8n and Wazuh compose projects join networks (or your n8n service name + whether they share an external network), we can narrow hook_url to a single line (internal vs host:32768 vs public URL).
